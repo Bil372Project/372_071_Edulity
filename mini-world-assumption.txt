@@ -12,19 +12,19 @@ is going and a DRIVER. Every DRIVER drives a SCHOOL-BUS and has a name and
 TELEPHONE-NUMBER. Each SCHEDULE has a group of COURSEs with a specific start 
 and end dates. COURSEs can be the following types: Mandatory classes that STUDENTs 
 have to attend and Optional after school COURSEs that a TEACHERs can give after 
-mandatory classes are over. STUDENTs are not marked as ìabsentî if they donít go to 
+mandatory classes are over. STUDENTs are not marked as ‚Äúabsent‚Äù if they don‚Äôt go to 
 optional classes. Each TEACHER has a specialization and OFFICE_NUMBER(HEAD-of-
-DEPARTMENTís have too) and a SCHEDULE that consists of the COURSES they give. 
+DEPARTMENT‚Äôs have too) and a SCHEDULE that consists of the COURSES they give. 
 Teachers can assign HOMEWORK and ANNOUNCMENTs to their CLASSES and mark the 
-students as ìabsentî for that day. Every HOMEWORK has a due date, list of questions and 
-can have answers (It doesnít have to have a specific an answer. ex. Writing an essay). 
-ANNOUNCMENTs have information about upcoming CLASSes, have a CLASS thatís 
+students as ‚Äúabsent‚Äù for that day. Every HOMEWORK has a due date, list of questions and 
+can have answers (It doesn‚Äôt have to have a specific an answer. ex. Writing an essay). 
+ANNOUNCMENTs have information about upcoming CLASSes, have a CLASS that‚Äôs 
 assigned to it, a submit date, and can have a due date. HEAD-of-DEPARTMENTs oversee a 
 group of TEACHERs and can assign HOMEWORK to all CLASSES in a year. STUDENTs 
-have homework and exam grades. PARENTs and TEACHERs can access to their studentís 
+have homework and exam grades. PARENTs and TEACHERs can access to their student‚Äôs 
 information and can update it. At the end of each semester HEAD-of-DEPARTMENTs can 
 assign a SURVEY to students and their PARENTs about the TEACHERs whom they are 
 related to. SURVEYs consist of a group of questions. Every PARENT has a name, address 
-information, telephone number and an email. School has  LUNCH that these parts: Main food, 
-dessert, fruits, DATE. DATE has a food table that shows which foods are going to be served 
-certain DATE 
+information, telephone number and an email. There is also a table for LUNCH that contains 
+every school days' menu that contains food, desert, fruit etc and the date that the menu
+will be given.

@@ -19,7 +19,7 @@ Every DRIVER drives a school bus and has a name and telephone number and unique 
 
 Each SCHEDULE has a group of courses with a specific start and end dates. 
 
-Each TEACHING_STUFF has a specialization and office number.
+Each TEACHING_STAFF has a specialization and office number.
 
 TEACHERs have a schedule that consists of the courses they give, can assign homeworks and announcements to their classes and mark the students as “absent” for that day. Teachers can update the grade and absenteeism information of the students whom they are related to.
 
@@ -27,7 +27,7 @@ Every HOMEWORK has a hw_number, the course that the hw given for, due date, list
 
 ANNOUNCEMENTs have information about upcoming classes, have a class that’s assigned to it, a submit date, and can have a due date. 
 
-HEAD-of-DEPARTMENTs oversee a group of teachers and can assign homework to all classes in one grade. HoDs can assign survey(s) at the end of the each semester to students and their parents about the teachers whom they are related to.
+HEAD-of-DEPARTMENTs oversee a group of teachers and can assign homework to all classes in one grade. HEAD-of-DEPARTMENTs can assign survey(s) at the end of the each semester to students and their parents about the teachers whom they are related to.
 
 SURVEYs consist of a group of questions. 
 

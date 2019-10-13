@@ -4,7 +4,7 @@ The SCHOOL has a unique name, type, employee list and number of employees, stude
 list of school bus(es).
  
 EMPLOYEES works for one school. Employees can just be one of teaching stuff or DRIVER and teaching staffs can be 
-both head of departments and teacher and they also have SSN. 
+both head of departments and teacher and they also have ssn. 
 
 STUDENTs study in one school. Each student has at least one parent, name, birth date, birth place, and a unique id and  is in only one class,  has a list of dates which the student was absent, has a number of times he was absent, can ride a specific school-bus to and from home, and in one specific year between 1-8 and have grades. Each grade has a type of exam or homework.
 
@@ -20,7 +20,7 @@ Every DRIVER drives a school bus and has a name and telephone number and unique 
 
 Each SCHEDULE has a group of courses with a specific start and end dates. 
 
-Each TEACHING_STUFF has a specialization and office number.
+Each TEACHING_STAFF has a specialization and office number.
 
 TEACHERs have a schedule that consists of the courses they give, can assign homeworks and announcements to their classes and mark the students as “absent” for that day. Teachers can update the grade and absenteeism information of the students whom they are related to.
 
@@ -28,10 +28,10 @@ Every HOMEWORK has a hw_number, the course that the hw given for, due date, list
 
 ANNOUNCEMENTs have information about upcoming classes, have a class that’s assigned to it, a submit date, and can have a due date. 
 
-HEAD-of-DEPARTMENTs oversee a group of teachers and can assign homework to all classes in one grade. HoDs can assign survey(s) at the end of the each semester to students and their parents about the teachers whom they are related to.
+HEAD-of-DEPARTMENTs oversee a group of teachers and can assign homework to all classes in one grade. HEAD-of-DEPARTMENTs can assign survey(s) at the end of the each semester to students and their parents about the teachers whom they are related to.
 
 SURVEYs consist of a group of questions. 
 
-Every PARENT has a name, address information, telephone number and an email. Parents can access the grading and absenteeism information of the students whom they are related to.
+Every PARENT has a name, uneque ssn, address information, telephone number and an email. Parents can access the grading and absenteeism information of the students whom they are related to.
 
 School also has a LUNCH_TABLE that show the list of food of every day with the information of food and date. Food consists of main food, dessert, fruits.

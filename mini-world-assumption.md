@@ -1,4 +1,5 @@
 #MINI-WORLD ASSUMPTION
+
 The SCHOOL has a unique name, type, employee list and number of employees, student list and number of students,has a 
 list of school bus(es).
  

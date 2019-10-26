@@ -1,1 +1,13 @@
+*.iml
+*.iws
+*.ipr
 .idea/
+.gradle/
+gitstats/
+stats/
+local.properties
+
+build/
+
+*~
+*.swp

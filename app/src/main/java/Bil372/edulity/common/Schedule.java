@@ -13,7 +13,7 @@ public class Schedule {
     private int id;
     private String section;
 
-    public class CourseInfo implements View.OnClickListener{
+    public class CourseInfo {
 
         private Course course;
         private Day day;
@@ -52,10 +52,6 @@ public class Schedule {
             this.endTime = endTime;
         }
 
-        @Override
-        public void onClick(View view) {
-
-        }
     }
 
     List<CourseInfo> courseInfos;

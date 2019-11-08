@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="cell_data" type="id">@id/cell_data</item>
+    <item name="column_header_data" type="id">@id/column_header_data</item>
+    <item name="row_header_data" type="id">@id/row_header_data</item>
+</resources>

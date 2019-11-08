@@ -1,4 +1,4 @@
-#MINI-WORLD ASSUMPTION
+# MINI-WORLD ASSUMPTION
 
 The SCHOOL has a unique name, type, employee list and number of employees, student list and number of students,has a 
 list of school bus(es).
@@ -12,13 +12,13 @@ Each CLASS has a schedule and unique section and a list of students.
 
 Each COURSE is assigned to a teacher and has a syllabus assigned by the head of department and the class that the course will be given. Courses can be the following types: Mandatory classes that students have to attend and optional after school courses that a teachers can give after mandatory classes are over. students are not marked as “absent” if they do not go to optional classes. 
 
-SYLLABUS consists of a description of the class, grading information, exam dates and a list of which subjects which is going to be thought in class. 
+SYLLABUS consists of a description of the class, grading information, exam dates and a list of which subjects which is going to be thought in course.
 
 Each SCHOOL-BUS has a group of students using it, a list of stops, unique license plate and id, capacity, the district where it is going and a driver. 
 
 Every DRIVER drives a school bus and has a name and telephone number and unique id. 
 
-Each SCHEDULE has a group of courses with a specific start and end dates. 
+Each SCHEDULE has a group of courses with a specific start and end times.
 
 Each TEACHING_STAFF has a specialization and office number.
 

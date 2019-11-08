@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#008577</color>
-    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorPrimary">#2b2b28</color>
+    <color name="colorPrimaryDark">#2b2b28</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="selected_background_color">#6b591d</color>
+    <color name="unselected_background_color">#233714</color>
+    <color name="shadow_background_color">#fdeced</color>
+    <color name="table_background">#a0855b</color>
+    <color name="cell_background_color">#a0855b</color>
+    <color name="cell_text_color">#5a3921</color>
+    <color name="row_header_background">#2b2b28</color>
+    <color name="column_header_background">#2b2b28</color>
 </resources>

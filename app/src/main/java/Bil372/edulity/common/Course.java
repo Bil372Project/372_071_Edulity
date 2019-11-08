@@ -1,8 +1,12 @@
 package Bil372.edulity.common;
 
+import android.view.MotionEvent;
+import android.view.View;
+
+import Bil372.edulity.R;
 import Bil372.edulity.enums.CourseType;
 
-public class Course {
+public class Course implements View.OnHoverListener, View.OnClickListener{
 
     private String name;
     private CourseType type;
@@ -36,5 +40,14 @@ public class Course {
 
     public void setTeacherId(int teacherId) {
         this.teacherId = teacherId;
+    }
+
+    @Override
+    public void onClick(View view) {
+    }
+
+    @Override
+    public boolean onHover(View view, MotionEvent motionEvent) {
+        return false;
     }
 }

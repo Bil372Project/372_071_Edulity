@@ -1,5 +1,7 @@
 package Bil372.edulity.common;
 
+import android.view.View;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,7 +13,7 @@ public class Schedule {
     private int id;
     private String section;
 
-    public class CourseInfo {
+    public class CourseInfo implements View.OnClickListener{
 
         private Course course;
         private Day day;
@@ -49,6 +51,11 @@ public class Schedule {
         public void setEndTime(String endTime) {
             this.endTime = endTime;
         }
+
+        @Override
+        public void onClick(View view) {
+
+        }
     }
 
     List<CourseInfo> courseInfos;
@@ -68,14 +75,14 @@ public class Schedule {
         //This is for test
         courseInfos = new ArrayList<>();
         for(int i = 1; i < 6; i++) {
-            CourseInfo courseInfo = new CourseInfo();
             for(int j = 0; j < 8; j++) { // 8 course per day
+                CourseInfo courseInfo = new CourseInfo();
                 courseInfo.setCourse(new Course("Course" + i, CourseType.MANDATORY, Utility.randomIdGenerator()));
                 courseInfo.setDay(Day.valueOf(i-1));
                 courseInfo.setStartTime(String.valueOf(j + 8) + ".30");
                 courseInfo.setEndTime(String.valueOf((j + 9)) + ".20");
+                courseInfos.add(courseInfo);
             }
-            courseInfos.add(courseInfo);
         }
 
     }

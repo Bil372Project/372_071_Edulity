@@ -19,18 +19,17 @@ public enum Day {
     }
 
     static {
-        for (Day pageType : Day.values()) {
-            map.put(pageType.value, pageType);
+        for (Day day : Day.values()) {
+            map.put(day.value, day);
         }
     }
 
-    public static Day valueOf(int pageType) {
-        return (Day) map.get(pageType);
+    public static Day valueOf(int day) {
+        return (Day) map.get(day);
     }
 
 
     public int getValue() {
         return value;
     }
-
 }

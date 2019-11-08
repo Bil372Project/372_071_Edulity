@@ -15,15 +15,10 @@ import android.widget.TableRow;
 import android.widget.TextView;
 
 
-import com.evrencoskun.tableview.TableView;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import Bil372.edulity.common.DataAccessor;
@@ -31,7 +26,6 @@ import Bil372.edulity.common.Schedule;
 import Bil372.edulity.enums.Day;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 

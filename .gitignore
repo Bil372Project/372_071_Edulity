@@ -1,5 +1,7 @@
 .idea/
+target/dependency/*
+!target/dependency/webapp-runner.jar
 target/*
 !target/edulity.war
-!target/dependency/webapp-runner.jar
+
 git.log

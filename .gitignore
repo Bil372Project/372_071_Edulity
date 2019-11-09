@@ -1,4 +1,5 @@
 .idea/
 target/*
 !target/edulity.war
+!target/dependency/webapp-runner.jar
 git.log

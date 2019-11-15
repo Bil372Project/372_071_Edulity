@@ -1,4 +1,4 @@
-package main.Hibernate.Mappings;
+package main.Hibernate.Entities;
 
 public class List_Of_Hw_Questions {
     private int hw_number;

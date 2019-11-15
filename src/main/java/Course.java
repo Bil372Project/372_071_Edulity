@@ -1,4 +1,6 @@
-package main.Hibernate.Mappings;
+import javax.persistence.*;
+@Entity
+@Table( name = "Course" )
 
 public class Course {
     private String course_name;

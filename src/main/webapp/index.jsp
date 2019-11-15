@@ -11,13 +11,11 @@
     <link rel="stylesheet" href="css/bootstrap-reboot.css">
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
-    <style>
-        h1 {
-            text-transform: uppercase;
-        }
-    </style>
 </head>
 <body>
-    <h1>selamun aleykum</h1>
+    <%
+        for(int i = 0; i < 5; i++) {%>
+    <h1 class="h2 text-uppercase">selamun aleykum</h1>
+    <%}%>
 </body>
 </html>

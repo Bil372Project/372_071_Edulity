@@ -6,11 +6,13 @@ import java.io.Serializable;
 @Entity
 @Table( name = "School" )
 public class School implements Serializable {
+
     @Column(name = "SCHOOL_TYPE")
     private String type;
     @Id
     @Column(name = "NAME", unique = true, nullable = false)
     private String name;
+
     @Column(name = "SCHOOL_ADDRESS")
     private String address;
 

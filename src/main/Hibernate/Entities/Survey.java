@@ -1,4 +1,4 @@
-package main.Hibernate.Mappings;
+package main.Hibernate.Entities;
 
 public class Survey {
     private String survey_id;

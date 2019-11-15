@@ -1,4 +1,4 @@
-package main.Hibernate.Mappings;
+package main.Hibernate.Entities;
 
 public class Teacher {
     private String school_name;

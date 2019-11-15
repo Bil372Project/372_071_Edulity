@@ -1,8 +1,15 @@
-package main.Hibernate.Mappings;
+package main.Hibernate.Entities;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 
+@Entity
+@Table( name = "Employee" )
 public class Employee implements Serializable {
+
     private String employee_id;
     private String school_name;
     private int ssn;

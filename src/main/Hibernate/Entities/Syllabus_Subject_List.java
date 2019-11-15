@@ -1,4 +1,4 @@
-package main.Hibernate.Mappings;
+package main.Hibernate.Entities;
 
 public class Syllabus_Subject_List {
     private String semester;

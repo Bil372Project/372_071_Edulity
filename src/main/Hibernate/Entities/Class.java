@@ -1,5 +1,9 @@
-package main.Hibernate.Mappings;
+package main.Hibernate.Entities;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "CLASS", uniqueConstraints = @UniqueConstraint(columnNames = {"school_name", "section"}))
 public class Class {
     private String school_name;
     private int section;

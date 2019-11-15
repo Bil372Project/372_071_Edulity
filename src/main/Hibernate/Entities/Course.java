@@ -1,4 +1,4 @@
-package main.Hibernate.Mappings;
+package main.Hibernate.Entities;
 
 public class Course {
     private String course_name;

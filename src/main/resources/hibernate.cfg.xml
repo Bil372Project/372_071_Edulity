@@ -4,12 +4,38 @@
 		"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
 <hibernate-configuration>
 	<session-factory>
-		<property name="hibernate.connection.driver_class">oracle.jdbc.driver.OracleDriver</property>
+		<property name="hibernate.connection.driver_class">oracle.jdbc.OracleDriver</property>
 		<property name="hibernate.connection.url">jdbc:oracle:thin:@localhost:1521:XE</property>
-		<property name="hibernate.connection.username">tester</property>
-		<property name="hibernate.connection.password">1234</property>
 		<property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
 		<property name="show_sql">true</property>
-		<mapping class="School"/>
+		<property name="connection.username">tester</property>
+		<property name="connection.password">tester</property>
+		<mapping class="entities.AnnouncementEntity"/>
+		<mapping class="entities.ClazzEntity"/>
+		<mapping class="entities.CourseEntity"/>
+		<mapping class="entities.DriverEntity"/>
+		<mapping class="entities.EmployeeEntity"/>
+		<mapping class="entities.HaveScheduleEntity"/>
+		<mapping class="entities.HeadOfDepartmentEntity"/>
+		<mapping class="entities.HomeworkEntity"/>
+		<mapping class="entities.ListOfAbsentDatesEntity"/>
+		<mapping class="entities.ListOfHwQuestionsEntity"/>
+		<mapping class="entities.LunchEntity"/>
+		<mapping class="entities.LunchMenuEntity"/>
+		<mapping class="entities.ParentEntity"/>
+		<mapping class="entities.ScheduleEntity"/>
+		<mapping class="entities.ScheduleConsistsOfEntity"/>
+		<mapping class="entities.SchoolEntity"/>
+		<mapping class="entities.SchoolBusEntity"/>
+		<mapping class="entities.SchoolBusStopsEntity"/>
+		<mapping class="entities.StopEntity"/>
+		<mapping class="entities.StudentEntity"/>
+		<mapping class="entities.SurveyEntity"/>
+		<mapping class="entities.SurveyQuestionEntity"/>
+		<mapping class="entities.SyllabusEntity"/>
+		<mapping class="entities.SyllabusExamDateEntity"/>
+		<mapping class="entities.SyllabusSubjectListEntity"/>
+		<mapping class="entities.TeacherEntity"/>
+		<mapping class="entities.TeachingStaffEntity"/>
 	</session-factory>
 </hibernate-configuration>

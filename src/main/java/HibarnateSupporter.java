@@ -17,11 +17,14 @@ import static sun.misc.Version.print;
 
 public class HibarnateSupporter {
 
-        private SessionFactory sessionFactory;
+        private static SessionFactory sessionFactory;
         private Session session;
 
-        public HibarnateSupporter(){
+        static {
             sessionFactory = new Configuration().configure().buildSessionFactory();
+        }
+
+        public HibarnateSupporter(){
             session = sessionFactory.openSession();
         }
         public Object getObject(Class realClass,Object referenced_object){
@@ -45,5 +48,9 @@ public class HibarnateSupporter {
             Query query = session.createQuery(hql);
             List results = query.list();
             return results;
+        }
+
+        public static SessionFactory getSessionFactory() {
+            return sessionFactory;
         }
 }

@@ -1,17 +1,22 @@
 package entities;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
 @Entity
 @Table(name = "COURSE", schema = "TESTER", catalog = "")
 @IdClass(CourseEntityPK.class)
-public class CourseEntity {
+public  class CourseEntity  implements Serializable {
     private String courseName;
     private long grade;
     private String type;
     private String teacherEmployeeId;
     private String schoolName;
+
+    public CourseEntity(){
+
+    }
 
     @Id
     @Column(name = "COURSE_NAME", nullable = false, length = 30)

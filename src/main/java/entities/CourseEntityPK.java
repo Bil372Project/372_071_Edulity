@@ -9,6 +9,9 @@ public class CourseEntityPK implements Serializable {
     private String courseName;
     private long grade;
 
+    public CourseEntityPK(){
+
+    }
     public CourseEntityPK(String courseName, long grade) {
         this.courseName = courseName;
         this.grade = grade;

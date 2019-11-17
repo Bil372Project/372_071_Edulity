@@ -42,7 +42,7 @@ public class MainServlet extends HttpServlet {
         if(schoolName.equals("")) {
             errors.put("schoolName", "School field should not be empty");
         }
-        if(type.equals("")) {
+        if(type == null || type.equals("")) {
             errors.put("type", "Role field should not be empty");
         }
         if(id.equals("")) {
@@ -50,13 +50,19 @@ public class MainServlet extends HttpServlet {
         }
 
         Session session = HibarnateSupporter.getSessionFactory().openSession();
-        String hql = "select s.studentId from StudentEntity as s where s.studentId =:id and " +
-                "s.schoolName =: schoolName";
-        Query query = session.createQuery(hql);
-        query.setParameter("id", id);
-        query.setParameter("schoolName", schoolName);
+        String hql = "";
+        Query query = null;
+        if(type != null) {
+            hql = (type.equals("student")) ? "select s.studentId from StudentEntity as s where s.studentId =:id " +
+                    "and " +
+                    "s.schoolName =: schoolName" :
+                    "select e.id from EmployeeEntity as e where e.employeeId=:id and e.schoolName=:schoolName";
+            query = session.createQuery(hql);
+            query.setParameter("id", id);
+            query.setParameter("schoolName", schoolName);
+        }
 
-        if(query.list().isEmpty()) {
+        if(query == null || query.list().isEmpty()) {
             errors.put("id","Your id or school name is wrong. Please check them..");
         }
 

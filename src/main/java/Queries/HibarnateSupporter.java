@@ -1,3 +1,5 @@
+package Queries;
+
 import entities.CourseEntity;
 import entities.CourseEntityPK;
 import org.hibernate.Criteria;
@@ -12,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-import static sun.misc.Version.print;
 
 
 public class HibarnateSupporter {

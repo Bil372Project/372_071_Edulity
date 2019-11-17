@@ -84,9 +84,6 @@
             transition: height 0.6s;
         }
 
-        main {
-            height: 80rem;
-        }
     </style>
 </head>
 <body>
@@ -122,37 +119,56 @@
     </nav>
 
     <main class="mt-5">
-        <div class="container clearfix">
-            <div class="align-content-center form-container">
-                <form action="mainServlet" method="get">
-                    <%=sbErros.toString()%>
-                    <div class="form-group">
-                        <label for="school_names">School Names</label>
-                        <select name="school_names" id="school_names" class="form-control">
-                            <%=schoolNames.toString()%>
-                        </select>
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <img src="resources/img/logo.png" alt="Logo" class="card-img pt-0">
+                </div>
+                <div class="col-6 pt-5">
+                    <div class="clearfix">
+                        <div class="align-content-center form-container">
+                            <form action="mainServlet" method="get">
+                                <%=sbErros.toString()%>
+                                <div class="form-group">
+                                    <label for="school_names">School Names</label>
+                                    <select name="school_names" id="school_names" class="form-control">
+                                        <%=schoolNames.toString()%>
+                                    </select>
+                                </div>
+                                <div class="form-group" id="types">
+                                    <label class="rad">
+                                        <input id="r1" type="radio" name="type" value="student"
+                                               onclick="changePlaceHolder('Student ID')">
+                                        <i></i> Student
+                                    </label>
+                                    <label class="rad">
+                                        <input id="r2" type="radio" name="type" value="teacher" class="form-control"
+                                               onclick="changePlaceHolder('Teacher ID')">
+                                        <i></i> Teacher
+                                    </label>
+                                </div>
+                                <div class="form-group">
+                                    <input id="text-id" type="text" name="id" class="form-control" placeholder="Enter your ID">
+                                </div>
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <input type="submit" name="submit" value="Login" class="form-control">
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <input type="submit" name="submit" value="Go to school page"
+                                               class="form-control">
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
                     </div>
-                    <div class="form-group" id="types">
-                        <label class="rad">
-                            <input id="r1" type="radio" name="type" value="student"
-                                   onclick="changePlaceHolder('Student ID')">
-                            <i></i> Student
-                        </label>
-                        <label class="rad">
-                            <input id="r2" type="radio" name="type" value="teacher" class="form-control"
-                                   onclick="changePlaceHolder('Teacher ID')">
-                            <i></i> Teacher
-                        </label>
-                    </div>
-                    <div class="form-group">
-                        <input id="text-id" type="text" name="id" class="form-control" placeholder="Enter your ID">
-                    </div>
-                    <div class="form-group">
-                        <input type="submit" value="Login" class="form-control">
-                    </div>
-                </form>
+                </div>
+
             </div>
         </div>
+
+
     </main>
 
     <footer class="py-5 bg-dark text-white text-center">

@@ -1,7 +1,7 @@
+import Queries.SchoolQuery;
 import com.fasterxml.classmate.AnnotationConfiguration;
 import entities.*;
 
-import jdk.nashorn.internal.runtime.regexp.joni.Config;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
@@ -22,7 +22,7 @@ public class OracleTest {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        /*HibarnateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
+        /*Queries.HibarnateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
         but now it does not have.
             --- create command
             --- delete object
@@ -31,13 +31,16 @@ public class OracleTest {
 
          */
         //Created hibarnate supported
-        DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
-        databaseGeneretor.generator();
-        //HibarnateSupporter supporter = new HibarnateSupporter();
+        //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
+       // databaseGeneretor.generator();
+        Queries.HibarnateSupporter supporter = new Queries.HibarnateSupporter();
 
         LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
         lunchMenuEntity.setFood("nuddle");
         lunchMenuEntity.setLunchDay(new Time(23425));
+
+        SchoolQuery sq = new SchoolQuery();
+        List q = sq.makeQuery("TOBB",null,null);
 
         //supporter.createObject(lunchMenuEntity);
         //This code block only for trial and query example

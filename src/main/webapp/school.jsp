@@ -1,4 +1,5 @@
-<%--
+<%@ page import="java.util.Hashtable" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
   Date: 17.11.2019
@@ -7,7 +8,28 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    request.getSession().setAttribute("current_page", "school.jsp");
+    Hashtable errors = (Hashtable) request.getAttribute("errors");
+    String sbErros = "";
+    if(errors != null && !errors.isEmpty()) {
+        for (String str :
+                new ArrayList<String>(errors.values())) {
+            sbErros += str + "\n";
+        }
+        if (!sbErros.equals("")){
+            sbErros ="<div class=\"alert alert-danger alert-dismissible  \n" +
+                    "            fade show\" role=\"alert\"> \n" +
+                    "              \n" +
+                    "            <strong>"+sbErros +"</strong>" +
+                "               <button type=\"button\" class=\"btn close\" \n" +
+                    "                data-dismiss=\"alert\" aria-label=\"Close\"> \n" +
+                    "                  \n" +
+                    "                <span aria-hidden=\"true\">×</span> \n" +
+                "               </button> " +
+                    "</div>";
 
+        }
+    }
 %>
 <html>
 <head>
@@ -23,24 +45,6 @@
     <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="hover.css">
-    <script>
-        var type;
-        function changePlaceHolder(t) {
-            type = t;
-            document.getElementById('text-id').setAttribute("placeholder", t);
-        }
-        $(document).ready(function(){
-            // $(window).scroll(function () {
-            //     if ($(this).scrollTop() > 50) {
-            //         $('#back-to-top').fadeIn();
-            //     } else {
-            //         $('#back-to-top').fadeOut();
-            //     }
-            // });
-            // scroll body to 0px on click
-
-        });
-    </script>
     <style>
         .navbar-collapse {
             height: 100%;
@@ -113,6 +117,7 @@
 
     <main>
         <div class="container mt-4 clearfix">
+            <%=sbErros%>
             <div id="login" class="collapse float-right">
                 <div class="form-container clearfix">
                     <form action="mainServlet" method="get">
@@ -191,3 +196,22 @@
 
 </body>
 </html>
+<script>
+    var type;
+    function changePlaceHolder(t) {
+        type = t;
+        document.getElementById('text-id').setAttribute("placeholder", t);
+    }
+
+    $(document).ready(function(){
+        // $(window).scroll(function () {
+        //     if ($(this).scrollTop() > 50) {
+        //         $('#back-to-top').fadeIn();
+        //     } else {
+        //         $('#back-to-top').fadeOut();
+        //     }
+        // });
+        // scroll body to 0px on click
+
+    });
+</script>

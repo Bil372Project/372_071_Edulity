@@ -6,6 +6,7 @@
 <%@ page import="java.util.Hashtable" %>
 <%@ page import="java.util.ArrayList" %>
 <%
+    request.getSession().setAttribute("current_page", "index.jsp");
     StringBuilder schoolNames = new StringBuilder();
     if(request.getAttribute("sessionFactory") == null)
         request.setAttribute("sessionFactory",new Configuration().configure().buildSessionFactory());

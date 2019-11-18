@@ -36,18 +36,22 @@ public class MainServlet extends HttpServlet {
         if(errors.isEmpty()) { // validation succesfull
             session.setAttribute("id", request.getParameter("id"));
             session.setAttribute("type", request.getParameter("type"));
-            session.setAttribute("school_name", request.getParameter("school_name"));
+            if(request.getParameter("school_name") != null)
+                session.setAttribute("school_name", request.getParameter("school_name"));
             request.getRequestDispatcher("/student.jsp").forward(request,response);
         }
         else {
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("index.jsp").forward(request,response);
+            String[] str = request.getHeader("referer").split("/");
+            request.getRequestDispatcher((String)request.getSession().getAttribute("current_page")).forward(request,
+                    response);
         }
     }
 
     private Hashtable validate(HttpServletRequest request) {
         Hashtable errors = new Hashtable();
         String schoolName = request.getParameter("school_name");
+        if(schoolName == null) schoolName = (String)request.getSession().getAttribute("school_name");
         String type = request.getParameter("type");
         String id = request.getParameter("id");
         if(schoolName.equals("")) {

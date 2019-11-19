@@ -6,6 +6,7 @@
 <%@ page import="java.util.Hashtable" %>
 <%@ page import="java.util.ArrayList" %>
 <%
+    request.getSession().setAttribute("current_page", "index.jsp");
     StringBuilder schoolNames = new StringBuilder();
     if(request.getAttribute("sessionFactory") == null)
         request.setAttribute("sessionFactory",new Configuration().configure().buildSessionFactory());
@@ -45,6 +46,8 @@
     <link rel="stylesheet" href="css/bootstrap-grid.css">
     <link rel="stylesheet" href="css/bootstrap-reboot.css">
     <link rel="stylesheet" href="homepage.css">
+    <link rel="stylesheet" href="common.css">
+    <link rel="stylesheet" href="hover.css">
 
     <script>
         var type;
@@ -52,37 +55,8 @@
             type = t;
             document.getElementById('text-id').setAttribute("placeholder", t);
         }
-        
-        function validateLogin() {
-            var option = document.getElementById('school_names');
-            var schoolName = option.options[option.selectedIndex].value;
-            var id = document.getElementById(text-id).valueOf();
-
-        }
     </script>
     <style>
-        body{
-            font-family: 'Oxygen', sans-serif;
-            background-color: #5a6268;
-        }
-        .img-logo{
-            height: 3rem;
-        }
-        .navbar {
-            opacity: 0.8;
-            border-bottom: 1px solid #fff;
-        }
-
-        .form-container {
-            background: transparent;
-        }
-        .form-control {
-            -webkit-transition: height 0.6s;
-            -moz-transition: height 0.6s;
-            -ms-transition: height 0.6s;
-            -o-transition: height 0.6s;
-            transition: height 0.6s;
-        }
 
     </style>
 </head>
@@ -98,17 +72,17 @@
             <div id="navbarCollapse" class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="#" class="nav-link active hvr-underline-from-center">
                             Home
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="#" class="nav-link active hvr-underline-from-center">
                             About
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link active">
+                        <a href="#" class="nav-link active hvr-underline-from-center">
                             Contact
                         </a>
                     </li>
@@ -130,8 +104,8 @@
                             <form action="mainServlet" method="get">
                                 <%=sbErros.toString()%>
                                 <div class="form-group">
-                                    <label for="school_names">School Names</label>
-                                    <select name="school_names" id="school_names" class="form-control">
+                                    <label for="school_name">School Name</label>
+                                    <select name="school_name" id="school_name" class="form-control">
                                         <%=schoolNames.toString()%>
                                     </select>
                                 </div>
@@ -152,11 +126,12 @@
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-6">
-                                        <input type="submit" name="submit" value="Login" class="form-control">
+                                        <input type="submit" name="submit" value="Login"
+                                               class="form-control rounded-pill">
                                     </div>
                                     <div class="form-group col-6">
                                         <input type="submit" name="submit" value="Go to school page"
-                                               class="form-control">
+                                               class="form-control rounded-pill">
                                     </div>
                                 </div>
 

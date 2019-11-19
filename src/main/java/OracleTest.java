@@ -1,4 +1,4 @@
-import Queries.Supporter.HibarnateSupporter;
+import Hibernate.Generator.HibarnateSupporter;
 
 import org.hibernate.Session;
 
@@ -10,7 +10,7 @@ public class OracleTest {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        /*Queries.Supporter.HibarnateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
+        /*HibarnateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
         but now it does not have.
             --- create command
             --- delete object
@@ -19,7 +19,7 @@ public class OracleTest {
 
          */
         //Created hibarnate supported
-        //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
+        //Hibernate.Generator.DatabaseGeneretor databaseGeneretor = new Hibernate.Generator.DatabaseGeneretor();
        // databaseGeneretor.generator();
         HibarnateSupporter supporter = new HibarnateSupporter();
         Session session = HibarnateSupporter.getSessionFactory().openSession();

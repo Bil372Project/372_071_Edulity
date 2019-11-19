@@ -1,4 +1,4 @@
-import Queries.Supporter.HibarnateSupporter;
+import Hibernate.Generator.HibarnateSupporter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 

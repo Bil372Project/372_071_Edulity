@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SyylabusQuery {
+public class SyllabusQuery {
 
     public List makeQuery(String semester, String courseName, Long gradingInfo, String hodEmployeeId,String schoolName) {
         Session session = HibarnateSupporter.getSessionFactory().openSession();

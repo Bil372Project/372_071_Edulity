@@ -1,3 +1,4 @@
+import Queries.HibarnateSupporter;
 import Queries.SchoolQuery;
 import com.fasterxml.classmate.AnnotationConfiguration;
 import entities.*;
@@ -34,17 +35,17 @@ public class OracleTest {
         //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
        // databaseGeneretor.generator();
         Queries.HibarnateSupporter supporter = new Queries.HibarnateSupporter();
+        Session session = HibarnateSupporter.getSessionFactory().openSession();
+session.close();
+        //LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
+        //lunchMenuEntity.setFood("nuddle");
+        //lunchMenuEntity.setLunchDay(new Time(23425));
 
-        LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
-        lunchMenuEntity.setFood("nuddle");
-        lunchMenuEntity.setLunchDay(new Time(23425));
-
-        SchoolQuery sq = new SchoolQuery();
-        List q = sq.makeQuery("TOBB",null,null);
+        //List q = sq.makeQuery("TOBB",null,null);
 
         //supporter.createObject(lunchMenuEntity);
         //This code block only for trial and query example
-        String hql = "FROM EmployeeEntity WHERE SCHOOL_NAME = 'TOBB' ";
+        //String hql = "FROM EmployeeEntity WHERE SCHOOL_NAME = 'TOBB' ";
         //List courses =  supporter.selectQueryBased(hql);
         //for(Object object:courses){
           //  System.out.println(((EmployeeEntity)object).getEmployeeId());

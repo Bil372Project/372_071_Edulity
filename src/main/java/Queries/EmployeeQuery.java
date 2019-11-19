@@ -1,5 +1,6 @@
 package Queries;
 
+import entities.EmployeeEntity;
 import entities.SchoolEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,8 +16,8 @@ public class EmployeeQuery {
     public List makeQuery(String employeeId, String schoolName, String ssn, String name) {
         Session session = HibarnateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<SchoolEntity> criteria = criteriaBuilder.createQuery(SchoolEntity.class);
-        Root<SchoolEntity> root = criteria.from(SchoolEntity.class);
+        CriteriaQuery<EmployeeEntity> criteria = criteriaBuilder.createQuery(EmployeeEntity.class);
+        Root<EmployeeEntity> root = criteria.from(EmployeeEntity.class);
         List<Predicate> predicates = new ArrayList<>();
         if(employeeId != null){
             predicates.add(criteriaBuilder.like(root.get("employeeId"),employeeId));
@@ -31,7 +32,7 @@ public class EmployeeQuery {
             predicates.add(criteriaBuilder.equal(root.get("name"),name));
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
-        Query<SchoolEntity> query = session.createQuery(criteria);
+        Query<EmployeeEntity> query = session.createQuery(criteria);
 
         return query.list();
     }

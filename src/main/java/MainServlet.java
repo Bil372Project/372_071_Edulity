@@ -1,5 +1,4 @@
-import Queries.HibarnateSupporter;
-import entities.SchoolEntity;
+import Hibernate.Generator.HibarnateSupporter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -8,7 +7,6 @@ import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.util.Hashtable;
-import java.util.List;
 
 @WebServlet(urlPatterns = {"/mainServlet"})
 public class MainServlet extends HttpServlet {

@@ -1,7 +1,7 @@
 package Queries;
 
 import Queries.Supporter.HibarnateSupporter;
-import entities.EmployeeEntity;
+import entities.HeadOfDepartmentEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -12,27 +12,21 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmployeeQuery {
-    public List makeQuery(String employeeId, String schoolName, String ssn, String name) {
+public class HeadOfDepartmentQuery {
+    public List makeQuery(String schoolName, String employeeId) {
         Session session = HibarnateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<EmployeeEntity> criteria = criteriaBuilder.createQuery(EmployeeEntity.class);
-        Root<EmployeeEntity> root = criteria.from(EmployeeEntity.class);
+        CriteriaQuery<HeadOfDepartmentEntity> criteria = criteriaBuilder.createQuery(HeadOfDepartmentEntity.class);
+        Root<HeadOfDepartmentEntity> root = criteria.from(HeadOfDepartmentEntity.class);
         List<Predicate> predicates = new ArrayList<>();
-        if(employeeId != null){
-            predicates.add(criteriaBuilder.like(root.get("employeeId"),employeeId));
-        }
         if(schoolName != null){
             predicates.add(criteriaBuilder.like(root.get("schoolName"),schoolName));
         }
-        if(ssn!= null){
-            predicates.add(criteriaBuilder.like(root.get("ssn"),ssn));
-        }
-        if(name!= null){
-            predicates.add(criteriaBuilder.like(root.get("name"),name));
+        if(employeeId != null){
+            predicates.add(criteriaBuilder.like(root.get("employeeId"),employeeId));
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
-        Query<EmployeeEntity> query = session.createQuery(criteria);
+        Query<HeadOfDepartmentEntity> query = session.createQuery(criteria);
 
         session.close();
 

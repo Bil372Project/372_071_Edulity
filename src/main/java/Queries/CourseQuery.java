@@ -1,7 +1,7 @@
 package Queries;
 
+import Queries.Supporter.HibarnateSupporter;
 import entities.CourseEntity;
-import entities.SchoolEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -29,13 +29,15 @@ public class CourseQuery {
             predicates.add(criteriaBuilder.like(root.get("type"),type));
         }
         if(teacherEmployeeId!= null){
-            predicates.add(criteriaBuilder.equal(root.get("teacherEmployeeId"),teacherEmployeeId));
+            predicates.add(criteriaBuilder.like(root.get("teacherEmployeeId"),teacherEmployeeId));
         }
         if(schoolName != null){
-            predicates.add(criteriaBuilder.equal(root.get("schoolName"),schoolName));
+            predicates.add(criteriaBuilder.like(root.get("schoolName"),schoolName));
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<CourseEntity> query = session.createQuery(criteria);
+
+        session.close();
 
         return query.list();
     }

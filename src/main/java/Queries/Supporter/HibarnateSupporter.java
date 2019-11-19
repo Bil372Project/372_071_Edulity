@@ -1,4 +1,4 @@
-package Queries;
+package Queries.Supporter;
 
 import entities.CourseEntity;
 import entities.CourseEntityPK;

@@ -1,6 +1,6 @@
 package Queries;
 
-import entities.EmployeeEntity;
+import Queries.Supporter.HibarnateSupporter;
 import entities.SyllabusEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -21,23 +21,25 @@ public class SyllabusQuery {
         Root<SyllabusEntity> root = criteria.from(SyllabusEntity.class);
         List<Predicate> predicates = new ArrayList<>();
         if(semester != null){
-            predicates.add(criteriaBuilder.equal(root.get("semester"),semester));
+            predicates.add(criteriaBuilder.like(root.get("semester"),semester));
         }
         if(courseName != null){
-            predicates.add(criteriaBuilder.equal(root.get("courseName"),courseName));
+            predicates.add(criteriaBuilder.like(root.get("courseName"),courseName));
         }
         if(gradingInfo!= null){
             predicates.add(criteriaBuilder.equal(root.get("gradingInfo"),gradingInfo));
         }
         if(hodEmployeeId!= null){
-            predicates.add(criteriaBuilder.equal(root.get("hodEmployeeId"),hodEmployeeId));
+            predicates.add(criteriaBuilder.like(root.get("hodEmployeeId"),hodEmployeeId));
         }
         if(schoolName!= null){
-            predicates.add(criteriaBuilder.equal(root.get("schoolName"),schoolName));
+            predicates.add(criteriaBuilder.like(root.get("schoolName"),schoolName));
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<SyllabusEntity> query = session.createQuery(criteria);
-        System.out.println(query.list());
+
+        session.close();
+
         return query.list();
     }
 }

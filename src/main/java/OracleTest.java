@@ -1,19 +1,6 @@
-import Queries.HibarnateSupporter;
-import Queries.SchoolQuery;
-import com.fasterxml.classmate.AnnotationConfiguration;
-import entities.*;
+import Queries.Supporter.HibarnateSupporter;
 
 import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-
-import javax.imageio.spi.ServiceRegistry;
-import javax.persistence.Entity;
-import java.sql.Driver;
-import java.sql.Time;
-import java.util.Date;
-import java.util.List;
 
 
 public class OracleTest {
@@ -23,7 +10,7 @@ public class OracleTest {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        /*Queries.HibarnateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
+        /*Queries.Supporter.HibarnateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
         but now it does not have.
             --- create command
             --- delete object
@@ -34,7 +21,7 @@ public class OracleTest {
         //Created hibarnate supported
         //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
        // databaseGeneretor.generator();
-        Queries.HibarnateSupporter supporter = new Queries.HibarnateSupporter();
+        HibarnateSupporter supporter = new HibarnateSupporter();
         Session session = HibarnateSupporter.getSessionFactory().openSession();
 session.close();
         //LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
@@ -42,7 +29,8 @@ session.close();
         //lunchMenuEntity.setLunchDay(new Time(23425));
 
         //List q = sq.makeQuery("TOBB",null,null);
-
+        //CourseQuery cq = new CourseQuery();
+        //cq.makeQuery(null,null,null,null);
         //supporter.createObject(lunchMenuEntity);
         //This code block only for trial and query example
         //String hql = "FROM EmployeeEntity WHERE SCHOOL_NAME = 'TOBB' ";

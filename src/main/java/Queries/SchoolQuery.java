@@ -1,5 +1,6 @@
 package Queries;
 
+import Queries.Supporter.HibarnateSupporter;
 import entities.SchoolEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -29,6 +30,8 @@ public class SchoolQuery {
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<SchoolEntity> query = session.createQuery(criteria);
+
+        session.close();
 
         return query.list();
     }

@@ -1,4 +1,4 @@
-import Queries.HibarnateSupporter;
+import Queries.Supporter.HibarnateSupporter;
 import entities.*;
 
 import java.sql.Time;

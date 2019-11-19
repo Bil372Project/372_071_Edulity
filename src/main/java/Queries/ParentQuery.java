@@ -1,7 +1,7 @@
 package Queries;
 
+import Queries.Supporter.HibarnateSupporter;
 import entities.ParentEntity;
-import entities.SchoolEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -29,13 +29,15 @@ public class ParentQuery {
             predicates.add(criteriaBuilder.like(root.get("name"),name));
         }
         if(address!= null){
-            predicates.add(criteriaBuilder.equal(root.get("address"),address));
+            predicates.add(criteriaBuilder.like(root.get("address"),address));
         }
         if(email != null){
-            predicates.add(criteriaBuilder.equal(root.get("email"),email));
+            predicates.add(criteriaBuilder.like(root.get("email"),email));
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<ParentEntity> query = session.createQuery(criteria);
+
+        session.close();
 
         return query.list();
     }

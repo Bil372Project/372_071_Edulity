@@ -19,11 +19,11 @@ public class OracleTest {
 
          */
         //Created hibarnate supported
-        //Hibernate.Generator.DatabaseGeneretor databaseGeneretor = new Hibernate.Generator.DatabaseGeneretor();
-       // databaseGeneretor.generator();
-        HibarnateSupporter supporter = new HibarnateSupporter();
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
-session.close();
+        Hibernate.Generator.DatabaseGeneretor databaseGeneretor = new Hibernate.Generator.DatabaseGeneretor();
+        databaseGeneretor.generator();
+//        HibarnateSupporter supporter = new HibarnateSupporter();
+//        Session session = HibarnateSupporter.getSessionFactory().openSession();
+//session.close();
         //LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
         //lunchMenuEntity.setFood("nuddle");
         //lunchMenuEntity.setLunchDay(new Time(23425));

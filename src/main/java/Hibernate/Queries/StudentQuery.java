@@ -76,4 +76,9 @@ public class StudentQuery {
         student.setSchoolBusId(schoolBusId);
         supporter.createObject(student);
     }
+    public void deletestu(StudentEntity student)
+    {
+        HibarnateSupporter supporter = new HibarnateSupporter();
+        supporter.delete(student);
+    }
 }

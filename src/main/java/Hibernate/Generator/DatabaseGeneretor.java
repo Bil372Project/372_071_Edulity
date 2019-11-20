@@ -16,12 +16,12 @@ import java.util.ArrayList;
 
 public class DatabaseGeneretor {
 
-        public String[] school_list = {"TOBB", "Hacettepe", "ITU", "METU", "Atılım", "Stanford"};
-        public String[] school_adrress = {"Ankara", "Ankara", "istanbul", "Ankara", "Ankara", "California"};
-        public String[] school_type = {"Public", "Public", "Public", "Public", "Public", "Public", "Private"};
-        public String[] employee_name = {"Mert", "Mustafa", "Onur", "Muhammed", "Tansel", "Buğra", "Oğuz"};
-        public ArrayList<String> sid_list;
-        public String[] specialization = {"Mat","Fen","İng","Türkce","Beden","Sosyal"};
+        private String[] school_list = {"TOBB", "Hacettepe", "ITU", "METU", "Atılım", "Stanford"};
+        private String[] school_adrress = {"Ankara", "Ankara", "istanbul", "Ankara", "Ankara", "California"};
+        private String[] school_type = {"Public", "Public", "Public", "Public", "Public", "Public", "Private"};
+        private String[] employee_name = {"Mert", "Mustafa", "Onur", "Muhammed", "Tansel", "Buğra", "Oğuz"};
+        private ArrayList<String> sid_list;
+        private String[] specialization = {"Mat","Fen","İng","Türkce","Beden","Sosyal"};
         public String[] questions = {"Dönem puanı","Dersler nasıl olmalı","Öğrenciler nasıl?"};
         public String[] sections = {"A","B","C","D","E"};
         private int max_int;
@@ -31,27 +31,27 @@ public class DatabaseGeneretor {
         private int numberOfSurvey;
         private int homework_number;
         private int numberOfDriver;
-        public HibarnateSupporter supporter;
-        public SchoolQuery schoolQuery; //NOT ADDED
-        public EmployeeQuery employeeQuery;
-        public TeacherQuery teacherQuery;
-        public TeachingStaffQuery teachingStaffEntityQuery;
-        public ParentQuery parentQuery;
-        public SyllabusQuery syllabusQuery;
-        public HeadOfDepartmentQuery headOfEmployeeQuery;
-        public SurveyQuery surveyQuery;
-        public CourseQuery courseQuery;
-        public ScheduleQuery scheduleQuery;
-        public ClazzQuery clazzQuery;
-        public HaveScheduleQuery haveScheduleQuery;
-        public HomeworkQuery homeworkQuery;
-        public SchoolBusQuery schoolBusQuery;
-        public StudentQuery studentQuery;   //isnot used for now
+        private HibarnateSupporter supporter;
+        private SchoolQuery schoolQuery; //NOT ADDED
+        private EmployeeQuery employeeQuery;
+        private TeacherQuery teacherQuery;
+        private TeachingStaffQuery teachingStaffEntityQuery;
+        private ParentQuery parentQuery;
+        private SyllabusQuery syllabusQuery;
+        private HeadOfDepartmentQuery headOfEmployeeQuery;
+        private SurveyQuery surveyQuery;
+        private CourseQuery courseQuery;
+        private ScheduleQuery scheduleQuery;
+        private ClazzQuery clazzQuery;
+        private HaveScheduleQuery haveScheduleQuery;
+        private HomeworkQuery homeworkQuery;
+        private SchoolBusQuery schoolBusQuery;
+        private StudentQuery studentQuery;   //isnot used for now
 
         public DatabaseGeneretor() {
                 this("");
         }
-        public DatabaseGeneretor(String name)
+        private DatabaseGeneretor(String name)
         {
                 sid_list = new ArrayList<>();
                 max_int = 1000000;

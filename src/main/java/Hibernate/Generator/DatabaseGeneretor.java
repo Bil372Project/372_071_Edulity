@@ -73,6 +73,7 @@ public class DatabaseGeneretor {
                 homeworkQuery = new HomeworkQuery();
                 schoolBusQuery = new SchoolBusQuery();
                 studentQuery = new StudentQuery();
+
         }
         public void generator() {
                 for (int i = 0; i < school_list.length; i++) {

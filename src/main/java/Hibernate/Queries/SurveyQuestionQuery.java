@@ -31,8 +31,6 @@ public class SurveyQuestionQuery {
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<SurveyQuestionEntity> query = session.createQuery(criteria);
 
-        session.close();
-
         return query.list();
     }
 }

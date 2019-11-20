@@ -41,7 +41,6 @@ public class AnnouncementQuery {
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<AnnouncementEntity> query = session.createQuery(criteria);
 
-        session.close();
 
         return query.list();
     }

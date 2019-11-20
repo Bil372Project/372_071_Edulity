@@ -28,7 +28,6 @@ public class LisOfHwQuestionsQuery {
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<ListOfHwQuestionsEntity> query = session.createQuery(criteria);
 
-        session.close();
 
         return query.list();
     }

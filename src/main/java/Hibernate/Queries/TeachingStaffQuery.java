@@ -38,8 +38,6 @@ public class TeachingStaffQuery {
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<TeachingStaffEntity> query = session.createQuery(criteria);
 
-        session.close();
-
         return query.list();
     }
 

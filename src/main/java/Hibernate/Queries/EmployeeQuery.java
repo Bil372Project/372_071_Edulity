@@ -1,5 +1,4 @@
 package Hibernate.Queries;
-
 import Hibernate.Entities.EmployeeEntity;
 import Hibernate.Generator.HibarnateSupporter;
 import org.hibernate.Session;
@@ -20,7 +19,7 @@ public class EmployeeQuery {
         Root<EmployeeEntity> root = criteria.from(EmployeeEntity.class);
         List<Predicate> predicates = new ArrayList<>();
         if(employeeId != null){
-            predicates.add(criteriaBuilder.like(root.get("employeeId"),employeeId));
+            predicates.add(criteriaBuilder.equal(root.get("employeeId"),employeeId));
         }
         if(schoolName != null){
             predicates.add(criteriaBuilder.like(root.get("schoolName"),schoolName));
@@ -33,8 +32,7 @@ public class EmployeeQuery {
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<EmployeeEntity> query = session.createQuery(criteria);
-
-        session.close();
+        System.out.println(query.list());
 
         return query.list();
     }

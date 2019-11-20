@@ -32,7 +32,6 @@ public class SyllabusSubjectListQuery {
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<SyllabusSubjectListEntity> query = session.createQuery(criteria);
 
-        session.close();
 
         return query.list();
     }

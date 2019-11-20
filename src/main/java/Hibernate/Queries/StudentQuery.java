@@ -1,7 +1,11 @@
 package Hibernate.Queries;
 
+
+
+
 import Hibernate.Entities.StudentEntity;
 import Hibernate.Generator.HibarnateSupporter;
+
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -53,8 +57,6 @@ public class StudentQuery {
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<StudentEntity> query = session.createQuery(criteria);
-
-        session.close();
 
         return query.list();
     }

@@ -38,8 +38,6 @@ public class HomeworkQuery {
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<HomeworkEntity> query = session.createQuery(criteria);
 
-        session.close();
-
         return query.list();
     }
 }

@@ -1,5 +1,4 @@
 package Hibernate.Queries;
-
 import Hibernate.Entities.CourseEntity;
 import Hibernate.Generator.HibarnateSupporter;
 import org.hibernate.Session;
@@ -37,7 +36,6 @@ public class CourseQuery {
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<CourseEntity> query = session.createQuery(criteria);
 
-        session.close();
 
         return query.list();
     }

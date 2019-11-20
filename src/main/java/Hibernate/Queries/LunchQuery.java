@@ -32,7 +32,6 @@ public class LunchQuery {
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
         Query<LunchEntity> query = session.createQuery(criteria);
 
-        session.close();
 
         return query.list();
     }

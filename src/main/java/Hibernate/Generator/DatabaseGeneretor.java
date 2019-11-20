@@ -20,40 +20,61 @@ public class DatabaseGeneretor {
         public String[] school_adrress = {"Ankara", "Ankara", "istanbul", "Ankara", "Ankara", "California"};
         public String[] school_type = {"Public", "Public", "Public", "Public", "Public", "Public", "Private"};
         public String[] employee_name = {"Mert", "Mustafa", "Onur", "Muhammed", "Tansel", "Buğra", "Oğuz"};
-        public ArrayList<String> sid_list = new ArrayList<>();
+        public ArrayList<String> sid_list;
         public String[] specialization = {"Mat","Fen","İng","Türkce","Beden","Sosyal"};
         public String[] questions = {"Dönem puanı","Dersler nasıl olmalı","Öğrenciler nasıl?"};
         public String[] sections = {"A","B","C","D","E"};
-        int max_int = 1000000;
-        int student_number = 1000;
-        int section_numbers = 16;
-        int grade = 8;
-        int numberOfSurvey = 100;
-        int homework_number = 20;
-        int numberOfDriver = 20;
-        public HibarnateSupporter supporter = new HibarnateSupporter();
-        public SchoolQuery schoolQuery = new SchoolQuery();
-        public EmployeeQuery employeeQuery = new EmployeeQuery();
-        public TeacherQuery teacherQuery = new TeacherQuery();
-        public TeachingStaffQuery teachingStaffEntityQuery = new TeachingStaffQuery();
-        public ParentQuery parentQuery = new ParentQuery();
-        public SyllabusQuery syllabusQuery = new SyllabusQuery();
-        public HeadOfDepartmentQuery headOfEmployeeQuery = new HeadOfDepartmentQuery();
-        public SurveyQuery surveyQuery = new SurveyQuery();
-        public CourseQuery courseQuery = new CourseQuery();
-        public ScheduleQuery scheduleQuery = new ScheduleQuery();
-        public ClazzQuery clazzQuery = new ClazzQuery();
-        public HaveScheduleQuery haveScheduleQuery = new HaveScheduleQuery();
-        public HomeworkQuery homeworkQuery = new HomeworkQuery();
-        public SchoolBusQuery schoolBusQuery = new SchoolBusQuery();
-        public StudentQuery studentQuery = new StudentQuery();
+        int max_int;
+        int student_number;
+        int section_numbers;
+        int grade;
+        int numberOfSurvey;
+        int homework_number;
+        int numberOfDriver;
+        public HibarnateSupporter supporter;
+        public SchoolQuery schoolQuery; //NOT ADDED
+        public EmployeeQuery employeeQuery;
+        public TeacherQuery teacherQuery;
+        public TeachingStaffQuery teachingStaffEntityQuery;
+        public ParentQuery parentQuery;
+        public SyllabusQuery syllabusQuery;
+        public HeadOfDepartmentQuery headOfEmployeeQuery;
+        public SurveyQuery surveyQuery;
+        public CourseQuery courseQuery;
+        public ScheduleQuery scheduleQuery;
+        public ClazzQuery clazzQuery;
+        public HaveScheduleQuery haveScheduleQuery;
+        public HomeworkQuery homeworkQuery;
+        public SchoolBusQuery schoolBusQuery;
+        public StudentQuery studentQuery;   //isnot used for now
 
         public DatabaseGeneretor() {
-
+                sid_list = new ArrayList<>();
+                max_int = 1000000;
+                student_number = 1000;
+                section_numbers = 16;
+                grade = 8;
+                numberOfSurvey = 100;
+                homework_number = 20;
+                numberOfDriver = 20;
+                supporter = new HibarnateSupporter();
+                schoolQuery = new SchoolQuery();
+                employeeQuery = new EmployeeQuery();
+                teacherQuery = new TeacherQuery();
+                teachingStaffEntityQuery = new TeachingStaffQuery();
+                parentQuery = new ParentQuery();
+                syllabusQuery = new SyllabusQuery();
+                headOfEmployeeQuery = new HeadOfDepartmentQuery();
+                surveyQuery = new SurveyQuery();
+                courseQuery = new CourseQuery();
+                scheduleQuery = new ScheduleQuery();
+                clazzQuery = new ClazzQuery();
+                haveScheduleQuery = new HaveScheduleQuery();
+                homeworkQuery = new HomeworkQuery();
+                schoolBusQuery = new SchoolBusQuery();
+                studentQuery = new StudentQuery();
         }
         public void generator() {
-
-
                 for (int i = 0; i < school_list.length; i++) {
 
                         SchoolEntity schoolEntity = new SchoolEntity();
@@ -90,7 +111,7 @@ public class DatabaseGeneretor {
                 //TODO do it in the next
                 for (int i = 0; i < school_list.length; i++) {
 
-                        for(int j=0;j < specialization.length;j++) {
+                        for(int j = 0; j < specialization.length; j++) {
                                 HeadOfDepartmentEntity headOfDepartmentEntity = new HeadOfDepartmentEntity();
                                 headOfDepartmentEntity.setSchoolName(school_list[i]);
                                 ArrayList<TeachingStaffEntity> headOfDepartment = (ArrayList) teachingStaffEntityQuery.makeQuery(school_list[i], null, specialization[j], null);
@@ -110,7 +131,7 @@ public class DatabaseGeneretor {
                         supporter.createObject(parent);
                 }
 
-                for(int i=0;i<numberOfSurvey;i++) {
+                for(int i = 0; i < numberOfSurvey; i++) {
                         ArrayList<HeadOfDepartmentEntity> headOfDepartment =(ArrayList) headOfEmployeeQuery.makeQuery(school_list[((int)(Math.random()*max_int))%school_list.length],null);
                         ArrayList<ParentEntity> parentEntities = (ArrayList) parentQuery.makeQuery(null,null,null,null,null);
                         SurveyEntity survey = new SurveyEntity();
@@ -123,7 +144,7 @@ public class DatabaseGeneretor {
                 }
                 ArrayList<SurveyEntity> surveyList = (ArrayList) surveyQuery.makeQuery(null,null,null,null);
 
-                for(int i=0;i<surveyList.size();i++) {
+                for(int i = 0; i < surveyList.size(); i++) {
                         SurveyQuestionEntity survey_question = new SurveyQuestionEntity();
 
                         survey_question.setQuestion(questions[(int)(Math.random()*max_int)%questions.length]);
@@ -133,31 +154,27 @@ public class DatabaseGeneretor {
                 }
                 ArrayList<TeachingStaffEntity> teachers = (ArrayList) teachingStaffEntityQuery.makeQuery(null,null,null,null);
 
-                for(int i=0;i<teachers.size();i++) {
+                for(int i = 0; i < teachers.size(); i++) {
                         TeacherEntity teacherEntity = new TeacherEntity();
                         teacherEntity.setEmployeeId(teachers.get(i).getEmployeeId());
                         ArrayList<HeadOfDepartmentEntity> headOfDepartmentEntities = (ArrayList) headOfEmployeeQuery.makeQuery(teachers.get(i).getSchoolName(),null);
 
-
-                        for(int j=0;j<headOfDepartmentEntities.size();j++){
+                        for(int j = 0; j < headOfDepartmentEntities.size(); j++){
                                 ArrayList<TeachingStaffEntity> headOfDepartment =(ArrayList)teachingStaffEntityQuery.makeQuery(null,headOfDepartmentEntities.get(j).getEmployeeId(),null,null);
-
                                 if(headOfDepartment.size() !=0 && headOfDepartment.get(0).getSpecialization().equals(teachers.get(i).getSpecialization())){
-
-                                         ArrayList<SurveyEntity> surveyEntities= (ArrayList)surveyQuery.makeQuery(null,null,headOfDepartment.get(0).getEmployeeId(),null);
-                                       if(surveyEntities.size() != 0) {
-                                               teacherEntity.setHodEmployeeId(headOfDepartment.get(0).getEmployeeId());
-                                               teacherEntity.setSchoolName(teachers.get(i).getSchoolName());
-                                               teacherEntity.setSurveyId(surveyEntities.get(0).getSurveyId()); //TODO do it
-                                               supporter.createObject(teacherEntity);
-                                       }
+                                    ArrayList<SurveyEntity> surveyEntities= (ArrayList)surveyQuery.makeQuery(null,null,headOfDepartment.get(0).getEmployeeId(),null);
+                                    if(surveyEntities.size() != 0) {
+                                        teacherEntity.setHodEmployeeId(headOfDepartment.get(0).getEmployeeId());
+                                        teacherEntity.setSchoolName(teachers.get(i).getSchoolName());
+                                        teacherEntity.setSurveyId(surveyEntities.get(0).getSurveyId()); //TODO do it
+                                        supporter.createObject(teacherEntity);
+                                    }
                                 }
                         }
-
                 }
 
-                for(int i=0;i<school_list.length;i++) {
-                        for(int j =0;j<section_numbers;j++) {
+                for(int i = 0; i < school_list.length; i++) {
+                        for(int j = 0; j < section_numbers; j++) {
                                 ClazzEntity clazzEntity = new ClazzEntity();
                                 clazzEntity.setClassSize((long) (Math.random() * 20) + 20);
                                 clazzEntity.setSchedule("scheduling.....");
@@ -166,9 +183,9 @@ public class DatabaseGeneretor {
                                 supporter.createObject(clazzEntity);
                         }
                 }
-                for(int i=0;i<school_list.length;i++) {
-                        for(int j=0;j<specialization.length;j++) {
-                                for(int k=1;k<=8;k++) {
+                for(int i = 0; i<school_list.length; i++) {
+                        for(int j = 0; j<specialization.length; j++) {
+                                for(int k = 1; k <= 8; k++) {
                                         ArrayList<TeacherEntity> teacher = (ArrayList) teacherQuery.makeQuery(school_list[i], null, null, null);
                                         int size = teacher.size();
                                         CourseEntity course = new CourseEntity();
@@ -181,9 +198,9 @@ public class DatabaseGeneretor {
                                 }
                         }
                 }
-                for(int i=0;i<school_list.length;i++) {
+                for(int i = 0; i < school_list.length; i++) {
                         ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,null,school_list[i]);
-                        for(int j=0;j<courseEntities.size();j++) {
+                        for(int j = 0; j < courseEntities.size(); j++) {
                                 ArrayList<TeacherEntity> teacherEntity = (ArrayList)teacherQuery.makeQuery(null,courseEntities.get(i).getTeacherEmployeeId(),null,null);
 
                                 SyllabusEntity syllabusEntity = new SyllabusEntity();
@@ -199,7 +216,7 @@ public class DatabaseGeneretor {
                 }
                 ArrayList<SyllabusEntity> syllabusEntity= (ArrayList)syllabusQuery.makeQuery(null,null,null,null,null);
 
-                for(int i=0;i<syllabusEntity.size();i++){
+                for(int i = 0; i < syllabusEntity.size(); i++){
                         SyllabusExamDateEntity syllabusExamDateEntity = new SyllabusExamDateEntity();
 
                         syllabusExamDateEntity.setCourseName(syllabusEntity.get(i).getCourseName());
@@ -210,14 +227,14 @@ public class DatabaseGeneretor {
                 ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,null,null);
                 ArrayList<ClazzEntity> clazzEntities = (ArrayList) clazzQuery.makeQuery(null,null,null,null);
                 int l = clazzEntities.size();
-                for(int i=0;i<l;i++) {
+                for(int i = 0; i < l; i++) {
                         ScheduleEntity scheduleEntity = new ScheduleEntity();
                         scheduleEntity.setScheduleId("sc"+(int)(Math.random()*max_int));
                         supporter.createObject(scheduleEntity);
                 }
                 ArrayList<ScheduleEntity> scheduleEntities = (ArrayList)scheduleQuery.makeQuery(null);
 
-                for(int j=0;j<l;j++) {
+                for(int j = 0; j < l; j++) {
                         HaveScheduleEntity haveScheduleEntity = new HaveScheduleEntity();
                         if (j < clazzEntities.size()){
                                 haveScheduleEntity.setClassSection(clazzEntities.get(j).getSection());
@@ -228,7 +245,7 @@ public class DatabaseGeneretor {
                 }
                 //TODO:this block should be improved so that generates schedule that does not overlapping with each other courses hours
                 ArrayList<HaveScheduleEntity> haveScheduleEntities = (ArrayList)haveScheduleQuery.makeQuery(null,null,null);
-                for(int i=0;i<haveScheduleEntities.size();i++) {
+                for(int i = 0; i < haveScheduleEntities.size(); i++) {
                         ArrayList<HaveScheduleEntity> schedules = (ArrayList)haveScheduleQuery.makeQuery(null,haveScheduleEntities.get(i).getSchoolName(),null);
                         int rand = (int)(Math.random()*schedules.size());
                         ScheduleConsistsOfEntity scheduleConsistsOfEntity = new ScheduleConsistsOfEntity();
@@ -240,7 +257,7 @@ public class DatabaseGeneretor {
                         supporter.createObject(scheduleConsistsOfEntity);
                 }
 
-                for(int i=0;i<homework_number;i++) {
+                for(int i = 0; i < homework_number; i++) {
                         int rand = (int)(Math.random()*max_int);
                         HomeworkEntity homeworkEntity = new HomeworkEntity();
                         homeworkEntity.setDueDate(new Time(63456));
@@ -250,7 +267,7 @@ public class DatabaseGeneretor {
                         supporter.createObject(homeworkEntity);
                 }
                 ArrayList<HomeworkEntity> homeworkEntities= (ArrayList)homeworkQuery.makeQuery(null,null,null,null,null);
-                for(int i=0;i<homework_number;i++) {
+                for(int i = 0; i < homework_number; i++) {
                         ListOfHwQuestionsEntity listOfHwQuestionsEntity = new ListOfHwQuestionsEntity();
                         listOfHwQuestionsEntity.setHwNumber(homeworkEntities.get(i).getHwNumber());
                         listOfHwQuestionsEntity.setQuestion("How many nodes have been seen on graph");//TODO:fix it
@@ -268,15 +285,14 @@ public class DatabaseGeneretor {
                 announcementEntity.setSubmitDate(new Time(45647));
                 announcementEntity.setTeacherEmployeeId(teacherEntities.get(0).getEmployeeId());
                 supporter.createObject(announcementEntity);
-
-                for(int i=0;i<numberOfDriver;i++){
+                for(int i = 0; i < numberOfDriver; i++){
                         DriverEntity driverEntity = new DriverEntity();
                         driverEntity.setId("dr" + i);
                         driverEntity.setPhoneNumber("" + Math.random()*max_int);
                         driverEntity.setSsn("ssn" + i);
                         supporter.createObject(driverEntity);
                 }
-                for(int i=0;i<numberOfDriver;i++) {
+                for(int i = 0; i < numberOfDriver; i++) {
                         SchoolBusEntity schoolBusEntity = new SchoolBusEntity();
                         schoolBusEntity.setCapacity((long)(Math.random()*30));
                         schoolBusEntity.setDestination("Ankara");
@@ -286,10 +302,8 @@ public class DatabaseGeneretor {
                         schoolBusEntity.setLicensePlate("06sf235");
                         supporter.createObject(schoolBusEntity);
                 }
-
                 ArrayList<ParentEntity> parentEntities = (ArrayList)parentQuery.makeQuery(null,null,null,null,null);
-
-                for(int i =0;i<student_number;i++) {
+                for(int i = 0; i < student_number; i++) {
                         int rand = (int)(Math.random()*parentEntities.size());
                         int class_sc =(int)(Math.random()*clazz.size());
                         StudentEntity student = new StudentEntity();
@@ -297,7 +311,6 @@ public class DatabaseGeneretor {
                         student.setClassSection(clazz.get(class_sc).getSection());
                         student.setName(employee_name[(int)(Math.random()*employee_name.length)]);
                         student.setNumberOfAbsent((long)(Math.random()*20));
-
                         student.setParentSsn(parentEntities.get(rand).getSsn());
                         student.setYear(2019L);
                         student.setStudentId("st"+i);

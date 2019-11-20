@@ -50,22 +50,22 @@
 	</div>
     */
 
-    if(classes != null && !classes.isEmpty()) {
-        for (ClazzEntity clazz :
-                classes) {
-            sbClasses.append("<div class=\"card my-3 w-50 d-inline-block pr-4\">"+
-                    "<img src=\"resources/img/classroom2.jpg\" class=\"card-img-top\" alt=\"\">" +
-                    "<div class=\"card-body\">" +
-                    "<h4 class=\"card-title\">Class : " + (clazz.getSection()/2  + 1) +
-                    " Section: "+(clazz.getSection()%2 + 1)+
-                    "</h4>" +
-                    "<p class=\"card-text\">Size: " + clazz.getClassSize() +"</p>" +
-                    "<a href=\"\" class=\"card-link\">See details</a>"+
-            "</div>" +
-            "</div>");
-        }
-
-    }
+//    if(classes != null && !classes.isEmpty()) {
+//        for (ClazzEntity clazz :
+//                classes) {
+//            sbClasses.append("<div class=\"card my-3 w-50 d-inline-block pr-4\">"+
+//                    "<img src=\"resources/img/classroom2.jpg\" class=\"card-img-top\" alt=\"\">" +
+//                    "<div class=\"card-body\">" +
+//                    "<h4 class=\"card-title\">Class : " + (clazz.getSection()/2  + 1) +
+//                    " Section: "+(clazz.getSection()%2 + 1)+
+//                    "</h4>" +
+//                    "<p class=\"card-text\">Size: " + clazz.getClassSize() +"</p>" +
+//                    "<a href=\"classList\" class=\"card-link\">See details</a>"+
+//            "</div>" +
+//            "</div>");
+//        }
+//
+//    }
 %>
 <html>
 <head>
@@ -179,9 +179,34 @@
             </div>
         </div>
         <div class="container">
-            <%=sbClasses.toString()%>
+            <%
+                for (ClazzEntity clazz :
+                        classes) {
+                    %>
+                <div class="w-50 d-inline-block">
+                    <div class="card px-4 mb-2">
+                        <form action="studentlist.jsp" class="d-inline-block">
+                            <img src="resources/img/classroom2.jpg" class="card-img-top mt-2" alt="">
+                            <div class="card-body">
+                                <input type="hidden" name="section" value="<%=clazz.getSection()%>">
+                                <h4 class="card-title">
+                                    <%="Class:  " +
+                                        (clazz.getSection()/2  + 1) +
+                                        " Section: "+(clazz.getSection()%2 + 1)
+                                    %>
+                                </h4>
+                                <p class="card-text"><%="Size: " + clazz.getClassSize()%></p>
+                                <input class="btn btn-link pl-0" type="submit" value="See details">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <%}%>
         </div>
     </main>
+    <footer class="py-5 bg-dark text-white text-center">
+        Copyright © Edulity 2019
+    </footer>
 
 </body>
 </html>

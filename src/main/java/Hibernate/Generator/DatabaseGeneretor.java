@@ -24,13 +24,13 @@ public class DatabaseGeneretor {
         public String[] specialization = {"Mat","Fen","İng","Türkce","Beden","Sosyal"};
         public String[] questions = {"Dönem puanı","Dersler nasıl olmalı","Öğrenciler nasıl?"};
         public String[] sections = {"A","B","C","D","E"};
-        int max_int;
-        int student_number;
-        int section_numbers;
-        int grade;
-        int numberOfSurvey;
-        int homework_number;
-        int numberOfDriver;
+        private int max_int;
+        private int student_number;
+        private int section_numbers;
+        private int grade;
+        private int numberOfSurvey;
+        private int homework_number;
+        private int numberOfDriver;
         public HibarnateSupporter supporter;
         public SchoolQuery schoolQuery; //NOT ADDED
         public EmployeeQuery employeeQuery;
@@ -126,7 +126,7 @@ public class DatabaseGeneretor {
 
                         }
                 }
-                for(int i = 0;i < student_number;i++)  {
+                for(int i = 0; i < student_number; i++)  {
                         ParentEntity parent = new ParentEntity();
                         parent.setAddress("Etlik/Ankara");//TODO fix it
                         parent.setEmail("Mahmut@gmail.com");//TODO fix it
@@ -187,8 +187,8 @@ public class DatabaseGeneretor {
                                 supporter.createObject(clazzEntity);
                         }
                 }
-                for(int i = 0; i<school_list.length; i++)  {
-                        for(int j = 0; j<specialization.length; j++)  {
+                for(int i = 0; i < school_list.length; i++)  {
+                        for(int j = 0; j < specialization.length; j++)  {
                                 for(int k = 1; k <= 8; k++)  {
                                         ArrayList<TeacherEntity> teacher = (ArrayList) teacherQuery.makeQuery(school_list[i], null, null, null);
                                         int size = teacher.size();
@@ -343,5 +343,15 @@ public class DatabaseGeneretor {
                        lunchEntity.setStudentId("st01");
                        supporter.createObject(lunchEntity);
                 */
+                }
+                public void resizeSizes()
+                {
+                        ArrayList<ClazzEntity> clazzEntities = (ArrayList) clazzQuery.makeQuery(null,null,null,null);
+                        int l = clazzEntities.size();
+                        for (long i = 0; i < l ; i++){
+                                ArrayList<StudentEntity> studentEntities = (ArrayList) studentQuery.makeQuery(null,null,null,null,null,null,null,i,null,null);
+                                if( clazzEntities.get((int)i).getClassSize() != studentEntities.size())
+                                        clazzEntities.get((int)i).setClassSize((long)studentEntities.size());
+                        }
                 }
         }

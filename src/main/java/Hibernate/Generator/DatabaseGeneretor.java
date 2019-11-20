@@ -25,8 +25,8 @@ public class DatabaseGeneretor {
         public String[] questions = {"Dönem puanı","Dersler nasıl olmalı","Öğrenciler nasıl?"};
         public String[] sections = {"A","B","C","D","E"};
         int max_int = 1000000;
-        int student_number = 100;
-        int section_numbers = 20;
+        int student_number = 1000;
+        int section_numbers = 16;
         int grade = 8;
         int numberOfSurvey = 100;
         int homework_number = 20;
@@ -162,7 +162,7 @@ public class DatabaseGeneretor {
                                 clazzEntity.setClassSize((long) (Math.random() * 20) + 20);
                                 clazzEntity.setSchedule("scheduling.....");
                                 clazzEntity.setSchoolName(school_list[i]);
-                                clazzEntity.setSection((long)(Math.random()*10000));//TODO:fix it
+                                clazzEntity.setSection(j);
                                 supporter.createObject(clazzEntity);
                         }
                 }

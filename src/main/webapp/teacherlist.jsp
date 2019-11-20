@@ -102,7 +102,7 @@
                         </a>
                     </li>
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="buslist.jsp" class="nav-link active hvr-underline-from-center">
                             Bus List
                         </a>
                     </li>

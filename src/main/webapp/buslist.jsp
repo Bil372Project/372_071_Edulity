@@ -1,20 +1,17 @@
-<%@ page import="java.util.Hashtable" %>
-<%@ page import="java.util.ArrayList" %>
-<%@ page import="Hibernate.Entities.ClazzEntity" %>
-<%@ page import="java.util.List" %>
-<%@ page import="Hibernate.Queries.ClazzQuery" %><%--
+<%@ page import="Hibernate.Entities.SchoolBusEntity" %>
+<%@ page import="Hibernate.Queries.SchoolBusQuery" %>
+<%@ page import="java.util.*" %>
+<%@ page import="Hibernate.Queries.DriverQuery" %>
+<%@ page import="Hibernate.Entities.DriverEntity" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
   Date: 20.11.2019
-  Time: 11:42
+  Time: 23:15
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    request.getSession().setAttribute("current_page", "classlist.jsp");
-    ClazzQuery query = new ClazzQuery();
-    List<ClazzEntity> classes = query.makeQuery((String)session.getAttribute("school_name"),null,
-            null,null);
+    request.getSession().setAttribute("current_page", "buslist.jsp");
     Hashtable errors = (Hashtable) request.getAttribute("errors");
     String sbErros = "";
     if(errors != null && !errors.isEmpty()) {
@@ -22,7 +19,6 @@
                 new ArrayList<String>(errors.values())) {
             sbErros += str + "\n";
         }
-        //print errors
         if (!sbErros.equals("")){
             sbErros ="<div class=\"alert alert-danger alert-dismissible  \n" +
                     "            fade show\" role=\"alert\"> \n" +
@@ -38,43 +34,31 @@
         }
     }
 
-    StringBuilder sbClasses = new StringBuilder();
+    List<SchoolBusEntity> busEntities = new SchoolBusQuery().makeQuery(null,null,null,
+            null,null,session.getAttribute("school_name").toString());
+    busEntities.sort(new Comparator<SchoolBusEntity>() {
+        @Override
+        public int compare(SchoolBusEntity o1, SchoolBusEntity o2) {
+            return o1.getLicensePlate().compareTo(o2.getLicensePlate());
+        }
+    });
+    Hashtable<Long, List> stopsTable = new Hashtable<>();
+    for (SchoolBusEntity bus :
+            busEntities) {
+        stopsTable.put(bus.getId(), new SchoolBusQuery().getStops(session.getAttribute("school_name").toString(),
+                bus.getId()));
+    }
 
-    /*
-        <div class="card my-3 w-50">
-		<img src="img/avatar.png" class="card-img-top" alt="">
-		<div class="card-img-overlay">
-			<h4 class="card-title">ClassSection</h4>
-			<p class="card-text">Size: classSize</p>
-			<a href="" class="card-link">See Profile</a>
-		</div>
-	</div>
-    */
-
-//    if(classes != null && !classes.isEmpty()) {
-//        for (ClazzEntity clazz :
-//                classes) {
-//            sbClasses.append("<div class=\"card my-3 w-50 d-inline-block pr-4\">"+
-//                    "<img src=\"resources/img/classroom2.jpg\" class=\"card-img-top\" alt=\"\">" +
-//                    "<div class=\"card-body\">" +
-//                    "<h4 class=\"card-title\">Class : " + (clazz.getSection()/2  + 1) +
-//                    " Section: "+(clazz.getSection()%2 + 1)+
-//                    "</h4>" +
-//                    "<p class=\"card-text\">Size: " + clazz.getClassSize() +"</p>" +
-//                    "<a href=\"classList\" class=\"card-link\">See details</a>"+
-//            "</div>" +
-//            "</div>");
-//        }
-//
-//    }
 %>
 <html>
 <head>
-    <title><%="Edulity - " + ((String)session.getAttribute("school_name")).toUpperCase() + "- Classes"%></title>
+    <title><%="Edulity - " + ((String)session.getAttribute("school_name")).toUpperCase() + "- Bus List"%></title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
     <link href="https://fonts.googleapis.com/css?family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
@@ -82,6 +66,7 @@
     <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="hover.css">
+
     <style>
         .navbar-collapse {
             height: 100%;
@@ -153,7 +138,7 @@
     </nav>
     <main>
         <div class="container mt-4 clearfix">
-            <%=sbErros%>
+                <%=sbErros%>
             <div id="login" class="collapse float-right">
                 <div class="form-container clearfix">
                     <form action="mainServlet" method="get">
@@ -179,35 +164,64 @@
                 </div>
             </div>
         </div>
-        <div class="container clearfix">
-            <%
-                for (ClazzEntity clazz :
-                        classes) {
-                    %>
-                <div class="w-50 d-inline-block card mb-2 mx-0 float-left">
-                    <div>
-                        <form action="studentlist.jsp">
-                            <img src="resources/img/classroom2.jpg" class="card-img-top mt-2" alt="">
-                            <div class="card-body">
-                                <input type="hidden" name="section" value="<%=clazz.getSection()%>">
-                                <h4 class="card-title">
-                                    <%="Class:  " +
-                                            (clazz.getSection()/2  + 1) +
-                                            " Section: "+(clazz.getSection()%2 + 1)
-                                    %>
-                                </h4>
-                                <p class="card-text"><%="Size: " + clazz.getClassSize()%></p>
-                                <input class="btn btn-link pl-0" type="submit" value="See details">
+        <div class="container">
+            <div id="accordion">
+                <%
+                    for (SchoolBusEntity bus :
+                            busEntities) {
+                %>
+                <div class="card mb-1 bg-dark text-white">
+                    <div class="card-header">
+                        <a href="#<%="busid" + bus.getId()%>" class="card-link" data-toggle="collapse">
+                            <i class="fas fa-bus-alt"> Show stops</i>
+                        </a>
+
+                        <span class="card-subtitle"><%=" Destination:" + bus.getDestination()%></span>
+                        <button type="button" class="btn btn-link" data-toggle="modal"
+                                data-target="<%="#busdriver" + bus.getDriverId()%>">
+                            About Driver
+                        </button>
+                        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
+                             id="<%="busdriver" + bus.getDriverId()%>">
+
+                            <div class="modal-dialog modal-sm modal-dialog-centered">
+
+                                <div class="modal-content">
+
+                                    <div class="modal-header">
+                                        <h4 class="modal-title"><%=bus.getDriverId()%></h4>
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <p>Phone number: <%=((DriverEntity)new DriverQuery().makeQuery(bus.getDriverId(),null,
+                                                null).get(0)).getPhoneNumber()%></p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button class="btn btn-danger" type="button" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
                             </div>
-                        </form>
+                        </div>
+
+                    </div>
+                    <div id="<%="busid" + bus.getId()%>" class="collapse" data-parent="#accordion">
+                        <div class="card-body">
+                            <%
+                                for (Object stop :
+                                        stopsTable.get(bus.getId())) {%>
+                            <span class="badge badge-dark"><%=stop%></span>
+                            <%}%>
+                        </div>
                     </div>
                 </div>
                 <%}%>
+
+            </div>
         </div>
+
     </main>
     <footer class="py-5 bg-dark text-white text-center">
         Copyright © Edulity 2019
     </footer>
-
 </body>
 </html>

@@ -12,6 +12,8 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    request.getSession().setAttribute("current_page", "studentlist.jsp");
+
     Hashtable errors = (Hashtable) request.getAttribute("errors");
     String sbErros = "";
     if(errors != null && !errors.isEmpty()) {
@@ -80,7 +82,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="teacherlist.jsp" class="nav-link active hvr-underline-from-center">
                             Teachers
                         </a>
                     </li>
@@ -90,7 +92,7 @@
                         </a>
                     </li>
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="buslist.jsp" class="nav-link active hvr-underline-from-center">
                             Bus List
                         </a>
                     </li>
@@ -116,6 +118,7 @@
             <div id="login" class="collapse float-right">
                 <div class="form-container clearfix">
                     <form action="mainServlet" method="get">
+                        <input type="hidden" name="section" value="<%=request.getParameter("section")%>">
                         <div class="form-group" id="types">
                             <label class="rad">
                                 <input id="r1" type="radio" name="type" value="student"

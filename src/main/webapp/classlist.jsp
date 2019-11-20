@@ -120,12 +120,12 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="teacherlist.jsp" class="nav-link active hvr-underline-from-center">
                             Teachers
                         </a>
                     </li>
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="classlist.jsp" class="nav-link active hvr-underline-from-center">
                             Classes
                         </a>
                     </li>
@@ -178,21 +178,21 @@
                 </div>
             </div>
         </div>
-        <div class="container">
+        <div class="container clearfix">
             <%
                 for (ClazzEntity clazz :
                         classes) {
                     %>
-                <div class="w-50 d-inline-block">
-                    <div class="card px-4 mb-2">
-                        <form action="studentlist.jsp" class="d-inline-block">
+                <div class="w-50 d-inline-block card mb-2 mx-0 float-left">
+                    <div>
+                        <form action="studentlist.jsp">
                             <img src="resources/img/classroom2.jpg" class="card-img-top mt-2" alt="">
                             <div class="card-body">
                                 <input type="hidden" name="section" value="<%=clazz.getSection()%>">
                                 <h4 class="card-title">
                                     <%="Class:  " +
-                                        (clazz.getSection()/2  + 1) +
-                                        " Section: "+(clazz.getSection()%2 + 1)
+                                            (clazz.getSection()/2  + 1) +
+                                            " Section: "+(clazz.getSection()%2 + 1)
                                     %>
                                 </h4>
                                 <p class="card-text"><%="Size: " + clazz.getClassSize()%></p>

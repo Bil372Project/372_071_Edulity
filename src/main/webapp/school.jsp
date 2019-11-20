@@ -1,5 +1,8 @@
 <%@ page import="java.util.Hashtable" %>
-<%@ page import="java.util.ArrayList" %><%--
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
+<%@ page import="Hibernate.Entities.TeachingStaffEntity" %>
+<%@ page import="Hibernate.Queries.TeachingStaffQuery" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
   Date: 17.11.2019
@@ -84,7 +87,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item border-right">
-                        <a href="teacherList" class="nav-link active hvr-underline-from-center">
+                        <a href="teacherlist.jsp" class="nav-link active hvr-underline-from-center">
                             Teachers
                         </a>
                     </li>

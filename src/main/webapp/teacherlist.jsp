@@ -2,7 +2,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.util.List" %>
 <%@ page import="Hibernate.Entities.TeacherEntity" %>
-<%@ page import="Hibernate.Entities.TeachingStaffEntity" %><%--
+<%@ page import="Hibernate.Entities.TeachingStaffEntity" %>
+<%@ page import="Hibernate.Queries.TeachingStaffQuery" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
   Date: 19.11.2019
@@ -33,24 +34,8 @@
 
         }
     }
-
-    List teachers = (List) request.getAttribute("teachers");
-    StringBuilder teacherList = new StringBuilder();
-//    for (Object teacher :
-//            (List<TeachingStaffEntity>) teachers) {
-//        teacherList.append("<div class=\"container\">" +
-        "<div class=\"card my-3 w-50\">" + "<img src=\"resources/img/avatar.png\" class=\"card-img-top\" alt=\"\">" +
-        "<div class=\"card-body bg-dark\">" + "<h4 class=\"card-title\">" + teacher.getEmployeeId() + "</h4>");
-//    }
-    <div class="container">
-    <div class="card my-3 w-50">
-    <img src="resources/img/avatar.png" class="card-img-top" alt="">
-    <div class="card-body bg-dark">
-    <h4 class="card-title">Muhammed Emre Durdu</h4>
-    <a href="" class="card-link">See Profile</a>
-    </div>
-    </div>
-    </div>
+    List<Object[]> teachers = new TeachingStaffQuery().getWithNames(session.getAttribute("school_name").toString());
+    
     
 
 %>
@@ -107,12 +92,12 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="teacherlist.jsp" class="nav-link active hvr-underline-from-center">
                             Teachers
                         </a>
                     </li>
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="classlist.jsp" class="nav-link active hvr-underline-from-center">
                             Classes
                         </a>
                     </li>
@@ -166,14 +151,21 @@
             </div>
         </div>
 
-        <div class="container">
-            <div class="card my-3 w-50">
-                <img src="resources/img/avatar.png" class="card-img-top" alt="">
-                <div class="card-body bg-dark">
-                    <h4 class="card-title">Muhammed Emre Durdu</h4>
-                    <a href="" class="card-link">See Profile</a>
+        <div class="container clearfix">
+            <% for (Object[] teacher :
+                     teachers) {
+                %>
+                <div class="card my-3 w-25 d-inline-block float-left">
+                    <img src="resources/img/avatar.png" class="card-img-top" alt="">
+                    <div class="card-body">
+                        <h4 class="card-title"><%=teacher[0]%></h4>
+                        <p class="card-text"><%="Specialization: " + teacher[1]%></p>
+                        <p class="card-text"><%="Office no: " + teacher[2]%></p>
+                        <a href="" class="card-link">See Profile</a>
+                    </div>
                 </div>
-            </div>
+            <%}%>
+
         </div>
 
     </main>

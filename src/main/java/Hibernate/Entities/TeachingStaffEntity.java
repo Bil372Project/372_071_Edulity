@@ -9,6 +9,7 @@ import java.util.Objects;
 public class TeachingStaffEntity {
     private String schoolName;
     private String employeeId;
+
     private String specialization;
     private String officeNo;
 
@@ -67,4 +68,5 @@ public class TeachingStaffEntity {
     public int hashCode() {
         return Objects.hash(schoolName, employeeId, specialization, officeNo);
     }
+
 }

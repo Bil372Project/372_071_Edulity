@@ -31,8 +31,10 @@ public class OracleTest {
 
          */
         //Created hibarnate supported
-        //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
+        //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor(git );
        // databaseGeneretor.generator();
+        DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
+        databaseGeneretor.generator();
         Queries.HibarnateSupporter supporter = new Queries.HibarnateSupporter();
 
         LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();

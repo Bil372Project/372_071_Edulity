@@ -1,5 +1,6 @@
 package Queries;
 
+import entities.ParentEntity;
 import entities.SchoolEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,8 +16,8 @@ public class ParentQuery {
     public List makeQuery(String ssn, String name, String phoneNumber, String address, String email) {
         Session session = HibarnateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
-        CriteriaQuery<SchoolEntity> criteria = criteriaBuilder.createQuery(SchoolEntity.class);
-        Root<SchoolEntity> root = criteria.from(SchoolEntity.class);
+        CriteriaQuery<ParentEntity> criteria = criteriaBuilder.createQuery(ParentEntity.class);
+        Root<ParentEntity> root = criteria.from(ParentEntity.class);
         List <Predicate>  predicates = new ArrayList<>();
         if(ssn != null){
             predicates.add(criteriaBuilder.like(root.get("ssn"),ssn));
@@ -34,7 +35,7 @@ public class ParentQuery {
             predicates.add(criteriaBuilder.equal(root.get("email"),email));
         }
         criteria.select(root).where((Predicate[]) predicates.toArray(new Predicate[0]));
-        Query<SchoolEntity> query = session.createQuery(criteria);
+        Query<ParentEntity> query = session.createQuery(criteria);
 
         return query.list();
     }

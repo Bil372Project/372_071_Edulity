@@ -1,8 +1,12 @@
 package Hibernate.Queries;
 
+import Hibernate.Entities.EmployeeEntity;
+import Hibernate.Entities.TeacherEntity;
 import Hibernate.Entities.TeachingStaffEntity;
 import Hibernate.Generator.HibarnateSupporter;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -37,5 +41,15 @@ public class TeachingStaffQuery {
         session.close();
 
         return query.list();
+    }
+
+    public List getWithNames(String schoolName) {
+        //TODO: get the teachers who are working in schoolName with their names
+        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Criteria employeeCriteria = session.createCriteria(EmployeeEntity.class,"employee");
+        Criteria teacherCriteria = employeeCriteria.createCriteria("TeacherEntity","teacher");
+        teacherCriteria.add(Restrictions.eq("schoolName",schoolName));
+
+        return employeeCriteria.list();
     }
 }

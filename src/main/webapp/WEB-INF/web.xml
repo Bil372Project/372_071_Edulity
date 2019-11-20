@@ -8,9 +8,16 @@
     <servlet-name>MainServlet</servlet-name>
     <servlet-class>MainServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>TeacherList</servlet-name>
+    <servlet-class>TeacherList</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>MainServlet</servlet-name>
     <url-pattern>/mainServlet</url-pattern>
   </servlet-mapping>
-
+  <servlet-mapping>
+    <servlet-name>TeacherList</servlet-name>
+    <url-pattern>/teacherList</url-pattern>
+  </servlet-mapping>
 </web-app>

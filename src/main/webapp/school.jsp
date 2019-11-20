@@ -84,7 +84,7 @@
                 </ul>
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="teacherList" class="nav-link active hvr-underline-from-center">
                             Teachers
                         </a>
                     </li>

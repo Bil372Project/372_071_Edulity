@@ -1,5 +1,16 @@
-import Queries.*;
-import entities.*;
+import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Queries.ClazzQuery;
+import Hibernate.Queries.HaveScheduleQuery;
+import Hibernate.Queries.HomeworkQuery;
+import Hibernate.Queries.ScheduleQuery;
+import Hibernate.Queries.SchoolBusQuery;
+import Hibernate.Queries.SchoolQuery;
+import Hibernate.Queries.SurveyQuery;
+import Hibernate.Queries.TeachingStaffQuery;
+import Hibernate.Entities.*;
+import Hibernate.Queries.*;
+
+import Hibernate.Entities.*;
 
 import java.math.MathContext;
 import java.sql.Time;
@@ -30,7 +41,7 @@ public class DatabaseGeneretor {
         public TeachingStaffQuery teachingStaffEntityQuery = new TeachingStaffQuery();
         public ParentQuery parentQuery = new ParentQuery();
         public SyllabusQuery syllabusQuery = new SyllabusQuery();
-        public HeadOfEmployeeQuery headOfEmployeeQuery = new HeadOfEmployeeQuery();
+        public HeadOfDepartmentQuery headOfEmployeeQuery = new HeadOfDepartmentQuery();
         public SurveyQuery surveyQuery = new SurveyQuery();
         public CourseQuery courseQuery = new CourseQuery();
         public ScheduleQuery scheduleQuery = new ScheduleQuery();
@@ -200,7 +211,7 @@ public class DatabaseGeneretor {
                         supporter.createObject(syllabusExamDateEntity);
                 }
                 ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,null,null);
-                ArrayList<ClazzEntity> clazzEntities = (ArrayList) clazzQuery.makeQuery(null,null);
+                ArrayList<ClazzEntity> clazzEntities = (ArrayList) clazzQuery.makeQuery(null,null,null,null);
                 int l = clazzEntities.size();
                 for(int i=0;i<l;i++) {
                         ScheduleEntity scheduleEntity = new ScheduleEntity();
@@ -241,7 +252,7 @@ public class DatabaseGeneretor {
                         homeworkEntity.setSchoolName(clazzEntities.get(rand % clazzEntities.size()).getSchoolName());
                         supporter.createObject(homeworkEntity);
                 }
-                ArrayList<HomeworkEntity> homeworkEntities= (ArrayList)homeworkQuery.makeQuery(null,null,null,null,0);
+                ArrayList<HomeworkEntity> homeworkEntities= (ArrayList)homeworkQuery.makeQuery(null,null,null,null,null);
                 for(int i=0;i<homework_number;i++) {
                         ListOfHwQuestionsEntity listOfHwQuestionsEntity = new ListOfHwQuestionsEntity();
                         listOfHwQuestionsEntity.setHwNumber(homeworkEntities.get(i).getHwNumber());
@@ -249,7 +260,7 @@ public class DatabaseGeneretor {
                         supporter.createObject(listOfHwQuestionsEntity);
                 }
 
-                ArrayList<ClazzEntity> clazz = (ArrayList)clazzQuery.makeQuery(null,null);
+                ArrayList<ClazzEntity> clazz = (ArrayList)clazzQuery.makeQuery(null,null,null,null);
                 ArrayList<TeacherEntity> teacherEntities = (ArrayList)teacherQuery.makeQuery(clazz.get(0).getSchoolName(),null,null,null);
 
                 AnnouncementEntity announcementEntity = new AnnouncementEntity();
@@ -285,7 +296,7 @@ public class DatabaseGeneretor {
                         int rand = (int)(Math.random()*parentEntities.size());
                         int class_sc =(int)(Math.random()*clazz.size());
                         StudentEntity student = new StudentEntity();
-                        ArrayList<SchoolBusEntity> schoolBusEntities = (ArrayList)schoolBusQuery.makeQuery(null,null,null,null,clazz.get(class_sc).getSchoolName());
+                        ArrayList<SchoolBusEntity> schoolBusEntities = (ArrayList)schoolBusQuery.makeQuery(null,null,null,null,null,clazz.get(class_sc).getSchoolName());
                         student.setClassSection(clazz.get(class_sc).getSection());
                         student.setName(employee_name[(int)(Math.random()*employee_name.length)]);
                         student.setNumberOfAbsent((long)(Math.random()*20));

@@ -2,7 +2,7 @@
 target/dependency/*
 !target/dependency/webapp-runner.jar
 target/*
-!target/edulity.war
+
 gitstats/
 stats/
 *.iml

@@ -1,0 +1,15 @@
+body{
+    font-family: 'Oxygen', sans-serif;
+    background-color: #5a6268;
+}
+.img-logo{
+    height: 3rem;
+}
+.navbar {
+    opacity: 0.8;
+    border-bottom: 1px solid #fff;
+}
+
+.form-container {
+    background: transparent;
+}

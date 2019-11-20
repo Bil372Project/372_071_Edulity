@@ -1,7 +1,9 @@
-import Queries.SchoolQuery;
+import Hibernate.Entities.LunchMenuEntity;
+import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Queries.SchoolQuery;
 import com.fasterxml.classmate.AnnotationConfiguration;
-import entities.*;
 
+import org.hibernate.Hibernate;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
@@ -35,7 +37,6 @@ public class OracleTest {
        // databaseGeneretor.generator();
         DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
         databaseGeneretor.generator();
-        Queries.HibarnateSupporter supporter = new Queries.HibarnateSupporter();
 
         LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
         lunchMenuEntity.setFood("nuddle");

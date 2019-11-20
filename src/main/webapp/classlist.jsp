@@ -1,17 +1,19 @@
 <%@ page import="java.util.Hashtable" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="Hibernate.Entities.ClazzEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Hibernate.Entities.TeacherEntity" %>
-<%@ page import="Hibernate.Entities.TeachingStaffEntity" %><%--
+<%@ page import="Hibernate.Queries.ClazzQuery" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
-  Date: 19.11.2019
-  Time: 22:12
+  Date: 20.11.2019
+  Time: 11:42
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    request.getSession().setAttribute("current_page", "teacherlist.jsp");
+    ClazzQuery query = new ClazzQuery();
+    List<ClazzEntity> classes = query.makeQuery((String)session.getAttribute("school_name"),null,
+            null,null);
     Hashtable errors = (Hashtable) request.getAttribute("errors");
     String sbErros = "";
     if(errors != null && !errors.isEmpty()) {
@@ -19,6 +21,7 @@
                 new ArrayList<String>(errors.values())) {
             sbErros += str + "\n";
         }
+        //print errors
         if (!sbErros.equals("")){
             sbErros ="<div class=\"alert alert-danger alert-dismissible  \n" +
                     "            fade show\" role=\"alert\"> \n" +
@@ -34,29 +37,39 @@
         }
     }
 
-    List teachers = (List) request.getAttribute("teachers");
-    StringBuilder teacherList = new StringBuilder();
-//    for (Object teacher :
-//            (List<TeachingStaffEntity>) teachers) {
-//        teacherList.append("<div class=\"container\">" +
-        "<div class=\"card my-3 w-50\">" + "<img src=\"resources/img/avatar.png\" class=\"card-img-top\" alt=\"\">" +
-        "<div class=\"card-body bg-dark\">" + "<h4 class=\"card-title\">" + teacher.getEmployeeId() + "</h4>");
-//    }
-    <div class="container">
-    <div class="card my-3 w-50">
-    <img src="resources/img/avatar.png" class="card-img-top" alt="">
-    <div class="card-body bg-dark">
-    <h4 class="card-title">Muhammed Emre Durdu</h4>
-    <a href="" class="card-link">See Profile</a>
-    </div>
-    </div>
-    </div>
-    
+    StringBuilder sbClasses = new StringBuilder();
 
+    /*
+        <div class="card my-3 w-50">
+		<img src="img/avatar.png" class="card-img-top" alt="">
+		<div class="card-img-overlay">
+			<h4 class="card-title">ClassSection</h4>
+			<p class="card-text">Size: classSize</p>
+			<a href="" class="card-link">See Profile</a>
+		</div>
+	</div>
+    */
+
+    if(classes != null && !classes.isEmpty()) {
+        for (ClazzEntity clazz :
+                classes) {
+            sbClasses.append("<div class=\"card my-3 w-50 d-inline-block pr-4\">"+
+                    "<img src=\"resources/img/classroom2.jpg\" class=\"card-img-top\" alt=\"\">" +
+                    "<div class=\"card-body\">" +
+                    "<h4 class=\"card-title\">Class : " + (clazz.getSection()/2  + 1) +
+                    " Section: "+(clazz.getSection()%2 + 1)+
+                    "</h4>" +
+                    "<p class=\"card-text\">Size: " + clazz.getClassSize() +"</p>" +
+                    "<a href=\"\" class=\"card-link\">See details</a>"+
+            "</div>" +
+            "</div>");
+        }
+
+    }
 %>
 <html>
 <head>
-    <title><%="Edulity - " + ((String)session.getAttribute("school_name")).toUpperCase() + "- Teachers"%></title>
+    <title><%="Edulity - " + ((String)session.getAttribute("school_name")).toUpperCase() + "- Classes"%></title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
@@ -165,40 +178,10 @@
                 </div>
             </div>
         </div>
-
         <div class="container">
-            <div class="card my-3 w-50">
-                <img src="resources/img/avatar.png" class="card-img-top" alt="">
-                <div class="card-body bg-dark">
-                    <h4 class="card-title">Muhammed Emre Durdu</h4>
-                    <a href="" class="card-link">See Profile</a>
-                </div>
-            </div>
+            <%=sbClasses.toString()%>
         </div>
-
     </main>
-    <footer class="py-5 bg-dark text-white text-center">
-        Copyright © Edulity 2019
-    </footer>
 
 </body>
-<script>
-    var type;
-    function changePlaceHolder(t) {
-        type = t;
-        document.getElementById('text-id').setAttribute("placeholder", t);
-    }
-
-    $(document).ready(function(){
-        // $(window).scroll(function () {
-        //     if ($(this).scrollTop() > 50) {
-        //         $('#back-to-top').fadeIn();
-        //     } else {
-        //         $('#back-to-top').fadeOut();
-        //     }
-        // });
-        // scroll body to 0px on click
-
-    });
-</script>
 </html>

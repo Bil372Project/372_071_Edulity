@@ -77,7 +77,7 @@
             <div id="navbarCollapse" class="collapse navbar-collapse">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="school.jsp" class="nav-link active hvr-underline-from-center">
                             <i class="fas fa-home"></i>
                         </a>
                     </li>
@@ -89,7 +89,7 @@
                         </a>
                     </li>
                     <li class="nav-item border-right">
-                        <a href="#" class="nav-link active hvr-underline-from-center">
+                        <a href="classlist.jsp" class="nav-link active hvr-underline-from-center">
                             Classes
                         </a>
                     </li>

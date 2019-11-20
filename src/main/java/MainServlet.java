@@ -1,4 +1,5 @@
 import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Queries.StudentQuery;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -10,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Hashtable;
+import java.util.List;
 
 @WebServlet(urlPatterns = {"/mainServlet"})
 public class MainServlet extends HttpServlet {
@@ -65,18 +67,14 @@ public class MainServlet extends HttpServlet {
 
         Session session = HibarnateSupporter.getSessionFactory().openSession();
         String hql = "";
-        Query query = null;
+        List students = null;
         if(type != null) {
-            hql = (type.equals("student")) ? "select s.studentId from StudentEntity as s where s.studentId =:id " +
-                    "and " +
-                    "s.schoolName =: schoolName" :
-                    "select e.id from EmployeeEntity as e where e.employeeId=:id and e.schoolName=:schoolName";
-            query = session.createQuery(hql);
-            query.setParameter("id", id);
-            query.setParameter("schoolName", schoolName);
+            StudentQuery query = new StudentQuery();
+            students = query.makeQuery(schoolName,id,null,null,null,
+                    null,null,null,null,null);
         }
 
-        if(query == null || query.list().isEmpty()) {
+        if(students == null || students.isEmpty()) {
             errors.put("id","Your id or school name is wrong. Please check them..");
         }
 

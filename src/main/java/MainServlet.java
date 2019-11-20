@@ -7,6 +7,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Hashtable;
 
@@ -20,22 +21,39 @@ public class MainServlet extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        HttpSession session = request.getSession();
+
         Hashtable errors = validate(request);
+
+        //if invoked the go to school page submit button
+        if(request.getParameter("submit").equals("Go to school page")){
+            session.setAttribute("school_name", request.getParameter("school_name"));
+            request.getRequestDispatcher("/school.jsp").forward(request,response);
+            return;
+        }
+
         if(errors.isEmpty()) { // validation succesfull
+            session.setAttribute("id", request.getParameter("id"));
+            session.setAttribute("type", request.getParameter("type"));
+            if(request.getParameter("school_name") != null)
+                session.setAttribute("school_name", request.getParameter("school_name"));
             request.getRequestDispatcher("/student.jsp").forward(request,response);
         }
         else {
             request.setAttribute("errors", errors);
-            request.getRequestDispatcher("index.jsp").forward(request,response);
+            String[] str = request.getHeader("referer").split("/");
+            request.getRequestDispatcher((String)request.getSession().getAttribute("current_page")).forward(request,
+                    response);
         }
     }
 
     private Hashtable validate(HttpServletRequest request) {
         Hashtable errors = new Hashtable();
-        String schoolName = request.getParameter("school_names");
+        String schoolName = request.getParameter("school_name");
+        if(schoolName == null) schoolName = (String)request.getSession().getAttribute("school_name");
         String type = request.getParameter("type");
         String id = request.getParameter("id");
-        if(schoolName == null || schoolName.equals("")) {
+        if(schoolName.equals("")) {
             errors.put("schoolName", "School field should not be empty");
         }
         if(type == null || type.equals("")) {

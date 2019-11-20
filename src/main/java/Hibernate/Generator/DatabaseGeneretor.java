@@ -1,6 +1,5 @@
 package Hibernate.Generator;
 
-import Hibernate.Generator.HibarnateSupporter;
 import Hibernate.Queries.ClazzQuery;
 import Hibernate.Queries.HaveScheduleQuery;
 import Hibernate.Queries.HomeworkQuery;
@@ -12,12 +11,8 @@ import Hibernate.Queries.TeachingStaffQuery;
 import Hibernate.Entities.*;
 import Hibernate.Queries.*;
 
-import Hibernate.Entities.*;
-
-import java.math.MathContext;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.util.List;
 
 public class DatabaseGeneretor {
 

@@ -35,7 +35,7 @@ public class MainServlet extends HttpServlet {
         String schoolName = request.getParameter("school_names");
         String type = request.getParameter("type");
         String id = request.getParameter("id");
-        if(schoolName.equals("")) {
+        if(schoolName == null || schoolName.equals("")) {
             errors.put("schoolName", "School field should not be empty");
         }
         if(type == null || type.equals("")) {

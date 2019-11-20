@@ -55,15 +55,4 @@ public class SchoolEntity {
     public int hashCode() {
         return Objects.hash(name, schoolType, schoolAddress);
     }
-
-    private HashSet<ClazzEntity> classes;
-
-    @OneToMany
-    public HashSet<ClazzEntity> getOneToMany() {
-        return classes;
-    }
-
-    public void setOneToMany(HashSet<ClazzEntity> oneToMany) {
-        this.classes = oneToMany;
-    }
 }

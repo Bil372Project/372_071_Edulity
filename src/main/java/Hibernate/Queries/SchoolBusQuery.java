@@ -42,4 +42,18 @@ public class SchoolBusQuery {
 
         return query.list();
     }
+
+    public List getStops(String schoolName, long busId) {
+        List stops = null;
+        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        org.hibernate.Query query = session.createQuery("select s.stopName from " +
+                "SchoolBusEntity b, SchoolBusStopsEntity stops left join StopEntity s on (b.id=stops.schoolBusId and stops.stopId=s.id) " +
+                "where " +
+                "b.schoolName=:schoolName and b.id=:busId and stops.schoolBusId=:busId");
+        query.setParameter("schoolName", schoolName);
+        query.setParameter("busId", busId);
+        stops = query.list();
+        session.close();
+        return stops;
+    }
 }

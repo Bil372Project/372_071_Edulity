@@ -39,7 +39,7 @@ create TABLE SURVEY(survey_id VARCHAR2(20) PRIMARY KEY,
 create TABLE SURVEY_QUESTION(survey_id,
                              FOREIGN KEY(survey_id) REFERENCES SURVEY(survey_id),
                               score  integer,
-                             question VARCHAR2(20))
+                             question VARCHAR2(100))
 create TABLE TEACHER(school_name,
                      employee_id,
                      survey_id,

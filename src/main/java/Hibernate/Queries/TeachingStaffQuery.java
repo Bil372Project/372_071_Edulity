@@ -43,7 +43,9 @@ public class TeachingStaffQuery {
 
     public List getWithNames(String schoolName){
         //return to
-        org.hibernate.Query query = session.createQuery("select e.name,t.schoolName,t.officeNo,t.employeeId from TeachingStaffEntity t left join EmployeeEntity e on (e.employeeId=t.employeeId and e.schoolName=:schoolName)");
+        org.hibernate.Query query = session.createQuery("select e.name,t.specialization,t.officeNo,t.employeeId from " +
+                "TeachingStaffEntity t left join EmployeeEntity e on (e.employeeId=t.employeeId) where " +
+                "e.schoolName=:schoolName");
         query.setParameter("schoolName", schoolName);
         List results = query.list();
         return results;

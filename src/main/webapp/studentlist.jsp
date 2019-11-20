@@ -1,17 +1,19 @@
 <%@ page import="java.util.Hashtable" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="Hibernate.Entities.StudentEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Hibernate.Entities.TeachingStaffEntity" %>
-<%@ page import="Hibernate.Queries.TeachingStaffQuery" %><%--
+<%@ page import="Hibernate.Queries.StudentQuery" %>
+<%@ page import="java.util.Comparator" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
-  Date: 17.11.2019
-  Time: 15:09
+  Date: 20.11.2019
+  Time: 12:45
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    request.getSession().setAttribute("current_page", "school.jsp");
+    request.getSession().setAttribute("current_page", "studentlist.jsp");
+
     Hashtable errors = (Hashtable) request.getAttribute("errors");
     String sbErros = "";
     if(errors != null && !errors.isEmpty()) {
@@ -19,20 +21,31 @@
                 new ArrayList<String>(errors.values())) {
             sbErros += str + "\n";
         }
+        //print errors
         if (!sbErros.equals("")){
             sbErros ="<div class=\"alert alert-danger alert-dismissible  \n" +
                     "            fade show\" role=\"alert\"> \n" +
                     "              \n" +
                     "            <strong>"+sbErros +"</strong>" +
-                "               <button type=\"button\" class=\"btn close\" \n" +
+                    "               <button type=\"button\" class=\"btn close\" \n" +
                     "                data-dismiss=\"alert\" aria-label=\"Close\"> \n" +
                     "                  \n" +
                     "                <span aria-hidden=\"true\">×</span> \n" +
-                "               </button> " +
+                    "               </button> " +
                     "</div>";
 
         }
     }
+    List<StudentEntity> students =
+            new StudentQuery().makeQuery(session.getAttribute("school_name").toString(),null,null,
+                    null,null,null,null,
+                    Long.valueOf(request.getParameter("section")),null,null);
+    students.sort(new Comparator<StudentEntity>() {
+        @Override
+        public int compare(StudentEntity o1, StudentEntity o2) {
+            return o1.getName().compareTo(o2.getName());
+        }
+    });
 %>
 <html>
 <head>
@@ -48,30 +61,12 @@
     <link rel="stylesheet" href="homepage.css">
     <link rel="stylesheet" href="common.css">
     <link rel="stylesheet" href="hover.css">
-    <style>
-        .navbar-collapse {
-            height: 100%;
-        }
-        .container {
-            position: relative;
-        }
-        a>i{
-            font-size: 1.5rem;
-        }
-
-        /*#login {*/
-        /*    position: fixed;*/
-        /*    right: 0;*/
-        /*    z-index: 10;*/
-        /*}*/
-
-    </style>
 </head>
 <body>
     <nav class="navbar bg-dark navbar-expand-sm navbar-dark sticky-top clearfix">
         <div class="container">
             <a href="./index.jsp" class="navbar-brand"><img class="img-logo" src="resources/img/logo.png"
-                                                             alt="Logo"></a>
+                                                            alt="Logo"></a>
 
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse">
                 <span class="navbar-toggler-icon"></span>
@@ -108,8 +103,8 @@
                     </li>
                     <li class="nav-item">
                         <button  id="back-to-top" type="button" class="btn btn-dark"
-                           data-toggle="collapse"
-                           data-target="#login">
+                                 data-toggle="collapse"
+                                 data-target="#login">
                             Login
                         </button>
                     </li>
@@ -117,13 +112,13 @@
             </div>
         </div>
     </nav>
-
     <main>
         <div class="container mt-4 clearfix">
             <%=sbErros%>
             <div id="login" class="collapse float-right">
                 <div class="form-container clearfix">
                     <form action="mainServlet" method="get">
+                        <input type="hidden" name="section" value="<%=request.getParameter("section")%>">
                         <div class="form-group" id="types">
                             <label class="rad">
                                 <input id="r1" type="radio" name="type" value="student"
@@ -146,75 +141,27 @@
                 </div>
             </div>
         </div>
-        <div class="container img-container">
-            <div id="slider2" class="carousel slide carousel-fade my-5 " data-ride="carousel">
-                <ol class="carousel-indicators">
-                    <li data-target="#slider2" data-slide-to="0" class="active"></li>
-                    <li data-target="#slider2" data-slide-to="1"></li>
-                    <li data-target="#slider2" data-slide-to="2"></li>
-                    <li data-target="#slider2" data-slide-to="3"></li>
-                </ol>
-                <div class="carousel-inner rounded-lg shadow-lg" >
-                    <div class="carousel-item active">
-                        <img class="d-block w-100" src="resources/img/food.jpg" alt="">
-                        <div class="carousel-caption">
-                            <h5>Food List</h5>
-                            <p>See the daily food list now!!</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="resources/img/classroom.jpg" alt="">
-                        <div class="carousel-caption">
-                            <h5>Classes</h5>
-                            <p>Get information about classes</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="resources/img/school_bus.jpg" alt="">
-                        <div class="carousel-caption">
-                            <h5>School Busses</h5>
-                            <p>Get every information about school busses!!</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img class="d-block w-100" src="resources/img/teacher.jpg" alt="">
-                        <div class="carousel-caption">
-                            <h5>Teachers</h5>
-                            <p>Want to contact one of our teachers..</p>
-                        </div>
-                    </div>
-                </div>
-                <a href="#slider2" class="carousel-control-prev" data-slide="prev">
-                    <span class="carousel-control-prev-icon"></span>
-                </a>
-                <a href="#slider2" class="carousel-control-next" data-slide="next">
-                    <span class="carousel-control-next-icon"></span>
-                </a>
-            </div>
+        <div class="container">
+            <table class="table table-dark">
+                <thead>
+                <tr><th>#</th><th>Name</th><th>ID</th></tr>
+                </thead>
+                <tbody>
+                <%
+                    int i = 1;
+                    for (StudentEntity student :
+                            students) {
+                        %>
+                    <tr><td><%=i%></td><td><%=student.getName()%></td><td><%=student.getStudentId()%></td></tr>
+                    <%i++;%>
+                <%}%>
+                </tbody>
+
+            </table>
         </div>
     </main>
     <footer class="py-5 bg-dark text-white text-center">
         Copyright © Edulity 2019
     </footer>
-
 </body>
 </html>
-<script>
-    var type;
-    function changePlaceHolder(t) {
-        type = t;
-        document.getElementById('text-id').setAttribute("placeholder", t);
-    }
-
-    $(document).ready(function(){
-        // $(window).scroll(function () {
-        //     if ($(this).scrollTop() > 50) {
-        //         $('#back-to-top').fadeIn();
-        //     } else {
-        //         $('#back-to-top').fadeOut();
-        //     }
-        // });
-        // scroll body to 0px on click
-
-    });
-</script>

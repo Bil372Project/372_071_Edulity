@@ -193,7 +193,8 @@ public class DatabaseGeneretor {
                                 syllabusEntity.setHodEmployeeId(teacherEntity.get(0).getHodEmployeeId());
                                 syllabusEntity.setSchoolName(school_list[i]);
 
-                                syllabusEntity.setSemester("FALL"+ (int)(Math.random()*10000));//TODO:fix it importantly
+                                syllabusEntity.setSemester("FALL"+ (int)(Math.random()*100000));//TODO:fix it
+                                // importantly
                                 supporter.createObject(syllabusEntity);
                         }
                 }

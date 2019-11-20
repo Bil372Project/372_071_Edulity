@@ -5,17 +5,18 @@
 <%@ page import="javax.persistence.Query" %>
 <%@ page import="java.util.Hashtable" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="Hibernate.Queries.SchoolQuery" %>
+<%@ page import="Hibernate.Entities.SchoolEntity" %>
 <%
     request.getSession().setAttribute("current_page", "index.jsp");
     StringBuilder schoolNames = new StringBuilder();
-    if(request.getAttribute("sessionFactory") == null)
-        request.setAttribute("sessionFactory",new Configuration().configure().buildSessionFactory());
-    SessionFactory sessionFactory = (SessionFactory) request.getAttribute("sessionFactory");
-    Session s = sessionFactory.openSession();
-    Query query = s.createQuery("select name from SchoolEntity ");
-    for (String se :
-            (List<String>) query.getResultList()) {
-        schoolNames.append("<option name=\"schoolName\" value=\""+ se + "\"" + ">" + se + "</option>");
+    SchoolQuery q = new SchoolQuery();
+    List<SchoolEntity> schools = q.makeQuery(null,null,null);
+    for (SchoolEntity school :
+            schools) {
+
+        schoolNames.append("<option name=\"schoolName\" value=\""+ school.getName() + "\"" + ">" +
+                school.getName()+ "</option>");
     }
 
     Hashtable errors = (Hashtable) request.getAttribute("errors");

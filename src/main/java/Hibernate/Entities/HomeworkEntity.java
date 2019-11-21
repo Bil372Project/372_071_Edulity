@@ -1,14 +1,14 @@
 package Hibernate.Entities;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
 @Table(name = "HOMEWORK", schema = "TESTER", catalog = "")
 public class HomeworkEntity {
     private long hwNumber;
-    private Time dueDate;
+    private Date dueDate;
     private String teacherEmployeeId;
     private String schoolName;
     private Long classSection;
@@ -25,11 +25,11 @@ public class HomeworkEntity {
 
     @Basic
     @Column(name = "DUE_DATE", nullable = true)
-    public Time getDueDate() {
+    public Date getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(Time dueDate) {
+    public void setDueDate(Date dueDate) {
         this.dueDate = dueDate;
     }
 

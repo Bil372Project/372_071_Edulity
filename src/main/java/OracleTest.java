@@ -1,11 +1,23 @@
 import Hibernate.Entities.LunchMenuEntity;
+import Hibernate.Entities.TeacherEntity;
+import Hibernate.Entities.TeachingStaffEntity;
 import Hibernate.Generator.DatabaseGeneretor;
+import Hibernate.Generator.HibarnateSupporter;
 import Hibernate.Queries.SchoolQuery;
+import Hibernate.Queries.TeachingStaffQuery;
+import com.fasterxml.classmate.AnnotationConfiguration;
 
 import org.hibernate.Hibernate;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
+import org.hibernate.cfg.Configuration;
 
-import javax.xml.crypto.Data;
+import javax.imageio.spi.ServiceRegistry;
+import javax.persistence.Entity;
+import java.sql.Driver;
 import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 
@@ -25,34 +37,30 @@ public class OracleTest {
 
          */
         //Created hibarnate supported
+        //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor(git );
+       // databaseGeneretor.generator();
         DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
         databaseGeneretor.generator();
-//        HibarnateSupporter supporter = new HibarnateSupporter();
-//        Session session = HibarnateSupporter.getSessionFactory().openSession();
-//session.close();
-        //LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
-        //lunchMenuEntity.setFood("nuddle");
-        //lunchMenuEntity.setLunchDay(new Time(23425));
+        TeachingStaffQuery teachingStaffQuery = new TeachingStaffQuery();
+       // List<TeachingStaffEntity> join_list = (List)teachingStaffQuery.getWithNames("TOBB";
+       // for(Object object:join_list){
+         //   System.out.println(object);
+       // }
+        LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
+        lunchMenuEntity.setFood("nuddle");
+        lunchMenuEntity.setLunchDay(new Time(23425));
 
-        //List q = sq.makeQuery("TOBB",null,null);
-        //CourseQuery cq = new CourseQuery();
-        //cq.makeQuery(null,null,null,null);
-        //Hibernate.Generator.DatabaseGeneretor databaseGeneretor = new Hibernate.Generator.DatabaseGeneretor(git );
-       // databaseGeneretor.generator();
-
-//        LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
-//        lunchMenuEntity.setFood("nuddle");
-//        lunchMenuEntity.setLunchDay(new Time(23425));
-//
-//        SchoolQuery sq = new SchoolQuery();
-//        List q = sq.makeQuery("TOBB",null,null);
+        SchoolQuery sq = new SchoolQuery();
+        List q = sq.makeQuery("TOBB",null,null);
 
         //supporter.createObject(lunchMenuEntity);
         //This code block only for trial and query example
-//        String hql = "FROM EmployeeEntity WHERE SCHOOL_NAME = 'TOBB' ";
+        String hql = "FROM EmployeeEntity WHERE SCHOOL_NAME = 'TOBB' ";
         //List courses =  supporter.selectQueryBased(hql);
         //for(Object object:courses){
           //  System.out.println(((EmployeeEntity)object).getEmployeeId());
         //}
+
     }
+
 }

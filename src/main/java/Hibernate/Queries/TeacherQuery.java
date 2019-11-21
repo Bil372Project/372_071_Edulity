@@ -1,7 +1,10 @@
 package Hibernate.Queries;
 import Hibernate.Entities.TeacherEntity;
 import Hibernate.Generator.HibarnateSupporter;
+import org.hibernate.Criteria;
 import org.hibernate.Session;
+import org.hibernate.criterion.ProjectionList;
+import org.hibernate.criterion.Projections;
 import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -12,8 +15,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeacherQuery {
+    Session session = HibarnateSupporter.getSessionFactory().openSession();
     public List makeQuery(String schoolName, String employeeId, String surveyId, String hodEmployeeId) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<TeacherEntity> criteria = criteriaBuilder.createQuery(TeacherEntity.class);
         Root<TeacherEntity> root = criteria.from(TeacherEntity.class);
@@ -35,4 +39,5 @@ public class TeacherQuery {
 
         return query.list();
     }
+
 }

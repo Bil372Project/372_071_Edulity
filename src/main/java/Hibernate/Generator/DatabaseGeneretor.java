@@ -153,18 +153,18 @@ public class DatabaseGeneretor {
                                 if(headOfDepartment.get(0).getSpecialization().equals(teachers.get(i).getSpecialization())){
 
                                         ArrayList<SurveyEntity> surveyEntities= (ArrayList)surveyQuery.makeQuery(null,null,headOfDepartment.get(0).getEmployeeId(),null);
-                                       if(surveyEntities.size() != 0) {
-                                               teacherEntity.setHodEmployeeId(headOfDepartment.get(0).getEmployeeId());
-                                               teacherEntity.setSchoolName(teachers.get(i).getSchoolName());
-                                               teacherEntity.setSurveyId(surveyEntities.get(0).getSurveyId()); //TODO do it
-                                               supporter.createObject(teacherEntity);
-                                               counts++;
-                                       }
+                                        if(surveyEntities.size() != 0) {
+                                                teacherEntity.setHodEmployeeId(headOfDepartment.get(0).getEmployeeId());
+                                                teacherEntity.setSchoolName(teachers.get(i).getSchoolName());
+                                                teacherEntity.setSurveyId(surveyEntities.get(0).getSurveyId()); //TODO do it
+                                                supporter.createObject(teacherEntity);
+                                                counts++;
+                                        }
                                 }
                         }
 
                 }
-            System.out.println("Count"+counts);
+                System.out.println("Count"+counts);
                 for(int i=0;i<school_list.length;i++) {
                         for(int j =0;j<section_numbers;j++) {
                                 ClazzEntity clazzEntity = new ClazzEntity();
@@ -321,7 +321,7 @@ public class DatabaseGeneretor {
                         student.setSchoolName(clazz.get(class_sc).getSchoolName());
                         supporter.createObject(student);
                 }
-                        //Did not work at first trial,it must be removed or fixed in the future
+                //Did not work at first trial,it must be removed or fixed in the future
                 /*
 
                        for(int i=0;i<studentEntities.size();i++) {
@@ -342,5 +342,5 @@ public class DatabaseGeneretor {
                        lunchEntity.setStudentId("st01");
                        supporter.createObject(lunchEntity);
                 */
-                }
         }
+}

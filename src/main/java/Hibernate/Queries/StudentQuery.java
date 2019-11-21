@@ -60,4 +60,25 @@ public class StudentQuery {
 
         return query.list();
     }
+    public void insertstu(String schoolName, String studentId, String name, Long numberOfAbsent, Long year, Time birthDate, String birthPlace, Long classSection, String parentSsn, Long schoolBusId)
+    {
+        HibarnateSupporter supporter = new HibarnateSupporter();
+        StudentEntity student = new StudentEntity();
+        student.setSchoolName(schoolName);
+        student.setStudentId(studentId);
+        student.setName(name);
+        student.setNumberOfAbsent(numberOfAbsent);
+        student.setYear(year);
+        student.setBirthDate(birthDate);
+        student.setBirthPlace(birthPlace);
+        student.setClassSection(classSection);
+        student.setParentSsn(parentSsn);
+        student.setSchoolBusId(schoolBusId);
+        supporter.createObject(student);
+    }
+    public void deletestu(StudentEntity student)
+    {
+        HibarnateSupporter supporter = new HibarnateSupporter();
+        supporter.delete(student);
+    }
 }

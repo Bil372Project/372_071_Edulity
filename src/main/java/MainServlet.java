@@ -77,6 +77,9 @@ public class MainServlet extends HttpServlet {
         if(students == null || students.isEmpty()) {
             errors.put("id","Your id or school name is wrong. Please check them..");
         }
+        else {
+            request.getSession().setAttribute("student", students.get(0));
+        }
 
         return errors;
     }

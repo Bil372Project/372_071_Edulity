@@ -13,6 +13,7 @@ import Hibernate.Queries.*;
 
 import java.sql.Time;
 import java.util.ArrayList;
+import java.sql.Date;
 
 public class DatabaseGeneretor {
 
@@ -244,7 +245,7 @@ public class DatabaseGeneretor {
                 for(int i=0;i<homework_number;i++) {
                         int rand = (int)(Math.random()*max_int);
                         HomeworkEntity homeworkEntity = new HomeworkEntity();
-                        homeworkEntity.setDueDate(new Time(63456));
+                        homeworkEntity.setDueDate(Date.valueOf("2019-03-1"));
                         homeworkEntity.setClassSection(clazzEntities.get(rand % clazzEntities.size()).getSection());
                         homeworkEntity.setHwNumber((int)(Math.random()*max_int));
                         homeworkEntity.setSchoolName(clazzEntities.get(rand % clazzEntities.size()).getSchoolName());

@@ -1,18 +1,14 @@
 <%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
-  Date: 16.11.2019
-  Time: 21:32
+  Date: 21.11.2019
+  Time: 13:10
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%
-    request.getSession().setAttribute("current_page", "student.jsp");
-
-%>
 <html>
 <head>
-    <title>Student Page</title>
+    <title>Absenteism</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -81,7 +77,7 @@
                         </a>
                     </li>
                     <li class="nav-item border-right">
-                        <a href="announcments.jsp" class="nav-link active hvr-underline-from-center">
+                        <a href="announcements.jsp" class="nav-link active hvr-underline-from-center">
                             Announcements
                         </a>
                     </li>
@@ -117,9 +113,7 @@
         </div>
     </nav>
     <main>
-        <div class="container">
 
-        </div>
     </main>
     <footer class="py-5 bg-dark text-white text-center">
         Copyright © Edulity 2019

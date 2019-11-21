@@ -181,7 +181,7 @@
                                 data-target="<%="#busdriver" + bus.getDriverId()%>">
                             About Driver
                         </button>
-                        <div class="modal fade" tabindex="-1" role="dialog" aria-hidden="true"
+                        <div class="modal fade text-dark" tabindex="-1" role="dialog" aria-hidden="true"
                              id="<%="busdriver" + bus.getDriverId()%>">
 
                             <div class="modal-dialog modal-sm modal-dialog-centered">

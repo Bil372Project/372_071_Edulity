@@ -1,7 +1,7 @@
 package Hibernate.Entities;
 
 import javax.persistence.*;
-import java.sql.Time;
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -10,7 +10,7 @@ import java.util.Objects;
 public class ListOfAbsentDatesEntity {
     private String schoolName;
     private String studentId;
-    private Time absentDate;
+    private Date absentDate;
 
     @Id
     @Column(name = "SCHOOL_NAME", nullable = false, length = 30)
@@ -34,11 +34,11 @@ public class ListOfAbsentDatesEntity {
 
     @Id
     @Column(name = "ABSENT_DATE", nullable = false)
-    public Time getAbsentDate() {
+    public Date getAbsentDate() {
         return absentDate;
     }
 
-    public void setAbsentDate(Time absentDate) {
+    public void setAbsentDate(Date absentDate) {
         this.absentDate = absentDate;
     }
 

@@ -12,7 +12,7 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LisOfHwQuestionsQuery {
+public class ListOfHwQuestionsQuery {
     public List makeQuery(String question, Long hwNumber) {
         Session session = HibarnateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();

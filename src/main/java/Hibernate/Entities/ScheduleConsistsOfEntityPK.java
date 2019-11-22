@@ -1,13 +1,17 @@
 package Hibernate.Entities;
 
+import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.sql.Date;
+import java.sql.Time;
 import java.util.Objects;
 
 public class ScheduleConsistsOfEntityPK implements Serializable {
     private String scheduleId;
     private String courseName;
+    private String startDate;
 
     @Column(name = "SCHEDULE_ID", nullable = false, length = 30)
     @Id
@@ -41,5 +45,16 @@ public class ScheduleConsistsOfEntityPK implements Serializable {
     @Override
     public int hashCode() {
         return Objects.hash(scheduleId, courseName);
+    }
+
+    @Column(name = "START_DATE", nullable = true)
+    @Basic
+    @Id
+    public String getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(String startDate) {
+        this.startDate = startDate;
     }
 }

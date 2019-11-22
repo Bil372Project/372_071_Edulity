@@ -1,6 +1,7 @@
 package Hibernate.Entities;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.Objects;
 
@@ -10,8 +11,8 @@ import java.util.Objects;
 public class ScheduleConsistsOfEntity {
     private String scheduleId;
     private String courseName;
-    private Time startDate;
-    private Time endDate;
+    private String startDate;
+    private String endDate;
     private Long grade;
 
     @Id
@@ -34,23 +35,24 @@ public class ScheduleConsistsOfEntity {
         this.courseName = courseName;
     }
 
+    @Id
     @Basic
     @Column(name = "START_DATE", nullable = true)
-    public Time getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Time startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
     @Basic
     @Column(name = "END_DATE", nullable = true)
-    public Time getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Time endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

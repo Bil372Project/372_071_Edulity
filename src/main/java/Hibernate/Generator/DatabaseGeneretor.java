@@ -179,9 +179,13 @@ public class DatabaseGeneretor {
                 System.out.println("Count"+counts);
                 for(int i=0;i<school_list.length;i++) {
                         for(int j =0;j<section_numbers;j++) {
+                                String scheduleId = "sc"+(int)(Math.random()*max_int);
+                                ScheduleEntity scheduleEntity = new ScheduleEntity();
+                                scheduleEntity.setScheduleId(scheduleId);
+                                supporter.createObject(scheduleEntity);
                                 ClazzEntity clazzEntity = new ClazzEntity();
                                 clazzEntity.setClassSize((long) (Math.random() * 20) + 20);
-                                clazzEntity.setSchedule("scheduling.....");
+                                clazzEntity.setSchedule(scheduleId);
                                 clazzEntity.setSchoolName(school_list[i]);
                                 clazzEntity.setSection(j);
                                 supporter.createObject(clazzEntity);
@@ -235,14 +239,8 @@ public class DatabaseGeneretor {
                         supporter.createObject(syllabusExamDateEntity);
                 }
           */
-                ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,null,null);
                 ArrayList<ClazzEntity> clazzEntities = (ArrayList) clazzQuery.makeQuery(null,null,null,null);
                 int l = clazzEntities.size();
-                for(int i=0;i<l;i++) {
-                        ScheduleEntity scheduleEntity = new ScheduleEntity();
-                        scheduleEntity.setScheduleId("sc"+(int)(Math.random()*max_int));
-                        supporter.createObject(scheduleEntity);
-                }
                 ArrayList<ScheduleEntity> scheduleEntities = (ArrayList)scheduleQuery.makeQuery(null);
 
                 for(int j=0;j<l;j++) {

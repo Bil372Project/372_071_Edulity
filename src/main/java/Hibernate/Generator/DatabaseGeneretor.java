@@ -10,10 +10,11 @@ import Hibernate.Queries.SurveyQuery;
 import Hibernate.Queries.TeachingStaffQuery;
 import Hibernate.Entities.*;
 import Hibernate.Queries.*;
+import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
+import java.sql.Date;
 import java.sql.Time;
 import java.util.ArrayList;
-import java.sql.Date;
 
 public class DatabaseGeneretor {
 
@@ -24,20 +25,34 @@ public class DatabaseGeneretor {
         public ArrayList<String> sid_list = new ArrayList<>();
         public String[] specialization = {"Mat","Fen","İng","Türkce","Beden","Sosyal"};
         public String[] questions = {"Dönem puanı","Dersler nasıl olmalı","Öğrenciler nasıl?"};
+        public String[] start_date = {"Monday=08.30","Monday=10:30","Monday=12:30","Monday=14:30","Monday=16:30",
+                                      "Tuesday=08.30","Tuesday=10:30","Tuesday=12:30","Tuesday=14:30","Tuesday=16:30",
+                                      "Wednesday=08.30","Wednesday=10:30","Wednesday=12:30","Wednesday=14:30","Wednesday=16:30",
+                                      "Thursday=08.30","Thursday=10:30","Thursday=12:30","Thursday=14:30","Thursday=16:30",
+                                      "Friday=08.30","Friday=10:30","Friday=12:30","Friday=14:30","Friday=16:30",
+        };
+        public String[] finish_date = {"Monday=10.30","Monday=12:30","Monday=14:30","Monday=16:30","Monday=18:30",
+                "Tuesday=10.30","Tuesday=12:30","Tuesday=14:30","Tuesday=16:30","Tuesday=18:30",
+                "Wednesday=10.30","Wednesday=12:30","Wednesday=14:30","Wednesday=16:30","Wednesday=18:30",
+                "Thursday=10.30","Thursday=12:30","Thursday=14:30","Thursday=16:30","Thursday=18:30",
+                "Friday=10.30","Friday=12:30","Friday=14:30","Friday=16:30","Friday=18:30",
+        };
         public String[] sections = {"A","B","C","D","E"};
         int max_int = 1000000;
         int student_number = 1000;
         int section_numbers = 16;
         int grade = 8;
-        int numberOfSurvey = 100;
+        int numberOfSurvey = 500;
         int homework_number = 20;
         int numberOfDriver = 20;
+        int employee_size = 300;
         public HibarnateSupporter supporter = new HibarnateSupporter();
         public SchoolQuery schoolQuery = new SchoolQuery();
         public EmployeeQuery employeeQuery = new EmployeeQuery();
         public TeacherQuery teacherQuery = new TeacherQuery();
         public TeachingStaffQuery teachingStaffEntityQuery = new TeachingStaffQuery();
         public ParentQuery parentQuery = new ParentQuery();
+        public ScheduleConsistsOfQuery scheduleConsistsOfQuery = new ScheduleConsistsOfQuery();
         public SyllabusQuery syllabusQuery = new SyllabusQuery();
         public HeadOfDepartmentQuery headOfEmployeeQuery = new HeadOfDepartmentQuery();
         public SurveyQuery surveyQuery = new SurveyQuery();
@@ -54,7 +69,6 @@ public class DatabaseGeneretor {
         }
         public void generator() {
 
-
                 for (int i = 0; i < school_list.length; i++) {
 
                         SchoolEntity schoolEntity = new SchoolEntity();
@@ -63,29 +77,35 @@ public class DatabaseGeneretor {
                         schoolEntity.setSchoolType(school_type[i]);
                         supporter.createObject(schoolEntity);
                 }
-                int N = 30;
-                for (int i = 0; i < N; i++) {
-                        EmployeeEntity employeeEntity = new EmployeeEntity();
-                        int sid = (int) (Math.random() * max_int);
-                        employeeEntity.setEmployeeId("s" + sid);
-                        employeeEntity.setName(employee_name[(int) (Math.random() * max_int) % employee_name.length]);
-                        employeeEntity.setSsn("ssn" + (int) (Math.random() * max_int));
-                        sid_list.add("s" + sid);
-                        employeeEntity.setSchoolName(school_list[(int) (Math.random() * max_int) % school_list.length]);
-                        supporter.createObject(employeeEntity);
-                }
 
-                for (int i = 0; i < sid_list.size(); i++) {
-                        TeachingStaffEntity teachingStaffEntity = new TeachingStaffEntity();
-                        int rand = (int) (Math.random() * 100);
-                        if (rand > 30) {
-                                System.out.println(sid_list.get(i));
-                                ArrayList<EmployeeEntity> teachingStaffEntityArrayList = (ArrayList) employeeQuery.makeQuery(sid_list.get(i), null, null, null);
-                                teachingStaffEntity.setEmployeeId(sid_list.get(i));
-                                teachingStaffEntity.setOfficeNo("No" + (int) (Math.random() * 100));
-                                teachingStaffEntity.setSchoolName(teachingStaffEntityArrayList.get(0).getSchoolName());
-                                teachingStaffEntity.setSpecialization(specialization[(int) (Math.random() * max_int) % specialization.length]);
-                                supporter.createObject(teachingStaffEntity);
+                for (int i = 0; i < school_list.length; i++) {
+                        for(int j=0;j < employee_size;j++) {
+                                EmployeeEntity employeeEntity = new EmployeeEntity();
+                                int sid = i*employee_size+j;
+                                employeeEntity.setEmployeeId("s" + sid);
+                                employeeEntity.setName(employee_name[(int) (Math.random() * max_int) % employee_name.length]);
+                                employeeEntity.setSsn("ssn" + i*employee_size+j);
+                                sid_list.add("s" + sid);
+                                employeeEntity.setSchoolName(school_list[i]);
+                                supporter.createObject(employeeEntity);
+                        }
+                }
+                int counter = 0;
+                for (int i = 0; i < school_list.length; i++) {
+                        for(int j=0;j < specialization.length;j++) {
+                                for(int k =1;k <= 8;k++ ) {
+                                        TeachingStaffEntity teachingStaffEntity = new TeachingStaffEntity();
+                                        int rand = (int) (Math.random() * 100);
+
+                                        ArrayList<EmployeeEntity> teachingStaffEntityArrayList = (ArrayList) employeeQuery.makeQuery(null, school_list[i], null, null);
+
+                                        teachingStaffEntity.setEmployeeId(teachingStaffEntityArrayList.get(j*8+k).getEmployeeId());
+                                        teachingStaffEntity.setOfficeNo("No" + (int) (Math.random() * 100));
+                                        teachingStaffEntity.setSchoolName(school_list[i]);
+                                        teachingStaffEntity.setSpecialization(specialization[j]);
+                                        supporter.createObject(teachingStaffEntity);
+                                        counter++;
+                                }
                         }
                 }
                 //TODO do it in the next
@@ -107,7 +127,7 @@ public class DatabaseGeneretor {
                         parent.setAddress("Etlik/Ankara");//TODO fix it
                         parent.setEmail("Mahmut@gmail.com");//TODO fix it
                         parent.setName(employee_name[(int) (Math.random() * max_int) % employee_name.length]);
-                        parent.setSsn("p"+ (int)(Math.random()*max_int));
+                        parent.setSsn("p"+ i);
                         supporter.createObject(parent);
                 }
 
@@ -119,7 +139,7 @@ public class DatabaseGeneretor {
                         survey.setSchoolName(headOfDepartment.get(rand % headOfDepartment.size()).getSchoolName());
                         survey.setHodEmployeeId(headOfDepartment.get(rand % headOfDepartment.size()).getEmployeeId());
                         survey.setParentSsn(parentEntities.get(rand%parentEntities.size()).getSsn());
-                        survey.setSurveyId("sv"+(int) (Math.random() * max_int));
+                        survey.setSurveyId("sv"+i);
                         supporter.createObject(survey);
                 }
                 ArrayList<SurveyEntity> surveyList = (ArrayList) surveyQuery.makeQuery(null,null,null,null);
@@ -133,30 +153,30 @@ public class DatabaseGeneretor {
                         supporter.createObject(survey_question);
                 }
                 ArrayList<TeachingStaffEntity> teachers = (ArrayList) teachingStaffEntityQuery.makeQuery(null,null,null,null);
-
+                int counts = 0;
                 for(int i=0;i<teachers.size();i++) {
                         TeacherEntity teacherEntity = new TeacherEntity();
                         teacherEntity.setEmployeeId(teachers.get(i).getEmployeeId());
                         ArrayList<HeadOfDepartmentEntity> headOfDepartmentEntities = (ArrayList) headOfEmployeeQuery.makeQuery(teachers.get(i).getSchoolName(),null);
 
-
                         for(int j=0;j<headOfDepartmentEntities.size();j++){
                                 ArrayList<TeachingStaffEntity> headOfDepartment =(ArrayList)teachingStaffEntityQuery.makeQuery(null,headOfDepartmentEntities.get(j).getEmployeeId(),null,null);
 
-                                if(headOfDepartment.size() !=0 && headOfDepartment.get(0).getSpecialization().equals(teachers.get(i).getSpecialization())){
+                                if(headOfDepartment.get(0).getSpecialization().equals(teachers.get(i).getSpecialization())){
 
-                                         ArrayList<SurveyEntity> surveyEntities= (ArrayList)surveyQuery.makeQuery(null,null,headOfDepartment.get(0).getEmployeeId(),null);
-                                       if(surveyEntities.size() != 0) {
-                                               teacherEntity.setHodEmployeeId(headOfDepartment.get(0).getEmployeeId());
-                                               teacherEntity.setSchoolName(teachers.get(i).getSchoolName());
-                                               teacherEntity.setSurveyId(surveyEntities.get(0).getSurveyId()); //TODO do it
-                                               supporter.createObject(teacherEntity);
-                                       }
+                                        ArrayList<SurveyEntity> surveyEntities= (ArrayList)surveyQuery.makeQuery(null,null,headOfDepartment.get(0).getEmployeeId(),null);
+                                        if(surveyEntities.size() != 0) {
+                                                teacherEntity.setHodEmployeeId(headOfDepartment.get(0).getEmployeeId());
+                                                teacherEntity.setSchoolName(teachers.get(i).getSchoolName());
+                                                teacherEntity.setSurveyId(surveyEntities.get(0).getSurveyId()); //TODO do it
+                                                supporter.createObject(teacherEntity);
+                                                counts++;
+                                        }
                                 }
                         }
 
                 }
-
+                System.out.println("Count"+counts);
                 for(int i=0;i<school_list.length;i++) {
                         for(int j =0;j<section_numbers;j++) {
                                 ClazzEntity clazzEntity = new ClazzEntity();
@@ -167,18 +187,22 @@ public class DatabaseGeneretor {
                                 supporter.createObject(clazzEntity);
                         }
                 }
+                int count = 0;
                 for(int i=0;i<school_list.length;i++) {
                         for(int j=0;j<specialization.length;j++) {
                                 for(int k=1;k<=8;k++) {
-                                        ArrayList<TeacherEntity> teacher = (ArrayList) teacherQuery.makeQuery(school_list[i], null, null, null);
+                                        ArrayList<TeachingStaffEntity> teacher = (ArrayList) teachingStaffEntityQuery.makeQuery(school_list[i], null, specialization[j], null);
                                         int size = teacher.size();
                                         CourseEntity course = new CourseEntity();
-                                        course.setCourseName(specialization[j]+ (int)(Math.random()*max_int));
+                                        course.setCourseName(specialization[j]+ count);
                                         course.setGrade(k);//TODO:fix it
-                                        course.setTeacherEmployeeId(teacher.get((int) (Math.random() * max_int) % size).getEmployeeId());
+                                        course.setTeacherEmployeeId(teacher.get(k-1).getEmployeeId());
                                         course.setType("true");
                                         course.setSchoolName(school_list[i]);
+                                        System.out.println(specialization[j]+ count);
+                                        System.out.println("EmployeeId:"+teacher.get(k-1).getEmployeeId());
                                         supporter.createObject(course);
+                                        count++;
                                 }
                         }
                 }
@@ -188,27 +212,29 @@ public class DatabaseGeneretor {
                                 ArrayList<TeacherEntity> teacherEntity = (ArrayList)teacherQuery.makeQuery(null,courseEntities.get(i).getTeacherEmployeeId(),null,null);
 
                                 SyllabusEntity syllabusEntity = new SyllabusEntity();
-                                syllabusEntity.setCourseName(courseEntities.get(i).getCourseName());
-                                syllabusEntity.setGradingInfo(courseEntities.get(i).getGrade());//TODO:fix it
+                                syllabusEntity.setCourseName(courseEntities.get(j).getCourseName());
+                                syllabusEntity.setGradingInfo(courseEntities.get(j).getGrade());//TODO:fix it
 
                                 syllabusEntity.setHodEmployeeId(teacherEntity.get(0).getHodEmployeeId());
                                 syllabusEntity.setSchoolName(school_list[i]);
 
-                                syllabusEntity.setSemester("FALL"+ (int)(Math.random()*100000));//TODO:fix it
-                                // importantly
+                                syllabusEntity.setSemester("FALL");//TODO:fix it important
                                 supporter.createObject(syllabusEntity);
                         }
                 }
                 ArrayList<SyllabusEntity> syllabusEntity= (ArrayList)syllabusQuery.makeQuery(null,null,null,null,null);
-
+        /*
                 for(int i=0;i<syllabusEntity.size();i++){
+                        System.out.println("syllabusExamDateEntity:"+syllabusEntity.get(i).getCourseName());
+                        System.out.println("syllabusExamDateEntity:"+syllabusEntity.get(i).getSemester());
                         SyllabusExamDateEntity syllabusExamDateEntity = new SyllabusExamDateEntity();
-
                         syllabusExamDateEntity.setCourseName(syllabusEntity.get(i).getCourseName());
                         syllabusExamDateEntity.setSemester(syllabusEntity.get(i).getSemester());
-                        syllabusExamDateEntity.setSubject(new Time((long)(Math.random()*100000)));//TODO:fix it
+                        syllabusExamDateEntity.setSubject(new Time(i));//TODO:fix it
+
                         supporter.createObject(syllabusExamDateEntity);
                 }
+          */
                 ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,null,null);
                 ArrayList<ClazzEntity> clazzEntities = (ArrayList) clazzQuery.makeQuery(null,null,null,null);
                 int l = clazzEntities.size();
@@ -231,21 +257,27 @@ public class DatabaseGeneretor {
                 //TODO:this block should be improved so that generates schedule that does not overlapping with each other courses hours
                 ArrayList<HaveScheduleEntity> haveScheduleEntities = (ArrayList)haveScheduleQuery.makeQuery(null,null,null);
                 for(int i=0;i<haveScheduleEntities.size();i++) {
-                        ArrayList<HaveScheduleEntity> schedules = (ArrayList)haveScheduleQuery.makeQuery(null,haveScheduleEntities.get(i).getSchoolName(),null);
-                        int rand = (int)(Math.random()*schedules.size());
-                        ScheduleConsistsOfEntity scheduleConsistsOfEntity = new ScheduleConsistsOfEntity();
-                        scheduleConsistsOfEntity.setCourseName(courseEntities.get(i).getCourseName());
-                        scheduleConsistsOfEntity.setEndDate(new Time(23542));//TODO:fix it
-                        scheduleConsistsOfEntity.setStartDate(new Time(265436));//TODO:fix it
-                        scheduleConsistsOfEntity.setGrade(courseEntities.get(i).getGrade());
-                        scheduleConsistsOfEntity.setScheduleId(haveScheduleEntities.get(rand).getScheduleId());
-                        supporter.createObject(scheduleConsistsOfEntity);
-                }
+                        ArrayList<ClazzEntity> clazzEntity = (ArrayList)clazzQuery.makeQuery(haveScheduleEntities.get(i).getSchoolName(),haveScheduleEntities.get(i).getClassSection(),null,null);
 
+                        ArrayList<CourseEntity> courseEntities1 = (ArrayList)courseQuery.makeQuery(null,((long)(haveScheduleEntities.get(i).getClassSection()/2)+1),null,null,haveScheduleEntities.get(i).getSchoolName());
+                        for(int j=0;j<courseEntities1.size();j++) {
+                                for(int k =0;k<3;k++) {
+                                        int m = (int)(j+(haveScheduleEntities.get(i).getClassSection()%2)+k*specialization.length);
+                                        ScheduleConsistsOfEntity scheduleConsistsOfEntity = new ScheduleConsistsOfEntity();
+                                        scheduleConsistsOfEntity.setCourseName(courseEntities1.get(j).getCourseName());
+                                        scheduleConsistsOfEntity.setEndDate(finish_date[m]);
+                                        scheduleConsistsOfEntity.setStartDate(start_date[m]);
+                                        scheduleConsistsOfEntity.setGrade(courseEntities1.get(j).getGrade());
+                                        scheduleConsistsOfEntity.setScheduleId(haveScheduleEntities.get(i).getScheduleId());
+                                        supporter.createObject(scheduleConsistsOfEntity);
+                                }
+                        }
+
+                }
                 for(int i=0;i<homework_number;i++) {
                         int rand = (int)(Math.random()*max_int);
                         HomeworkEntity homeworkEntity = new HomeworkEntity();
-                        homeworkEntity.setDueDate(Date.valueOf("2019-03-1"));
+                        homeworkEntity.setDueDate(Date.valueOf("2019-03-01"));
                         homeworkEntity.setClassSection(clazzEntities.get(rand % clazzEntities.size()).getSection());
                         homeworkEntity.setHwNumber((int)(Math.random()*max_int));
                         homeworkEntity.setSchoolName(clazzEntities.get(rand % clazzEntities.size()).getSchoolName());
@@ -307,7 +339,7 @@ public class DatabaseGeneretor {
                         student.setSchoolName(clazz.get(class_sc).getSchoolName());
                         supporter.createObject(student);
                 }
-                        //Did not work at first trial,it must be removed or fixed in the future
+                //Did not work at first trial,it must be removed or fixed in the future
                 /*
 
                        for(int i=0;i<studentEntities.size();i++) {
@@ -328,5 +360,19 @@ public class DatabaseGeneretor {
                        lunchEntity.setStudentId("st01");
                        supporter.createObject(lunchEntity);
                 */
+        }
+        public void createSchedule(){
+                ArrayList<ClazzEntity> clazzEntities = (ArrayList)clazzQuery.makeQuery(null,null,null,null);
+                ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,null,null);
+                ArrayList<HaveScheduleEntity> haveScheduleEntities= (ArrayList)haveScheduleQuery.makeQuery(null,null,null);
+                ArrayList<ScheduleConsistsOfEntity> scheduleConsistsOfEntities = (ArrayList)scheduleConsistsOfQuery.makeQuery(null,null,null,null,null);
+                for (int i = 0; i < school_list.length; i++) {
+
+                        SchoolEntity schoolEntity = new SchoolEntity();
+                        schoolEntity.setName(school_list[i]);
+                        schoolEntity.setSchoolAddress(school_adrress[i]);
+                        schoolEntity.setSchoolType(school_type[i]);
+                        supporter.createObject(schoolEntity);
                 }
         }
+}

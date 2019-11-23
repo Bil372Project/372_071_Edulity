@@ -89,7 +89,7 @@
                         </a>
                     </li>
                     <li class="nav-item border-right">
-                        <a href="absenteism.jsp" class="nav-link active hvr-underline-from-center">
+                        <a href="absenteeism.jsp" class="nav-link active hvr-underline-from-center">
                             Absenteism
                         </a>
                     </li>

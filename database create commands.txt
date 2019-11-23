@@ -181,7 +181,7 @@ create TABLE LIST_OF_ABSENT_DATES(
                     school_name,
                     student_id,
                     absent_date Date,
-                    FOREIGN KEY(school_name,student_id) REFERENCES STUDENT(student_id,school_name),
+                    FOREIGN KEY(school_name,student_id) REFERENCES STUDENT(school_name,student_id),
                     PRIMARY KEY(absent_date,school_name,student_id)
 )
 create TABLE LUNCH(

@@ -7,6 +7,8 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Hibernate.Queries.SchoolQuery" %>
 <%@ page import="Hibernate.Entities.SchoolEntity" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 
 <%
     request.getSession().setAttribute("current_page", "index.jsp");

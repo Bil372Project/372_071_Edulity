@@ -103,8 +103,8 @@
                         </a>
                     </li>
                     <li class="nav-item border-right">
-                        <a href="absenteism.jsp" class="nav-link active hvr-underline-from-center">
-                            Absenteism
+                        <a href="absenteeism.jsp" class="nav-link active hvr-underline-from-center">
+                            Absenteeism
                         </a>
                     </li>
                     <li class="nav-item border-right">
@@ -146,7 +146,7 @@
     <main class="mt-4">
         <div class="container">
             <div class="align-content-center">
-                <span class="mx-auto badge-info badge">
+                <span class="mx-auto badge-info badge ">
                     <%="Section: " + ((StudentEntity)session.getAttribute("student")).getClassSection()%>
                 </span>
                 <span class="mx-auto badge-info badge">

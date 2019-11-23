@@ -294,10 +294,10 @@ public class DatabaseGeneretor {
 
                 AnnouncementEntity announcementEntity = new AnnouncementEntity();
                 announcementEntity.setClassSection(clazz.get(0).getSection());
-                announcementEntity.setDueDate(new Time(35235));
+                announcementEntity.setDueDate(new Date(System.currentTimeMillis()));
                 announcementEntity.setInfo("Please not being copied");
                 announcementEntity.setSchoolName(teacherEntities.get(0).getSchoolName());
-                announcementEntity.setSubmitDate(new Time(45647));
+                announcementEntity.setSubmitDate(new Date(System.currentTimeMillis()));
                 announcementEntity.setTeacherEmployeeId(teacherEntities.get(0).getEmployeeId());
                 supporter.createObject(announcementEntity);
 

@@ -7,17 +7,19 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Hibernate.Queries.SchoolQuery" %>
 <%@ page import="Hibernate.Entities.SchoolEntity" %>
+
 <%
     request.getSession().setAttribute("current_page", "index.jsp");
     StringBuilder schoolNames = new StringBuilder();
     SchoolQuery q = new SchoolQuery();
     List<SchoolEntity> schools = q.makeQuery(null,null,null);
-    for (SchoolEntity school :
-            schools) {
+    if(schools != null)
+        for (SchoolEntity school :
+                schools) {
 
-        schoolNames.append("<option name=\"schoolName\" value=\""+ school.getName() + "\"" + ">" +
-                school.getName()+ "</option>");
-    }
+            schoolNames.append("<option name=\"schoolName\" value=\""+ school.getName() + "\"" + ">" +
+                    school.getName()+ "</option>");
+        }
 
     Hashtable errors = (Hashtable) request.getAttribute("errors");
     StringBuilder sbErros = new StringBuilder();
@@ -51,6 +53,9 @@
     <link rel="stylesheet" href="hover.css">
 
     <script>
+        if(performance.navigation.type == 2){
+            location.reload(true);
+        }
         var type;
         function changePlaceHolder(t) {
             type = t;

@@ -1,4 +1,7 @@
-<%--
+<%@ page import="Hibernate.Entities.ScheduleConsistsOfEntity" %>
+<%@ page import="Hibernate.Queries.StudentQuery" %>
+<%@ page import="Hibernate.Entities.StudentEntity" %>
+<%@ page import="java.util.List" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
   Date: 16.11.2019
@@ -8,7 +11,31 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     request.getSession().setAttribute("current_page", "student.jsp");
-
+    StudentQuery query = new StudentQuery();
+    List schedule = query.getSchedule((StudentEntity)request.getSession().getAttribute("student"));
+    String[][] str = new String[10][5];
+    for (Object[] course :
+            (List<Object[]>)schedule) {
+        String courseName = ((String)course[0]).replaceAll("[0-9]","");
+        String day = ((String)course[1]).split("=")[0];
+        String startTime = ((String)course[1]).split("=")[1];
+        String endTime = ((String)course[2]).split("=")[1];
+        int row = Integer.valueOf(startTime.split("\\.|:")[0]) - 8; //start time is 8.30
+        int row2 = Integer.valueOf(endTime.split("\\.|:")[0]) - 8;
+        int  column;
+        switch (day.toLowerCase()) {
+            case "monday":column = 0;break;
+            case "tuesday":column=1;break;
+            case "wednesday":column=2;break;
+            case "thursday":column=3;break;
+            case "friday":column=4;break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + day.toLowerCase());
+        }
+        for(int i = row; i < row2; i++) {
+            str[i][column] = courseName;
+        }
+    }
 %>
 <html>
 <head>
@@ -116,9 +143,35 @@
             </div>
         </div>
     </nav>
-    <main>
+    <main class="mt-4">
         <div class="container">
-
+            <div class="align-content-center">
+                <span class="mx-auto badge-info badge">
+                    <%="Section: " + ((StudentEntity)session.getAttribute("student")).getClassSection()%>
+                </span>
+                <span class="mx-auto badge-info badge">
+                    <%="Name: " + ((StudentEntity)session.getAttribute("student")).getName()%>
+                </span>
+            </div>
+            <table class="table table-dark table-hover">
+                <thead><th>Time</th><th>Monday</th><th>Tuesdat</th><th>Wednesday</th>
+                    <th>Thursday</th><th>Friday</th>
+                </thead>
+                <tbody>
+                    <%for (int i = 0; i < 10; i++) {%>
+                    <tr>
+                        <%for (int j = 0; j < 6; j++) {%>
+                        <td><%if(j == 0){%>
+                            <%=i + 8 + ".30"%>
+                            <%}else if(str[i][j-1] != null){%>
+                            <%=str[i][j-1]%>
+                            <%}%>
+                        </td>
+                        <%}%>
+                    </tr>
+                    <%}%>
+                </tbody>
+            </table>
         </div>
     </main>
     <footer class="py-5 bg-dark text-white text-center">

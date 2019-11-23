@@ -43,7 +43,6 @@ public class MainServlet extends HttpServlet {
         }
         else {
             request.setAttribute("errors", errors);
-            String[] str = request.getHeader("referer").split("/");
             request.getRequestDispatcher((String)request.getSession().getAttribute("current_page")).forward(request,
                     response);
         }

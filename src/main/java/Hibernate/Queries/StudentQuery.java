@@ -3,6 +3,7 @@ package Hibernate.Queries;
 
 
 
+import Hibernate.Entities.ScheduleConsistsOfEntity;
 import Hibernate.Entities.StudentEntity;
 import Hibernate.Generator.HibarnateSupporter;
 
@@ -60,8 +61,7 @@ public class StudentQuery {
 
         return query.list();
     }
-    public void insertstu(String schoolName, String studentId, String name, Long numberOfAbsent, Long year, Time birthDate, String birthPlace, Long classSection, String parentSsn, Long schoolBusId)
-    {
+    public void insertstu(String schoolName, String studentId, String name, Long numberOfAbsent, Long year, Time birthDate, String birthPlace, Long classSection, String parentSsn, Long schoolBusId) {
         HibarnateSupporter supporter = new HibarnateSupporter();
         StudentEntity student = new StudentEntity();
         student.setSchoolName(schoolName);
@@ -76,9 +76,24 @@ public class StudentQuery {
         student.setSchoolBusId(schoolBusId);
         supporter.createObject(student);
     }
-    public void deletestu(StudentEntity student)
-    {
+    public void deletestu(StudentEntity student) {
         HibarnateSupporter supporter = new HibarnateSupporter();
         supporter.delete(student);
     }
+
+    public List getSchedule(StudentEntity student) {
+        Long section = student.getClassSection();
+        Session session = Hibernate.Generator.HibarnateSupporter.getSessionFactory().openSession();
+        org.hibernate.Query query = session.createQuery("select DISTINCT s.courseName, s.startDate, s.endDate from " +
+                "ScheduleConsistsOfEntity s, " +
+                "ClazzEntity c where s.scheduleId=:schedule");
+        Query query2 = session.createQuery("select DISTINCT c.schedule from ClazzEntity c, " +
+                "StudentEntity s where c.section=:section and c.schoolName=:schoolName");
+        query2.setParameter("section",section);
+        query2.setParameter("schoolName", student.getSchoolName());
+        String schedule = (String) query2.list().get(0);
+        query.setParameter("schedule",schedule);
+        return query.list();
+    }
+
 }

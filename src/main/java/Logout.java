@@ -20,6 +20,9 @@ public class Logout extends HttpServlet {
         session.setAttribute("type",null);
         session.setAttribute("school_name",null);
         session.setAttribute("student",null);
+        session.setAttribute("teacher", null);
+        session.setAttribute("hod", null);
+        session.setAttribute("parent_id",null);
         req.getRequestDispatcher("index.jsp").forward(req,resp);
     }
 }

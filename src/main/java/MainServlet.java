@@ -41,7 +41,10 @@ public class MainServlet extends HttpServlet {
             session.setAttribute("type", request.getParameter("type"));
             if(request.getParameter("school_name") != null)
                 session.setAttribute("school_name", request.getParameter("school_name"));
-            request.getRequestDispatcher("/student.jsp").forward(request,response);
+            if (request.getParameter("type").equals("student"))
+                request.getRequestDispatcher("/student.jsp").forward(request,response);
+            else // if teacher logged in
+                request.getRequestDispatcher("/teacher.jsp").forward(request,response);
         }
         else {
             request.setAttribute("errors", errors);
@@ -100,8 +103,11 @@ public class MainServlet extends HttpServlet {
                             errors.put("id", "Your id or school name is wrong. Please check them..");
                         else
                             request.getSession().setAttribute("hod", hods.get(0));
-                } else
+                } else {
                     request.getSession().setAttribute("teacher", teachers.get(0));
+                    if (hods != null && !hods.isEmpty())
+                        request.getSession().setAttribute("hod", hods.get(0));
+                }
             }
 
         }

@@ -1,5 +1,7 @@
 package Hibernate.Entities;
 
+import org.hibernate.annotations.Formula;
+
 import javax.persistence.*;
 import java.util.Objects;
 
@@ -8,8 +10,13 @@ import java.util.Objects;
 @IdClass(ClazzEntityPK.class)
 public class ClazzEntity {
     private String schoolName;
+
+    @Column(name = "SECTION")
     private long section;
+
     private String schedule;
+
+    @Formula("SECTION + 1")
     private Long classSize;
 
 

@@ -46,4 +46,19 @@ public class TeachingStaffQuery {
         List results = query.list();
         return results;
     }
+    public List getSchedule(TeachingStaffEntity teachingStaffEntity){
+        Session session = Hibernate.Generator.HibarnateSupporter.getSessionFactory().openSession();
+        org.hibernate.Query query = session.createQuery("select DISTINCT s.courseName, s.startDate, s.endDate from " +
+                                "ScheduleConsistsOfEntity s, " +
+                                "ClazzEntity c where s.scheduleId=:schedule");
+        Query query2 = session.createQuery("select DISTINCT t from TeachingStaffEntity t, " +
+                                "StudentEntity s where s.schoolName=t.schoolName");
+        query2.setParameter("officeNo",teachingStaffEntity.getOfficeNo());
+        query2.setParameter("employeeId",teachingStaffEntity.getEmployeeId());
+        query2.setParameter("specialization",teachingStaffEntity.getEmployeeId());
+        String schoolname = (String) query2.list().get(0);
+        query.setParameter("schedule",schoolname);
+        return query.list();
+
+    }
 }

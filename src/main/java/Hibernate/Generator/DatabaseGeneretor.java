@@ -10,10 +10,8 @@ import Hibernate.Queries.SurveyQuery;
 import Hibernate.Queries.TeachingStaffQuery;
 import Hibernate.Entities.*;
 import Hibernate.Queries.*;
-import com.sun.org.apache.xerces.internal.util.SynchronizedSymbolTable;
 
 import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
 
 public class DatabaseGeneretor {
@@ -46,7 +44,7 @@ public class DatabaseGeneretor {
         int homework_number = 20;
         int numberOfDriver = 20;
         int employee_size = 300;
-        public HibarnateSupporter supporter = new HibarnateSupporter();
+        public HibernateSupporter supporter = new HibernateSupporter();
         public SchoolQuery schoolQuery = new SchoolQuery();
         public EmployeeQuery employeeQuery = new EmployeeQuery();
         public TeacherQuery teacherQuery = new TeacherQuery();

@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.ScheduleConsistsOfEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ScheduleConsistsOfQuery {
     public List makeQuery(String scheduleId, String courseName, Time startDate, Time endDate, Long grade) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<ScheduleConsistsOfEntity> criteria = criteriaBuilder.createQuery(ScheduleConsistsOfEntity.class);
         Root<ScheduleConsistsOfEntity> root = criteria.from(ScheduleConsistsOfEntity.class);

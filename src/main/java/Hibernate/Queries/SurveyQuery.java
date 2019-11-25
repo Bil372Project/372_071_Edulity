@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.SurveyEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SurveyQuery {
     public List makeQuery(String surveyId, String schoolName, String hodEmployeeId, String parentSsn) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<SurveyEntity> criteria = criteriaBuilder.createQuery(SurveyEntity.class);
         Root<SurveyEntity> root = criteria.from(SurveyEntity.class);

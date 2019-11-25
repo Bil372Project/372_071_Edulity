@@ -1,8 +1,7 @@
 package Hibernate.Queries;
 
-import Hibernate.Entities.SyllabusExamDateEntity;
 import Hibernate.Entities.SyllabusSubjectListEntity;
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -15,7 +14,7 @@ import java.util.List;
 
 public class SyllabusSubjectListQuery {
     public List makeQuery(String semester, String subject, String courseName) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<SyllabusSubjectListEntity> criteria = criteriaBuilder.createQuery(SyllabusSubjectListEntity.class);
         Root<SyllabusSubjectListEntity> root = criteria.from(SyllabusSubjectListEntity.class);

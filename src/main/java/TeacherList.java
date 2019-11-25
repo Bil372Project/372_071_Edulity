@@ -1,13 +1,9 @@
-import Hibernate.Generator.HibarnateSupporter;
 import Hibernate.Queries.TeachingStaffQuery;
-import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import java.io.IOException;
-import java.util.Hashtable;
 import java.util.List;
 
 @WebServlet(urlPatterns = {"/teacherList"})

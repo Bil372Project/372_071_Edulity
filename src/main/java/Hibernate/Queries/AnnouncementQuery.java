@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.AnnouncementEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class AnnouncementQuery {
     public List makeQuery(Time submitDate, Time dueDate, String info, String teacherEmployeeId, String schoolName, Long classSection) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<AnnouncementEntity> criteria = criteriaBuilder.createQuery(AnnouncementEntity.class);
         Root<AnnouncementEntity> root = criteria.from(AnnouncementEntity.class);

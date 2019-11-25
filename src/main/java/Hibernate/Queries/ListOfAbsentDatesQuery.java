@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.ListOfAbsentDatesEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class ListOfAbsentDatesQuery {
     public List makeQuery(String schoolName, String studentId, Time absentDate) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<ListOfAbsentDatesEntity> criteria = criteriaBuilder.createQuery(ListOfAbsentDatesEntity.class);
         Root<ListOfAbsentDatesEntity> root = criteria.from(ListOfAbsentDatesEntity.class);

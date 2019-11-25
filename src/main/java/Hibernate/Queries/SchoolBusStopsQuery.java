@@ -1,7 +1,7 @@
 package Hibernate.Queries;
 
 import Hibernate.Entities.SchoolBusStopsEntity;
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SchoolBusStopsQuery {
     public List makeQuery(Long schoolBusId, String stopId) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<SchoolBusStopsEntity> criteria = criteriaBuilder.createQuery(SchoolBusStopsEntity.class);
         Root<SchoolBusStopsEntity> root = criteria.from(SchoolBusStopsEntity.class);

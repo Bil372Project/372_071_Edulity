@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.HaveScheduleEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class HaveScheduleQuery {
     public List makeQuery(Long classSection, String schoolName, String scheduleId) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<HaveScheduleEntity> criteria = criteriaBuilder.createQuery(HaveScheduleEntity.class);
         Root<HaveScheduleEntity> root = criteria.from(HaveScheduleEntity.class);

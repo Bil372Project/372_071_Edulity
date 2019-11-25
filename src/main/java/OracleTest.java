@@ -1,24 +1,4 @@
-import Hibernate.Entities.LunchMenuEntity;
-import Hibernate.Entities.TeacherEntity;
-import Hibernate.Entities.TeachingStaffEntity;
 import Hibernate.Generator.DatabaseGeneretor;
-import Hibernate.Generator.HibarnateSupporter;
-import Hibernate.Queries.SchoolQuery;
-import Hibernate.Queries.TeachingStaffQuery;
-import com.fasterxml.classmate.AnnotationConfiguration;
-
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.boot.registry.BootstrapServiceRegistryBuilder;
-import org.hibernate.cfg.Configuration;
-
-import javax.imageio.spi.ServiceRegistry;
-import javax.persistence.Entity;
-import java.sql.Driver;
-import java.sql.Time;
-import java.util.Date;
-import java.util.List;
 
 
 public class OracleTest {
@@ -28,7 +8,7 @@ public class OracleTest {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        /*Queries.HibarnateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
+        /*Queries.HibernateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
         but now it does not have.
             --- create command
             --- delete object

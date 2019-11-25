@@ -1,12 +1,8 @@
 package Hibernate.Queries;
 
 import Hibernate.Entities.TeachingStaffEntity;
-import Hibernate.Generator.HibarnateSupporter;
-import org.hibernate.Criteria;
+import Hibernate.Generator.HibernateSupporter;
 import org.hibernate.Session;
-import org.hibernate.criterion.ProjectionList;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
 import org.hibernate.query.Query;
 
 import javax.persistence.criteria.CriteriaBuilder;
@@ -17,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TeachingStaffQuery {
-    Session session = HibarnateSupporter.getSessionFactory().openSession();
+    Session session = HibernateSupporter.getSessionFactory().openSession();
     public List makeQuery(String schoolName, String employeeId, String specialization, String officeNo) {
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<TeachingStaffEntity> criteria = criteriaBuilder.createQuery(TeachingStaffEntity.class);

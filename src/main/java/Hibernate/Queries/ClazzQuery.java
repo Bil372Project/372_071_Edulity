@@ -1,7 +1,7 @@
 package Hibernate.Queries;
 
 import Hibernate.Entities.ClazzEntity;
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -15,7 +15,7 @@ import java.util.List;
 public class ClazzQuery {
 
     public List makeQuery(String schoolName, Long section, String schedule, Long classSize) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<ClazzEntity> criteria = criteriaBuilder.createQuery(ClazzEntity.class);
         Root<ClazzEntity> root = criteria.from(ClazzEntity.class);

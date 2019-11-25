@@ -12,6 +12,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    String parentId = (String) session.getAttribute("parent_id");
     ListOfAbsentDatesQuery query = new ListOfAbsentDatesQuery();
     List<ListOfAbsentDatesEntity> tmp =  query.makeQuery(session.getAttribute("school_name").toString(),
             session.getAttribute("id").toString(), null);
@@ -85,11 +86,13 @@
                             Homeworks
                         </a>
                     </li>
+                    <%if (parentId != null && !parentId.equals("")) {%>
                     <li class="nav-item border-right">
-                        <a href="grades.jsp" class="nav-link active hvr-underline-from-center">
-                            Grades
+                        <a href="questions.jsp" class="nav-link active hvr-underline-from-center">
+                            Surveys
                         </a>
                     </li>
+                    <%}%>
                     <li class="nav-item border-right">
                         <a href="absenteeism.jsp" class="nav-link active hvr-underline-from-center">
                             Absenteeism

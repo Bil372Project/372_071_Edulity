@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.SyllabusEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,7 +15,7 @@ import java.util.List;
 public class SyllabusQuery {
 
     public List makeQuery(String semester, String courseName, Long gradingInfo, String hodEmployeeId,String schoolName) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<SyllabusEntity> criteria = criteriaBuilder.createQuery(SyllabusEntity.class);
         Root<SyllabusEntity> root = criteria.from(SyllabusEntity.class);

@@ -9,7 +9,7 @@ import java.io.Serializable;
 import java.util.List;
 
 
-public class HibarnateSupporter {
+public class HibernateSupporter {
 
         private static SessionFactory sessionFactory;
         private Session session;
@@ -18,7 +18,7 @@ public class HibarnateSupporter {
             sessionFactory = new Configuration().configure().buildSessionFactory();
         }
 
-        public HibarnateSupporter(){
+        public HibernateSupporter(){
             session = sessionFactory.openSession();
         }
         public Object getObject(Class realClass,Object referenced_object){

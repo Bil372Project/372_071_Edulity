@@ -13,6 +13,7 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    String parentId = (String) session.getAttribute("parent_id");
     StudentEntity studentEntity = (StudentEntity) session.getAttribute("student");
     HomeworkQuery query = new HomeworkQuery();
     List<HomeworkEntity> homeworks = query.makeQuery(null,null,null,
@@ -83,11 +84,13 @@
                             Homeworks
                         </a>
                     </li>
+                    <%if (parentId != null && !parentId.equals("")) {%>
                     <li class="nav-item border-right">
-                        <a href="grades.jsp" class="nav-link active hvr-underline-from-center">
-                            Grades
+                        <a href="questions.jsp" class="nav-link active hvr-underline-from-center">
+                            Surveys
                         </a>
                     </li>
+                    <%}%>
                     <li class="nav-item border-right">
                         <a href="absenteeism.jsp" class="nav-link active hvr-underline-from-center">
                             Absenteism

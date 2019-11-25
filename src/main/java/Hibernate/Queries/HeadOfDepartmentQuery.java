@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.HeadOfDepartmentEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class HeadOfDepartmentQuery {
     public List makeQuery(String schoolName, String employeeId) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<HeadOfDepartmentEntity> criteria = criteriaBuilder.createQuery(HeadOfDepartmentEntity.class);
         Root<HeadOfDepartmentEntity> root = criteria.from(HeadOfDepartmentEntity.class);

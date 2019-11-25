@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.ListOfHwQuestionsEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -12,9 +12,9 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LisOfHwQuestionsQuery {
+public class ListOfHwQuestionsQuery {
     public List makeQuery(String question, Long hwNumber) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<ListOfHwQuestionsEntity> criteria = criteriaBuilder.createQuery(ListOfHwQuestionsEntity.class);
         Root<ListOfHwQuestionsEntity> root = criteria.from(ListOfHwQuestionsEntity.class);

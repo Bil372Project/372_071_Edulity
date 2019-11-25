@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.StopEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class StopQuery {
     public List makeQuery(String stopId, String stopName) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<StopEntity> criteria = criteriaBuilder.createQuery(StopEntity.class);
         Root<StopEntity> root = criteria.from(StopEntity.class);

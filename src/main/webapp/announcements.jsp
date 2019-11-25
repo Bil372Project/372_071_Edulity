@@ -1,54 +1,31 @@
-<%@ page import="Hibernate.Entities.ScheduleConsistsOfEntity" %>
-<%@ page import="Hibernate.Queries.StudentQuery" %>
+<%@ page import="Hibernate.Queries.AnnouncementQuery" %>
 <%@ page import="Hibernate.Entities.StudentEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="Hibernate.Queries.SurveyQuestionQuery" %><%--
+<%@ page import="Hibernate.Entities.AnnouncementEntity" %>
+<%@ page import="Hibernate.Queries.EmployeeQuery" %>
+<%@ page import="Hibernate.Entities.EmployeeEntity" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
-  Date: 16.11.2019
-  Time: 21:32
+  Date: 24.11.2019
+  Time: 00:29
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
-    request.getSession().setAttribute("current_page", "student.jsp");
-    StudentQuery query = new StudentQuery();
-    List schedule = query.getSchedule((StudentEntity)request.getSession().getAttribute("student"));
-    String[][] str = new String[10][5];
-    for (Object[] course :
-            (List<Object[]>)schedule) {
-        String courseName = ((String)course[0]).replaceAll("[0-9]","");
-        String day = ((String)course[1]).split("=")[0];
-        String startTime = ((String)course[1]).split("=")[1];
-        String endTime = ((String)course[2]).split("=")[1];
-        int row = Integer.valueOf(startTime.split("\\.|:")[0]) - 8; //start time is 8.30
-        int row2 = Integer.valueOf(endTime.split("\\.|:")[0]) - 8;
-        int  column;
-        switch (day.toLowerCase()) {
-            case "monday":column = 0;break;
-            case "tuesday":column=1;break;
-            case "wednesday":column=2;break;
-            case "thursday":column=3;break;
-            case "friday":column=4;break;
-            default:
-                throw new IllegalStateException("Unexpected value: " + day.toLowerCase());
-        }
-        for(int i = row; i < row2; i++) {
-            str[i][column] = courseName;
-        }
-    }
     String parentId = (String) session.getAttribute("parent_id");
+    AnnouncementQuery query = new AnnouncementQuery();
+    List<AnnouncementEntity> announcements = query.makeQuery(null,null,null,null,session.getAttribute("school_name").toString(),
+            ((StudentEntity)session.getAttribute("student")).getClassSection());
 %>
 <html>
 <head>
-    <title>Student Page</title>
+    <title>Announcements</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="js/bootstrap.js"></script>
     <script src="js/bootstrap.bundle.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
     <link href="https://fonts.googleapis.com/css?family=Oxygen&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/bootstrap-grid.css">
@@ -149,29 +126,19 @@
     </nav>
     <main class="mt-4">
         <div class="container">
-            <div class="align-content-center">
-                <span class="mx-auto badge-info badge ">
-                    <%="Section: " + ((StudentEntity)session.getAttribute("student")).getClassSection()%>
-                </span>
-                <span class="mx-auto badge-info badge">
-                    <%="Name: " + ((StudentEntity)session.getAttribute("student")).getName()%>
-                </span>
-            </div>
             <table class="table table-dark table-hover">
-                <thead><th>Time</th><th>Monday</th><th>Tuesdat</th><th>Wednesday</th>
-                    <th>Thursday</th><th>Friday</th>
+                <thead>
+                    <th>Submit Date</th><th>Due Date</th><th>Announcement</th>
+                    <th>Assigning Teacher</th>
                 </thead>
                 <tbody>
-                    <%for (int i = 0; i < 10; i++) {%>
-                    <tr>
-                        <%for (int j = 0; j < 6; j++) {%>
-                        <td><%if(j == 0){%>
-                            <%=i + 8 + ".30"%>
-                            <%}else if(str[i][j-1] != null){%>
-                            <%=str[i][j-1]%>
-                            <%}%>
-                        </td>
-                        <%}%>
+                <%
+                    for (AnnouncementEntity a :
+                            announcements) {
+                        %>
+                    <tr><td><%=a.getSubmitDate()%></td><td><%=a.getDueDate()%></td>
+                        <td><%=a.getInfo()%></td><td><%=((List<EmployeeEntity>)new EmployeeQuery().makeQuery(a.getTeacherEmployeeId(),
+                                a.getSchoolName(),null,null)).get(0).getName()%></td>
                     </tr>
                     <%}%>
                 </tbody>
@@ -181,6 +148,5 @@
     <footer class="py-5 bg-dark text-white text-center">
         Copyright © Edulity 2019
     </footer>
-
 </body>
 </html>

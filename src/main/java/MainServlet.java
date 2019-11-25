@@ -1,7 +1,9 @@
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Entities.StudentEntity;
+import Hibernate.Generator.HibernateSupporter;
+import Hibernate.Queries.HeadOfDepartmentQuery;
 import Hibernate.Queries.StudentQuery;
+import Hibernate.Queries.TeacherQuery;
 import org.hibernate.Session;
-import org.hibernate.query.Query;
 
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.*;
@@ -39,11 +41,13 @@ public class MainServlet extends HttpServlet {
             session.setAttribute("type", request.getParameter("type"));
             if(request.getParameter("school_name") != null)
                 session.setAttribute("school_name", request.getParameter("school_name"));
-            request.getRequestDispatcher("/student.jsp").forward(request,response);
+            if (request.getParameter("type").equals("student"))
+                request.getRequestDispatcher("/student.jsp").forward(request,response);
+            else // if teacher logged in
+                request.getRequestDispatcher("/teacher.jsp").forward(request,response);
         }
         else {
             request.setAttribute("errors", errors);
-            String[] str = request.getHeader("referer").split("/");
             request.getRequestDispatcher((String)request.getSession().getAttribute("current_page")).forward(request,
                     response);
         }
@@ -55,6 +59,7 @@ public class MainServlet extends HttpServlet {
         if(schoolName == null) schoolName = (String)request.getSession().getAttribute("school_name");
         String type = request.getParameter("type");
         String id = request.getParameter("id");
+        String parentId = request.getParameter("parent_id");
         if(schoolName.equals("")) {
             errors.put("schoolName", "School field should not be empty");
         }
@@ -65,18 +70,48 @@ public class MainServlet extends HttpServlet {
             errors.put("id", "ID field should not be empty");
         }
 
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         String hql = "";
         List students = null;
+        List teachers = null;
         if(type != null) {
-            StudentQuery query = new StudentQuery();
-            students = query.makeQuery(schoolName,id,null,null,null,
-                    null,null,null,null,null);
+            if(type.equals("student")){
+                StudentQuery query = new StudentQuery();
+                students = query.makeQuery(schoolName,id,null,null,null,
+                        null,null,null,null,null);
+                if(students == null || students.isEmpty()) {
+                    errors.put("id","Your id or school name is wrong. Please check them..");
+                }
+                else {
+                    if(parentId != null && !parentId.equals("")){
+                        if (((StudentEntity)students.get(0)).getParentSsn().equals(parentId)) {
+                            request.getSession().setAttribute("parent_id",parentId);
+                        }
+                        else
+                            errors.put("parent","Student id and parent ssn does not match.");
+                    } else {
+                        request.getSession().setAttribute("parent_id", null);
+                    }
+                    request.getSession().setAttribute("student", students.get(0));
+                }
+
+            } else { // if type == "Teacher"
+                List hods = new HeadOfDepartmentQuery().makeQuery(schoolName, id);
+                teachers = new TeacherQuery().makeQuery(schoolName,id,null,null);
+                if(teachers == null || teachers.isEmpty()) {
+                        if(hods == null || hods.isEmpty())
+                            errors.put("id", "Your id or school name is wrong. Please check them..");
+                        else
+                            request.getSession().setAttribute("hod", hods.get(0));
+                } else {
+                    request.getSession().setAttribute("teacher", teachers.get(0));
+                    if (hods != null && !hods.isEmpty())
+                        request.getSession().setAttribute("hod", hods.get(0));
+                }
+            }
+
         }
 
-        if(students == null || students.isEmpty()) {
-            errors.put("id","Your id or school name is wrong. Please check them..");
-        }
 
         return errors;
     }

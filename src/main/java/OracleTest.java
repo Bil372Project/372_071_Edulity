@@ -1,12 +1,4 @@
-import Hibernate.Entities.LunchMenuEntity;
 import Hibernate.Generator.DatabaseGeneretor;
-import Hibernate.Queries.SchoolQuery;
-
-import org.hibernate.Hibernate;
-
-import javax.xml.crypto.Data;
-import java.sql.Time;
-import java.util.List;
 
 
 public class OracleTest {
@@ -16,7 +8,7 @@ public class OracleTest {
      */
     public static void main(String[] args) {
         // TODO Auto-generated method stub
-        /*Queries.HibarnateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
+        /*Queries.HibernateSupporter class has present us to use some basic functions or would be advanced function depending on requirement
         but now it does not have.
             --- create command
             --- delete object
@@ -25,25 +17,19 @@ public class OracleTest {
 
          */
         //Created hibarnate supported
+        //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor(git );
+       // databaseGeneretor.generator();
         DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
         databaseGeneretor.generator();
-//        HibarnateSupporter supporter = new HibarnateSupporter();
-//        Session session = HibarnateSupporter.getSessionFactory().openSession();
-//session.close();
-        //LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
-        //lunchMenuEntity.setFood("nuddle");
-        //lunchMenuEntity.setLunchDay(new Time(23425));
-
-        //List q = sq.makeQuery("TOBB",null,null);
-        //CourseQuery cq = new CourseQuery();
-        //cq.makeQuery(null,null,null,null);
-        //Hibernate.Generator.DatabaseGeneretor databaseGeneretor = new Hibernate.Generator.DatabaseGeneretor(git );
-       // databaseGeneretor.generator();
-
+//        TeachingStaffQuery teachingStaffQuery = new TeachingStaffQuery();
+       // List<TeachingStaffEntity> join_list = (List)teachingStaffQuery.getWithNames("TOBB";
+       // for(Object object:join_list){
+         //   System.out.println(object);
+       // }
 //        LunchMenuEntity lunchMenuEntity = new LunchMenuEntity();
 //        lunchMenuEntity.setFood("nuddle");
 //        lunchMenuEntity.setLunchDay(new Time(23425));
-//
+
 //        SchoolQuery sq = new SchoolQuery();
 //        List q = sq.makeQuery("TOBB",null,null);
 
@@ -54,5 +40,7 @@ public class OracleTest {
         //for(Object object:courses){
           //  System.out.println(((EmployeeEntity)object).getEmployeeId());
         //}
+
     }
+
 }

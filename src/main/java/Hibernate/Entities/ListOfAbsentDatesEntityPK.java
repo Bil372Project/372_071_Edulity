@@ -3,13 +3,14 @@ package Hibernate.Entities;
 import javax.persistence.Column;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.sql.Date;
 import java.sql.Time;
 import java.util.Objects;
 
 public class ListOfAbsentDatesEntityPK implements Serializable {
     private String schoolName;
     private String studentId;
-    private Time absentDate;
+    private Date absentDate;
 
     @Column(name = "SCHOOL_NAME", nullable = false, length = 30)
     @Id
@@ -33,11 +34,11 @@ public class ListOfAbsentDatesEntityPK implements Serializable {
 
     @Column(name = "ABSENT_DATE", nullable = false)
     @Id
-    public Time getAbsentDate() {
+    public Date getAbsentDate() {
         return absentDate;
     }
 
-    public void setAbsentDate(Time absentDate) {
+    public void setAbsentDate(Date absentDate) {
         this.absentDate = absentDate;
     }
 

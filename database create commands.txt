@@ -48,12 +48,16 @@ create TABLE TEACHER(school_name,
                      FOREIGN KEY(survey_id) REFERENCES SURVEY(survey_id),
                      FOREIGN KEY(school_name,hod_employee_id) REFERENCES HEAD_OF_DEPARTMENT(school_name,employee_id),
                      PRIMARY KEY(school_name,employee_id))
+create TABLE SCHEDULE(
+                    schedule_id VARCHAR2(30) PRIMARY KEY
+)
 create TABLE CLASS(
                      school_name,
                      section integer,
                      schedule VARCHAR2(50),
                      class_size integer,
                      FOREIGN KEY(school_name) REFERENCES SCHOOL(name),
+                     FOREIGN KEY(schedule) references SCHEDULE(schedule_id),
                      PRIMARY KEY(school_name,section)
 )
 
@@ -88,9 +92,6 @@ create TABLE SYLLABUS_EXAM_DATE(
                        FOREIGN KEY(semester,course_name) REFERENCES SYLLABUS(semester,course_name),
                        PRIMARY KEY(semester,subject)
 )
-create TABLE SCHEDULE(
-                    schedule_id VARCHAR2(30) PRIMARY KEY
-)
 create TABLE HAVE_SCHEDULE(
                  class_section,
                  school_name,
@@ -102,11 +103,11 @@ create TABLE SCHEDULE_CONSISTS_OF(
                 schedule_id,
                 course_name,
                 grade,
-                start_date Date,
-                end_date Date,
+                start_date varchar2(20),
+                end_date varchar2(20),
                 FOREIGN KEY(course_name,grade) REFERENCES COURSE(course_name,grade),
                 FOREIGN KEY(schedule_id) REFERENCES SCHEDULE(schedule_id),
-                PRIMARY KEY(schedule_id,course_name)
+                PRIMARY KEY(schedule_id,course_name,start_date)
 )
 create TABLE HOMEWORK(
              hw_number integer,
@@ -180,7 +181,7 @@ create TABLE LIST_OF_ABSENT_DATES(
                     school_name,
                     student_id,
                     absent_date Date,
-                    FOREIGN KEY(school_name,student_id) REFERENCES STUDENT(student_id,school_name),
+                    FOREIGN KEY(school_name,student_id) REFERENCES STUDENT(school_name,student_id),
                     PRIMARY KEY(absent_date,school_name,student_id)
 )
 create TABLE LUNCH(

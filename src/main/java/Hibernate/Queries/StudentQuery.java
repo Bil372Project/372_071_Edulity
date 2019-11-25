@@ -4,7 +4,7 @@ package Hibernate.Queries;
 
 
 import Hibernate.Entities.StudentEntity;
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -20,7 +20,7 @@ import java.util.List;
 public class StudentQuery {
 
     public List makeQuery(String schoolName, String studentId, String name, Long numberOfAbsent, Long year, Time birthDate, String birthPlace, Long classSection, String parentSsn, Long schoolBusId) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<StudentEntity> criteria = criteriaBuilder.createQuery(StudentEntity.class);
         Root<StudentEntity> root = criteria.from(StudentEntity.class);
@@ -60,4 +60,39 @@ public class StudentQuery {
 
         return query.list();
     }
+    public void insertstu(String schoolName, String studentId, String name, Long numberOfAbsent, Long year, Time birthDate, String birthPlace, Long classSection, String parentSsn, Long schoolBusId) {
+        HibernateSupporter supporter = new HibernateSupporter();
+        StudentEntity student = new StudentEntity();
+        student.setSchoolName(schoolName);
+        student.setStudentId(studentId);
+        student.setName(name);
+        student.setNumberOfAbsent(numberOfAbsent);
+        student.setYear(year);
+        student.setBirthDate(birthDate);
+        student.setBirthPlace(birthPlace);
+        student.setClassSection(classSection);
+        student.setParentSsn(parentSsn);
+        student.setSchoolBusId(schoolBusId);
+        supporter.createObject(student);
+    }
+    public void deletestu(StudentEntity student) {
+        HibernateSupporter supporter = new HibernateSupporter();
+        supporter.delete(student);
+    }
+
+    public List getSchedule(StudentEntity student) {
+        Long section = student.getClassSection();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
+        org.hibernate.Query query = session.createQuery("select DISTINCT s.courseName, s.startDate, s.endDate from " +
+                "ScheduleConsistsOfEntity s, " +
+                "ClazzEntity c where s.scheduleId=:schedule");
+        Query query2 = session.createQuery("select DISTINCT c.schedule from ClazzEntity c, " +
+                "StudentEntity s where c.section=:section and c.schoolName=:schoolName");
+        query2.setParameter("section",section);
+        query2.setParameter("schoolName", student.getSchoolName());
+        String schedule = (String) query2.list().get(0);
+        query.setParameter("schedule",schedule);
+        return query.list();
+    }
+
 }

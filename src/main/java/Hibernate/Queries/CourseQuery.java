@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 import Hibernate.Entities.CourseEntity;
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -13,7 +13,7 @@ import java.util.List;
 
 public class CourseQuery {
     public List makeQuery(String courseName, Long grade, String type, String teacherEmployeeId, String schoolName) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<CourseEntity> criteria = criteriaBuilder.createQuery(CourseEntity.class);
         Root<CourseEntity> root = criteria.from(CourseEntity.class);

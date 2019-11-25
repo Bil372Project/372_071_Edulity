@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.SchoolBusEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class SchoolBusQuery {
     public List makeQuery(Long id, String licensePlate, String destination, Long capacity, String driverId, String schoolName) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<SchoolBusEntity> criteria = criteriaBuilder.createQuery(SchoolBusEntity.class);
         Root<SchoolBusEntity> root = criteria.from(SchoolBusEntity.class);
@@ -45,7 +45,7 @@ public class SchoolBusQuery {
 
     public List getStops(String schoolName, long busId) {
         List stops = null;
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         org.hibernate.Query query = session.createQuery("select s.stopName from " +
                 "SchoolBusEntity b, SchoolBusStopsEntity stops left join StopEntity s on (b.id=stops.schoolBusId and stops.stopId=s.id) " +
                 "where " +

@@ -1,7 +1,7 @@
 package Hibernate.Queries;
 
 import Hibernate.Entities.ParentEntity;
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
 
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class ParentQuery {
     public List makeQuery(String ssn, String name, String phoneNumber, String address, String email) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<ParentEntity> criteria = criteriaBuilder.createQuery(ParentEntity.class);
         Root<ParentEntity> root = criteria.from(ParentEntity.class);

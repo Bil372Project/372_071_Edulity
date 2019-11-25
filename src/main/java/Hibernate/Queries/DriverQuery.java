@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.DriverEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -14,7 +14,7 @@ import java.util.List;
 
 public class DriverQuery {
     public List makeQuery(String id, String ssn, String phoneNumber) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<DriverEntity> criteria = criteriaBuilder.createQuery(DriverEntity.class);
         Root<DriverEntity> root = criteria.from(DriverEntity.class);

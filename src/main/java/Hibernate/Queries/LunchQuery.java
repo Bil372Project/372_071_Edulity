@@ -1,6 +1,6 @@
 package Hibernate.Queries;
 
-import Hibernate.Generator.HibarnateSupporter;
+import Hibernate.Generator.HibernateSupporter;
 import Hibernate.Entities.LunchEntity;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -15,7 +15,7 @@ import java.util.List;
 
 public class LunchQuery {
     public List makeQuery(Time day, String studentId, String schoolName) {
-        Session session = HibarnateSupporter.getSessionFactory().openSession();
+        Session session = HibernateSupporter.getSessionFactory().openSession();
         CriteriaBuilder criteriaBuilder = session.getCriteriaBuilder();
         CriteriaQuery<LunchEntity> criteria = criteriaBuilder.createQuery(LunchEntity.class);
         Root<LunchEntity> root = criteria.from(LunchEntity.class);

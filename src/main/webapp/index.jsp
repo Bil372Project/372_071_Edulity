@@ -7,17 +7,21 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="Hibernate.Queries.SchoolQuery" %>
 <%@ page import="Hibernate.Entities.SchoolEntity" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+
 <%
     request.getSession().setAttribute("current_page", "index.jsp");
     StringBuilder schoolNames = new StringBuilder();
     SchoolQuery q = new SchoolQuery();
     List<SchoolEntity> schools = q.makeQuery(null,null,null);
-    for (SchoolEntity school :
-            schools) {
+    if(schools != null)
+        for (SchoolEntity school :
+                schools) {
 
-        schoolNames.append("<option name=\"schoolName\" value=\""+ school.getName() + "\"" + ">" +
-                school.getName()+ "</option>");
-    }
+            schoolNames.append("<option name=\"schoolName\" value=\""+ school.getName() + "\"" + ">" +
+                    school.getName()+ "</option>");
+        }
 
     Hashtable errors = (Hashtable) request.getAttribute("errors");
     StringBuilder sbErros = new StringBuilder();
@@ -51,14 +55,28 @@
     <link rel="stylesheet" href="hover.css">
 
     <script>
+        if(performance.navigation.type == 2){
+            location.reload(true);
+        }
         var type;
         function changePlaceHolder(t) {
             type = t;
             document.getElementById('text-id').setAttribute("placeholder", t);
         }
+        function show(message, op) {
+            changePlaceHolder(message)
+            var x = document.getElementById("parent-id");
+            if (op === "none") {
+                x.style.display = "none";
+            } else {
+                x.style.display = "block";
+            }
+        }
     </script>
     <style>
-
+        #parent-id {
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -105,25 +123,30 @@
                             <form action="mainServlet" method="get">
                                 <%=sbErros.toString()%>
                                 <div class="form-group">
-                                    <label for="school_name">School Name</label>
+                                    <label for="school_name" class="text-light">School Name</label>
                                     <select name="school_name" id="school_name" class="form-control">
                                         <%=schoolNames.toString()%>
                                     </select>
                                 </div>
-                                <div class="form-group" id="types">
+                                <label for="types" class="text-light">Role</label>
+                                <div class="form-group text-white" id="types">
                                     <label class="rad">
                                         <input id="r1" type="radio" name="type" value="student"
-                                               onclick="changePlaceHolder('Student ID')">
+                                               onclick="show('Student ID', 'show')">
                                         <i></i> Student
                                     </label>
                                     <label class="rad">
                                         <input id="r2" type="radio" name="type" value="teacher" class="form-control"
-                                               onclick="changePlaceHolder('Teacher ID')">
+                                               onclick="show('Teacher ID', 'none')">
                                         <i></i> Teacher
                                     </label>
                                 </div>
                                 <div class="form-group">
                                     <input id="text-id" type="text" name="id" class="form-control" placeholder="Enter your ID">
+                                </div>
+                                <div class="form-group">
+                                    <input id="parent-id" type="text" name="parent_id" class="form-control"
+                                           placeholder="Enter parent SSN (Not necessary)">
                                 </div>
                                 <div class="row">
                                     <div class="form-group col-6">

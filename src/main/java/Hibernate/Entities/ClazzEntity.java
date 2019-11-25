@@ -16,7 +16,6 @@ public class ClazzEntity {
 
     private String schedule;
 
-    @Formula("SECTION + 1")
     private Long classSize;
 
 

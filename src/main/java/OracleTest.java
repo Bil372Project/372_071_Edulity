@@ -1,4 +1,7 @@
 import Hibernate.Generator.DatabaseGeneretor;
+import Hibernate.Queries.TeacherQuery;
+
+import java.util.List;
 
 
 public class OracleTest {
@@ -20,7 +23,12 @@ public class OracleTest {
         //DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor(git );
        // databaseGeneretor.generator();
         DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
-        databaseGeneretor.generator();
+        TeacherQuery teacherQuery = new TeacherQuery();
+        List<String> teachers = teacherQuery.retrieveSchedule();
+        for(int k=0;k<teachers.size();k++){
+            System.out.println(teachers.get(k));
+        }
+        //databaseGeneretor.generator();
 //        TeachingStaffQuery teachingStaffQuery = new TeachingStaffQuery();
        // List<TeachingStaffEntity> join_list = (List)teachingStaffQuery.getWithNames("TOBB";
        // for(Object object:join_list){

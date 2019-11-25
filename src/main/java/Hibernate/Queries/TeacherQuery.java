@@ -36,11 +36,11 @@ public class TeacherQuery {
 
         return query.list();
     }
-    public List retrieveSchedule(){
-            CourseQuery courseQuery = new CourseQuery();git
+    public List retrieveSchedule(String teacherEmployeeId){
+            CourseQuery courseQuery = new CourseQuery();
             ClazzQuery clazzQuery = new ClazzQuery();
             ScheduleConsistsOfQuery scheduleConsistsOfQuery = new ScheduleConsistsOfQuery();
-            ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,"s1",null);
+            ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,teacherEmployeeId,null);
 
             List<String> scheduleList = new ArrayList<String>();
             for(int i=0;i<courseEntities.size();i++) {

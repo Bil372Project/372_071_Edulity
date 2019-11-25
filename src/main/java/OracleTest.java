@@ -24,7 +24,7 @@ public class OracleTest {
        // databaseGeneretor.generator();
         DatabaseGeneretor databaseGeneretor = new DatabaseGeneretor();
         TeacherQuery teacherQuery = new TeacherQuery();
-        List<String> teachers = teacherQuery.retrieveSchedule();
+        List<String> teachers = teacherQuery.retrieveSchedule("s1");
         for(int k=0;k<teachers.size();k++){
             System.out.println(teachers.get(k));
         }

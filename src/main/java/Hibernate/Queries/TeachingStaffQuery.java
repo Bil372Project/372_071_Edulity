@@ -46,4 +46,14 @@ public class TeachingStaffQuery {
         List results = query.list();
         return results;
     }
+
+    public List getAllInfo(String schoolName) {
+        org.hibernate.Query query = session.createQuery("select e.id, e.schoolName, e.name, e.ssn, t.specialization" +
+                ", t.officeNo " +
+                "from TeachingStaffEntity t left join EmployeeEntity e on (e.employeeId=t.employeeId) where " +
+                "e.schoolName=:schoolName");
+        query.setParameter("schoolName", schoolName);
+        List results = query.list();
+        return results;
+    }
 }

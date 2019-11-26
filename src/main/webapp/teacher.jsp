@@ -1,4 +1,8 @@
-<%--
+<%@ page import="java.util.List" %>
+<%@ page import="Hibernate.Queries.TeachingStaffQuery" %>
+<%@ page import="Hibernate.Queries.EmployeeQuery" %>
+<%@ page import="Hibernate.Queries.TeacherQuery" %>
+<%@ page import="java.util.ArrayList" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
   Date: 25.11.2019
@@ -6,6 +10,32 @@
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+
+    List<String> tmp = new TeacherQuery().retrieveSchedule((String) session.getAttribute("id"));
+    List<String[]> strings = new ArrayList<>();
+    if(tmp != null && !tmp.isEmpty()) {
+        for (String str :
+                tmp) {
+            strings.add(str.split("\\*"));
+        }
+    }
+%>
+<%
+    String[][] str = new String[10][5];
+    for (String[] s : strings) {
+        String dayT = s[2].split("=")[0];
+        String course = s[0].replaceAll("[0-9]","");
+        int startTime = Integer.valueOf(s[2].split("=")[1].split("\\.|:")[0]);
+        int endTime = Integer.valueOf(s[3].split("=")[1].split("\\.|:")[0]);
+        int day = (dayT.equalsIgnoreCase("monday")) ? 0 : (dayT.equalsIgnoreCase("tuesday")) ? 1 :
+                (dayT.equalsIgnoreCase("wednesday")) ? 2 : (dayT.equalsIgnoreCase("thursday")) ? 3 : 4;
+        for(int i = startTime-8; i < endTime-8; i++) {
+            str[i][day] = course + "<br>Section:" + s[1];
+        }
+    }
+
+%>
 <html>
 <head>
     <title>Teacher</title>
@@ -63,17 +93,21 @@
                 <ul class="navbar-nav dropdown">
                     <a href="#" class="dropdown-toggle nav-link active hvr-underline-from-center" data-toggle="dropdown">Admin</a>
                     <li class="dropdown-menu bg-white">
-                        <%if (session.getAttribute("hod") != null) {%>
+                        <%if (session.getAttribute("hod") != null &&
+                                !session.getAttribute("hod").toString().equals("")) {%>
                         <a href="employees.jsp"
                            class="dropdown-item nav-link active hvr-underline-from-center bg-dark">Manage employees
                         </a>
                         <a href="classes.jsp"
                            class="dropdown-item nav-link active hvr-underline-from-center bg-dark">Manage classes
                         </a>
-                        <a href="" class="dropdown-item nav-link active hvr-underline-from-center bg-dark">Manage schedule</a>
+                        <a href="#" class="dropdown-item nav-link active hvr-underline-from-center bg-dark">Manage
+                            schedule</a>
                         <%}%>
-                        <a href="" class="dropdown-item nav-link active hvr-underline-from-center bg-dark">Manage absenteeism</a>
-                        <a href="" class="dropdown-item nav-link active hvr-underline-from-center bg-dark">Manage assignments</a>
+                        <a href="manageabsenteeism.jsp" class="dropdown-item nav-link active hvr-underline-from-center bg-dark">Manage
+                            absenteeism</a>
+                        <a href="#" class="dropdown-item nav-link active hvr-underline-from-center bg-dark">Manage
+                            assignments</a>
 
                     </li>
                 </ul>
@@ -110,6 +144,28 @@
     <main class="m-4">
         <div class="container">
             <span class="badge-info rounded p-2">Teacher id: <%=session.getAttribute("id")%></span>
+        </div>
+        <div class="container">
+            <table class="table table-dark table-hover">
+                <thead><th>Time</th><th>Monday</th><th>Tuesday</th><th>Wednesday</th>
+                <th>Thursday</th><th>Friday</th>
+                </thead>
+                <tbody>
+                <%if(strings!=null && !strings.isEmpty()) for (int i = 0; i < 10; i++) {%>
+                <tr>
+                    <%for (int j = 0; j < 6; j++) {%>
+
+                    <td><%if(j == 0){%>
+                        <%=i + 8 + ".30"%>
+                        <%}else if(str[i][j-1] != null){%>
+                        <%=str[i][j-1]%>
+                        <%}%>
+                    </td>
+                    <%}%>
+                </tr>
+                <%}%>
+                </tbody>
+            </table>
         </div>
     </main>
     <footer class="py-5 bg-dark text-white text-center">

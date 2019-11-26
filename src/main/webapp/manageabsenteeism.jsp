@@ -1,26 +1,25 @@
-<%@ page import="Hibernate.Queries.EmployeeQuery" %>
-<%@ page import="Hibernate.Entities.EmployeeEntity" %>
+<%@ page import="Hibernate.Entities.ClazzEntity" %>
 <%@ page import="java.util.List" %>
-<%@ page import="java.util.HashSet" %>
-<%@ page import="java.util.Hashtable" %>
+<%@ page import="Hibernate.Queries.ClazzQuery" %>
+<%@ page import="Hibernate.Queries.StudentQuery" %>
+<%@ page import="Hibernate.Entities.StudentEntity" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="Hibernate.Queries.TeachingStaffQuery" %>
-<%@ page import="Hibernate.Entities.EmployeeEntityPK" %><%--
+<%@ page import="java.util.Hashtable" %><%--
   Created by IntelliJ IDEA.
   User: Muhammed Emre Durdu
-  Date: 25.11.2019
-  Time: 10:27
+  Date: 26.11.2019
+  Time: 02:52
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
+    List<StudentEntity> students =
+            new StudentQuery().makeQuery(session.getAttribute("school_name").toString(),null,null,null,null,null,null,
+                    null,null,null);
     Hashtable errors = (Hashtable) request.getAttribute("errors");
     Hashtable messages = (Hashtable) request.getAttribute("messages");
     StringBuilder sbErros = new StringBuilder();
     StringBuilder sbMessages = new StringBuilder();
-
-    List<Object[]> employees = new TeachingStaffQuery().getAllInfo((String) session.getAttribute("school_name"));
-
     if(errors != null && !errors.isEmpty()) {
         for (String str :
                 new ArrayList<String>(errors.values())) {
@@ -39,10 +38,11 @@
         }
 
     }
+
 %>
 <html>
 <head>
-    <title>Manage Employees</title>
+    <title>Manage Absenteeism</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -66,6 +66,10 @@
         }
         a>i{
             font-size: 1.5rem;
+        }
+
+        .form-group {
+            margin-right: 1rem;
         }
 
         /*#login {*/
@@ -143,87 +147,60 @@
         </div>
     </div>
 </nav>
-<main class="m-4">
+<main class="my-4">
     <div class="container">
-        <form action="manageEmployees" method="post">
-            <%=sbErros.toString()%>
-            <%=sbMessages.toString()%>
-            <label for="add-employee" class="text-white">Add Teaching staff</label>
-            <div class="form-group clearfix" id="add-employee">
-                <div class="clearfix">
-                    <label for="types" class="text-light float-left mr-2">Role</label>
-                    <div class="form-group text-white float-left" id="types">
-                        <label class="ckb">
-                            <input id="c1" type="checkbox" name="type" value="teacher">
-                            <i></i> Teacher
-                        </label>
-                        <label class="ckb">
-                            <input id="c2" type="checkbox" name="type" value="hod">
-                            <i></i> Head of Department
-                        </label>
-                    </div>
+        <%=sbErros.toString()%>
+        <%=sbMessages.toString()%>
+
+        <form action="manageAbsenteeism" method="post">
+            <div class="clearfix">
+                <div class="form-group float-left d-inline-block" >
+                    <label for="id" >Select student ID</label>
+                    <select name="id" id="id" class="form-control">
+                        <%
+                            for (StudentEntity c :
+                                    students) {%>
+                        <option value="<%=c.getStudentId()%>"><%=c.getStudentId()%></option>
+                        <%}%>
+                    </select>
+                </div>
+                <div class="form-group float-left d-inline-block">
+                    <label for="year">Year</label>
+                    <select name="year" id="year" class="form-control">
+                        <%
+                            for (int i = 1970; i < 2051; i++) {%>s
+                        <option value="<%=i%>"><%=i%></option>
+                        <%}%>
+                    </select>
+                </div>
+                <div class="form-group float-left d-inline-block">
+                    <label for="month" >Month</label>
+                    <select name="month" id="month" class="form-control ">
+                        <%
+                            for (int i = 1; i < 13; i++) {%>
+                        <option value="<%=i%>"><%=i%></option>
+                        <%}%>
+                    </select>
+                </div>
+                <div class="form-group float-left d-inline-block">
+                    <label for="day" >Day</label>
+                    <select name="day" id="day" class="form-control ">
+                        <%
+                            for (int i = 1; i < 32; i++) {%>
+                        <option value="<%=i%>"><%=i%></option>
+                        <%}%>
+                    </select>
                 </div>
             </div>
-            <input class="float-left col-1 form-control" type="text" placeholder="ID" name="id">
-            <input class="float-left col-3 form-control" type="text" placeholder="Name" name="name">
-            <input class="float-left col-2 form-control" type="text" placeholder="Specialization"
-                   name="specialization">
-            <input class="float-left col-2 form-control" type="text" placeholder="SSN"
-                   name="ssn">
-            <input class="float-left col-2 form-control" type="text" placeholder="Office no" name="office_no">
-            <button type="submit" class="btn btn-success col-2" name="submit" value="add">
-                <i class="fas fa-plus"></i> Add
-            </button>
-        </form>
-        <br><br>
-        <hr>
-        <br><br>
-        <form action="manageEmployees" method="post">
             <div class="clearfix">
-                <button type="submit" class="btn btn-success col-2 bg-info" name="submit" value="update">
-                    <i class="fas fa-file-import "></i> Update
-                </button>
-                <button type="submit" class="btn btn-success col-2 bg-danger" name="submit" value="delete">
-                    <i class="fas fa-user-minus "></i> Delete selecteds
-                </button>
+                <div class="form-group float-left d-inline-block">
+                    <input type="submit" name="submit" value="add"
+                           class="form-control bg-success rounded p-2 mr-2 text-white">
+                </div>
+                <div class="form-group float-left d-inline-block my-auto">
+                    <input type="submit" name="submit" value="delete" class="form-control bg-danger rounded p-2 text-white">
+                </div>
             </div>
-            <table class="table table-dark table-hover">
-                <thead>
-                    <th>#</th><th>ID</th><th>Name</th><th>Specialization</th><th>SSN</th><th>Office No</th>
-                </thead>
-                <tbody>
-                <%
-                    for (Object[] emp :
-                            employees) {
-                    String id = ((EmployeeEntityPK)emp[0]).getEmployeeId();
-                    String name = (String) emp[2];
-                    String specialization = (String) emp[4];
-                    String ssn = (String) emp[3];
-                    String office_no = (String) emp[5];
-                %>
-                <input type="hidden" name="<%=id + "-id"%>" value="<%=id%>">
-                <input type="hidden" name="<%=id + "-name-orig"%>" value="<%=name%>">
-                <input type="hidden" name="<%=id + "-specialization-orig"%>" value="<%=specialization%>">
-                <input type="hidden" name="<%=id + "-ssn-orig"%>" value="<%=ssn%>">
-                <input type="hidden" name="<%=id + "-office_no-orig"%>" value="<%=office_no%>">
-                      <tr>
-                          <td><label class="ckb">
-                              <input type="checkbox" name="ids" value="<%=id%>">
-                              <i></i>
-                          </label></td>
-                          <td><%=id%></td>
-                          <td>
-                              <input class="form-control" type="text" name="<%=id + "-name"%>" placeholder="<%=name%>">
-                          </td>
-                          <td><input class="form-control" type="text" name="<%=id + "-specialization"%>"
-                                     placeholder="<%=specialization%>"></td>
-                          <td><input class="form-control" type="text" name="<%=id + "-ssn"%>" placeholder="<%=ssn%>"></td>
-                          <td><input class="form-control" type="text" name="<%=id + "-office_no"%>" placeholder="<%=office_no%>"></td>
-                      </tr>
-                    <%}%>
-                </tbody>
-            </table>
-
         </form>
     </div>
 </main>

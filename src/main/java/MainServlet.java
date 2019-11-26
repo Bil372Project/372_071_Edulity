@@ -98,6 +98,7 @@ public class MainServlet extends HttpServlet {
             } else { // if type == "Teacher"
                 List hods = new HeadOfDepartmentQuery().makeQuery(schoolName, id);
                 teachers = new TeacherQuery().makeQuery(schoolName,id,null,null);
+                request.getSession().setAttribute("hod", null);
                 if(teachers == null || teachers.isEmpty()) {
                         if(hods == null || hods.isEmpty())
                             errors.put("id", "Your id or school name is wrong. Please check them..");

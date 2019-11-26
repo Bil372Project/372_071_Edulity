@@ -108,6 +108,7 @@ public class ManageClasses extends HttpServlet {
                     query.setParameter("id", id);
                     try {
                         query.executeUpdate();
+                        transaction.commit();
                     } catch (PersistenceException e) {
                         errors.put("Persistence0" + id, String.format("Error for deleting %s\n from Teachers" +
                                 "Possible reasons: The entity may be linked to some course like instances",id));
@@ -121,6 +122,7 @@ public class ManageClasses extends HttpServlet {
                 req.setAttribute("section" ,s);
             }
         }
+
         session.close();
         req.setAttribute("section", req.getParameter("section"));
         req.setAttribute("errors", errors);

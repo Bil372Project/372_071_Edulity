@@ -27,14 +27,27 @@ public class HibernateSupporter {
             return object;
         }
         public void createObject(Object created_object){
+            session = sessionFactory.openSession();
             session.beginTransaction();
             session.save(created_object);
             session.getTransaction().commit();
+            session.close();
         }
         public void delete(Object deleted_object){
+            session = sessionFactory.openSession();
             session.beginTransaction();
             session.delete(deleted_object);
             session.getTransaction().commit();
+            session.close();
+
+        }
+
+        public void update(Object updated_object) {
+            session = sessionFactory.openSession();
+            session.beginTransaction();
+            session.update(updated_object);
+            session.getTransaction().commit();
+            session.close();
         }
 
         public List<Object> selectQueryBased(String hql){

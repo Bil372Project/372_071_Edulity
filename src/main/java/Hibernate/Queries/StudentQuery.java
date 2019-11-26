@@ -81,7 +81,10 @@ public class StudentQuery {
     }
 
     public List getSchedule(StudentEntity student) {
-        Long section = student.getClassSection();
+        return getSchedule(student.getClassSection(), student.getSchoolName());
+    }
+
+    public List getSchedule(Long section, String schoolName) {
         Session session = HibernateSupporter.getSessionFactory().openSession();
         org.hibernate.Query query = session.createQuery("select DISTINCT s.courseName, s.startDate, s.endDate from " +
                 "ScheduleConsistsOfEntity s, " +
@@ -89,7 +92,7 @@ public class StudentQuery {
         Query query2 = session.createQuery("select DISTINCT c.schedule from ClazzEntity c, " +
                 "StudentEntity s where c.section=:section and c.schoolName=:schoolName");
         query2.setParameter("section",section);
-        query2.setParameter("schoolName", student.getSchoolName());
+        query2.setParameter("schoolName", schoolName);
         String schedule = (String) query2.list().get(0);
         query.setParameter("schedule",schedule);
         return query.list();

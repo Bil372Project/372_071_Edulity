@@ -1,5 +1,5 @@
 package Hibernate.Queries;
-import Hibernate.Entities.TeacherEntity;
+import Hibernate.Entities.*;
 import Hibernate.Generator.HibernateSupporter;
 import org.hibernate.Session;
 import org.hibernate.query.Query;
@@ -36,5 +36,20 @@ public class TeacherQuery {
 
         return query.list();
     }
+    public List retrieveSchedule(String teacherEmployeeId){
+            CourseQuery courseQuery = new CourseQuery();
+            ClazzQuery clazzQuery = new ClazzQuery();
+            ScheduleConsistsOfQuery scheduleConsistsOfQuery = new ScheduleConsistsOfQuery();
+            ArrayList<CourseEntity> courseEntities = (ArrayList)courseQuery.makeQuery(null,null,null,teacherEmployeeId,null);
 
+            List<String> scheduleList = new ArrayList<String>();
+            for(int i=0;i<courseEntities.size();i++) {
+                  ArrayList<ScheduleConsistsOfEntity> scheduleConsistsOfEntities = (ArrayList) scheduleConsistsOfQuery.makeQuery(null, courseEntities.get(i).getCourseName(), null, null, null);
+                  for(int j=0;j<scheduleConsistsOfEntities.size();j++) {
+                      ArrayList<ClazzEntity> clazzEntities = (ArrayList)clazzQuery.makeQuery(null,null,scheduleConsistsOfEntities.get(j).getScheduleId(),null);
+                      scheduleList.add(courseEntities.get(i).getCourseName()+"*"+clazzEntities.get(0).getSection()+"*"+scheduleConsistsOfEntities.get(j).getStartDate()+"*"+scheduleConsistsOfEntities.get(j).getEndDate());
+                  }
+            }
+            return scheduleList;
+    }
 }

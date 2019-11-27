@@ -1,7 +1,7 @@
 [![Build Status](https://travis-ci.org/Bil372Project/372_071_Edulity.svg?branch=master)](https://travis-ci.org/Bil372Project/372_071_Edulity)
 # EDULITY
 
-##Setup
+## Setup
 >mvn install & mvn compile
 
 This install will try to get an connection from oracle repository

@@ -57,13 +57,13 @@ these instructions:
 
 >https://maven.apache.org/guides/mini/guide-encryption.html
 
-##Start Databse
+## Start Databse
 Before starting the server, you should first start your database and create the tables by following these instructions:
 >+ Start your oracle database
 >+ In the project root directory, copy the content of the "database create command.txt" file then paste and run it in
  a sql console
 
-##Start Sever
+## Start Sever
 
 After succesfully building the code, you should download Apache-Tomcat server from the link
 >https://tomcat.apache.org/download-80.cgi

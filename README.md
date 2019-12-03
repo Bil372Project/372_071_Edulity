@@ -76,4 +76,4 @@ If you are not using an editor, you should follow these steps:
 >+ Copy the .war file from the target directory in the project root
 >+ Paste the copied war file to the directory [TOMCAT_HOME/webapps/]
 >+ Start your server from command line by ```[TOMCAT_HOME/bin/startup.bat]```
->+ The server is now up. Enter the url ```http://localhost:[port_number]/edulity/index.jsp```
+>+ The server is now up. Enter the url ```http://localhost:[port_number]/edulity_war/```
